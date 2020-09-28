@@ -9,25 +9,36 @@ class FormLogin extends React.Component {
         data: {
             user: "",
             pass: ""
+        },
+        recived: {
+            user: "",
+            pass: ""
         }
     }
+  
 
     handleClick = () => {
+        let res;
         this.setState({
             data: {
                 user: $("#user").val(),
                 pass: $("#pass").val()
             }
         })
-        var us = this.state.data.user;
+        
         $.ajax({
-            url: { loginPhp },
-            data: { us },
-            type: 'POST',
-            success: function (response) {
-                console.log(response)
+            url: "http://localhost/backend/Login.php",
+            data: { us:this.state.data.user, pa:this.state.data.pass },
+            dataType:'json', 
+            type: 'POST',            
+            success: function (response) {                 
+                response.forEach(red =>{
+                // ahcer algo aca
+                   
+                })     
             }
         })
+        
     }
 
     render() {

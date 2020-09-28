@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Login from "../pages/Login"
 
 const App = () => (
+
     <div>       
         <BrowserRouter>
         <Switch>
@@ -13,4 +14,5 @@ const App = () => (
          
     </div>
 )
+
 export default App
