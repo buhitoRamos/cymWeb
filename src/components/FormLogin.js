@@ -14,64 +14,76 @@ class FormLogin extends React.Component {
             user: "",
             pass: ""
         }
+        
     }
-  
+
+    setState2 =(user, pass)=>{
+        this.setState({
+            recived: {
+                user: user,
+                pass: pass
+            }
+        })
+        console.log(user+pass)
+        console.log("usuario: "+this.state.recived.user)
+
+    }
+
 
     handleClick = () => {
-        let res;
         this.setState({
             data: {
                 user: $("#user").val(),
                 pass: $("#pass").val()
             }
         })
-        
+
         $.ajax({
             url: "http://localhost/backend/Login.php",
-            data: { us:this.state.data.user, pa:this.state.data.pass },
-            dataType:'json', 
-            type: 'POST',            
-            success: function (response) {                 
-                response.forEach(red =>{
-                // ahcer algo aca
-                   
-                })     
+            data: { us: this.state.data.user, pa: this.state.data.pass },
+            dataType: 'json',
+            type: 'POST',
+            success: ( response)=> {
+                let user=response[0].user
+                let pass=response[0].pass
+                this.setState2(user,pass)
+                
             }
+
         })
-        
     }
 
-    render() {
-        return (
-            <div className="container form-login">
+render() {
+    return (
+        <div className="container form-login">
 
-                <div>
-                    <input
-                        id="user"
-                        placeholder="Ingrese Usuario"
-                        type="text"
-                        className="form-control form-input"
-                    />
-                </div>
-                <div>
-                    <input
-                        id="pass"
-                        placeholder="Ingrese Password"
-                        type="password"
-                        className="form-control form-input"
-                    />
-                </div>
-                <div className="form-btn float-center">
-                    <button
-                        class="btn btn-primary btn-block"
-                        type="submit"
-                        onClick={this.handleClick}>
-                        Ingresar
-                    </button>
-                </div>
-
+            <div>
+                <input
+                    id="user"
+                    placeholder="Ingrese Usuario"
+                    type="text"
+                    className="form-control form-input"
+                />
             </div>
-        )
-    }
+            <div>
+                <input
+                    id="pass"
+                    placeholder="Ingrese Password"
+                    type="password"
+                    className="form-control form-input"
+                />
+            </div>
+            <div className="form-btn float-center">
+                <button
+                    class="btn btn-primary btn-block"
+                    type="submit"
+                    onClick={this.handleClick}>
+                    Ingresar
+                    </button>
+            </div>
+
+        </div>
+    )
+}
 }
 export default FormLogin
