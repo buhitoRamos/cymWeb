@@ -17,28 +17,22 @@ class FormLogin extends React.Component {
         },
         aux: {
             chk: "password"
-
         }
-
-
     }
-    handleChangeChk = () =>{     
 
-        var myCheck=this.state.aux.chk
+    handleChangeChk = () => {
+        var myCheck = this.state.aux.chk
         console.log(myCheck)
-        
-        if(myCheck=="password"){
-            myCheck="text"
-        }else{
-            myCheck="password"
+        if (myCheck == "password") {
+            myCheck = "text"
+        } else {
+            myCheck = "password"
         }
-        
         this.setState({
             aux: {
-                chk:myCheck
+                chk: myCheck
             }
         })
-        
     }
 
     setStateRecived = (user, pass) => {
@@ -64,10 +58,7 @@ class FormLogin extends React.Component {
                 [e.target.id]: e.target.value,
             }
         })
-
-
     }
-
 
     handleClick = () => {
         $.ajax({
@@ -86,16 +77,13 @@ class FormLogin extends React.Component {
                     user = ""
                     pass = ""
                 }
-
             }
-
         })
     }
 
     render() {
         return (
             <div className="container form-login">
-
                 <div>
                     <input
                         id="user"
@@ -105,9 +93,6 @@ class FormLogin extends React.Component {
                         className="form-control form-input"
                     />
                 </div>
-
-
-
                 <div className="input-group-prepend">
                     <input
                         id="pass"
@@ -116,19 +101,14 @@ class FormLogin extends React.Component {
                         type={this.state.aux.chk}
                         className="form-control form-input"
                     />
-
                     <input
                         type="checkbox"
                         aria-label="Checkbox for following text input"
                         className="form-input-ch"
                         onChange={this.handleChangeChk}
-                    
+
                     />
                 </div>
-
-
-
-
                 <div className="form-btn float-center">
                     <input
                         className="btn btn-primary btn-block"
@@ -137,7 +117,6 @@ class FormLogin extends React.Component {
                         onClick={this.handleClick}
                     />
                 </div>
-
             </div>
         )
     }
