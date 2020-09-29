@@ -12,78 +12,134 @@ class FormLogin extends React.Component {
         },
         recived: {
             user: "",
-            pass: ""
+            pass: "",
+            aproved: false
+        },
+        aux: {
+            chk: "password"
+
         }
+
+
+    }
+    handleChangeChk = () =>{     
+
+        var myCheck=this.state.aux.chk
+        console.log(myCheck)
+        
+        if(myCheck=="password"){
+            myCheck="text"
+        }else{
+            myCheck="password"
+        }
+        
+        this.setState({
+            aux: {
+                chk:myCheck
+            }
+        })
         
     }
 
-    setState2 =(user, pass)=>{
+    setStateRecived = (user, pass) => {
         this.setState({
             recived: {
                 user: user,
                 pass: pass
             }
         })
-        console.log(user+pass)
-        console.log("usuario: "+this.state.recived.user)
+        if ((this.state.data.user + this.state.data.pass) ==
+            (this.state.recived.user + this.state.recived.pass)
+        ) {
+            console.log("es igual")
+        } else {
+            console.log("es diferente")
+        }
+    }
+
+    handleChange = e => {
+        this.setState({
+            data: {
+                ...this.state.data,
+                [e.target.id]: e.target.value,
+            }
+        })
+
 
     }
 
 
     handleClick = () => {
-        this.setState({
-            data: {
-                user: $("#user").val(),
-                pass: $("#pass").val()
-            }
-        })
-
         $.ajax({
             url: "http://localhost/backend/Login.php",
             data: { us: this.state.data.user, pa: this.state.data.pass },
             dataType: 'json',
             type: 'POST',
-            success: ( response)=> {
-                let user=response[0].user
-                let pass=response[0].pass
-                this.setState2(user,pass)
-                
+            async: false,
+            success: (response) => {
+                try {
+                    var { user, pass } = ""
+                    user = response[0].user
+                    pass = response[0].pass
+                    this.setStateRecived(user, pass)
+                } catch {
+                    user = ""
+                    pass = ""
+                }
+
             }
 
         })
     }
 
-render() {
-    return (
-        <div className="container form-login">
+    render() {
+        return (
+            <div className="container form-login">
 
-            <div>
-                <input
-                    id="user"
-                    placeholder="Ingrese Usuario"
-                    type="text"
-                    className="form-control form-input"
-                />
-            </div>
-            <div>
-                <input
-                    id="pass"
-                    placeholder="Ingrese Password"
-                    type="password"
-                    className="form-control form-input"
-                />
-            </div>
-            <div className="form-btn float-center">
-                <button
-                    class="btn btn-primary btn-block"
-                    type="submit"
-                    onClick={this.handleClick}>
-                    Ingresar
-                    </button>
-            </div>
+                <div>
+                    <input
+                        id="user"
+                        onChange={this.handleChange}
+                        placeholder="Ingrese Usuario"
+                        type="text"
+                        className="form-control form-input"
+                    />
+                </div>
 
-        </div>
-    )
-}
+
+
+                <div className="input-group-prepend">
+                    <input
+                        id="pass"
+                        onChange={this.handleChange}
+                        placeholder="Ingrese Password"
+                        type={this.state.aux.chk}
+                        className="form-control form-input"
+                    />
+
+                    <input
+                        type="checkbox"
+                        aria-label="Checkbox for following text input"
+                        className="form-input-ch"
+                        onChange={this.handleChangeChk}
+                    
+                    />
+                </div>
+
+
+
+
+                <div className="form-btn float-center">
+                    <input
+                        className="btn btn-primary btn-block"
+                        type="submit"
+                        value="ingresar"
+                        onClick={this.handleClick}
+                    />
+                </div>
+
+            </div>
+        )
+    }
 }
 export default FormLogin
