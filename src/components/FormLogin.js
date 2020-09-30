@@ -1,9 +1,14 @@
 import React from "react"
 import "../components/styles/FormLogin.css"
 import $ from "jquery"
-import loginPhp from "../backend/Login.php"
 
 class FormLogin extends React.Component {
+    constructor(props){
+        super(props);{
+            this.handleSubmit = this.handleSubmit.bind(this)
+            this.input = React.createRef();
+        }
+    }
 
     state = {
         data: {
@@ -18,6 +23,10 @@ class FormLogin extends React.Component {
         aux: {
             chk: "password"
         }
+    }
+    handleSubmit = e =>{
+        this.handleClick()
+        e.preventDefault();
     }
 
     handleChangeChk = () => {
@@ -47,6 +56,8 @@ class FormLogin extends React.Component {
         ) {
             console.log("es igual")
         } else {
+            console.log("datos que tengo: "+this.state.data.user +" " +this.state.data.pass)
+            console.log("datos que llegan: "+this.state.recived.user +" " +this.state.recived.pass)
             console.log("es diferente")
         }
     }
@@ -60,13 +71,15 @@ class FormLogin extends React.Component {
         })
     }
 
+    
+
     handleClick = () => {
         $.ajax({
             url: "http://localhost/backend/Login.php",
             data: { us: this.state.data.user, pa: this.state.data.pass },
             dataType: 'json',
             type: 'POST',
-            async: false,
+            async: true,
             success: (response) => {
                 try {
                     var { user, pass } = ""
@@ -83,6 +96,7 @@ class FormLogin extends React.Component {
 
     render() {
         return (
+            <form onSubmit={this.handleSubmit}>
             <div className="container form-login">
                 <div>
                     <input
@@ -110,14 +124,16 @@ class FormLogin extends React.Component {
                 </div>
                 <div className="form-btn float-center">
                     <input
+                        id="sub"
                         className="btn btn-primary btn-block"
                         type="submit"
                         value="ingresar"
-                        onClick={this.handleClick}
                     />
                 </div>
             </div>
+            </form>
         )
     }
 }
 export default FormLogin
+
