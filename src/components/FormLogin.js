@@ -106,7 +106,6 @@ class FormLogin extends React.Component {
                         aria-label="Checkbox for following text input"
                         className="form-input-ch"
                         onChange={this.handleChangeChk}
-
                     />
                 </div>
                 <div className="form-btn float-center">
