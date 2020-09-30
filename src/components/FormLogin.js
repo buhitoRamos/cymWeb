@@ -3,13 +3,7 @@ import "../components/styles/FormLogin.css"
 import $ from "jquery"
 
 class FormLogin extends React.Component {
-    constructor(props){
-        super(props);{
-            this.handleSubmit = this.handleSubmit.bind(this)
-            this.input = React.createRef();
-        }
-    }
-
+    
     state = {
         data: {
             user: "",
@@ -24,7 +18,8 @@ class FormLogin extends React.Component {
             chk: "password"
         }
     }
-    handleSubmit = e =>{
+
+    handleSubmit = e => {
         this.handleClick()
         e.preventDefault();
     }
@@ -56,8 +51,8 @@ class FormLogin extends React.Component {
         ) {
             console.log("es igual")
         } else {
-            console.log("datos que tengo: "+this.state.data.user +" " +this.state.data.pass)
-            console.log("datos que llegan: "+this.state.recived.user +" " +this.state.recived.pass)
+            console.log("datos que tengo: " + this.state.data.user + " " + this.state.data.pass)
+            console.log("datos que llegan: " + this.state.recived.user + " " + this.state.recived.pass)
             console.log("es diferente")
         }
     }
@@ -71,7 +66,7 @@ class FormLogin extends React.Component {
         })
     }
 
-    
+
 
     handleClick = () => {
         $.ajax({
@@ -97,40 +92,40 @@ class FormLogin extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-            <div className="container form-login">
-                <div>
-                    <input
-                        id="user"
-                        onChange={this.handleChange}
-                        placeholder="Ingrese Usuario"
-                        type="text"
-                        className="form-control form-input"
-                    />
+                <div className="container form-login">
+                    <div>
+                        <input
+                            id="user"
+                            onChange={this.handleChange}
+                            placeholder="Ingrese Usuario"
+                            type="text"
+                            className="form-control form-input"
+                        />
+                    </div>
+                    <div className="input-group-prepend">
+                        <input
+                            id="pass"
+                            onChange={this.handleChange}
+                            placeholder="Ingrese Password"
+                            type={this.state.aux.chk}
+                            className="form-control form-input"
+                        />
+                        <input
+                            type="checkbox"
+                            aria-label="Checkbox for following text input"
+                            className="form-input-ch"
+                            onChange={this.handleChangeChk}
+                        />
+                    </div>
+                    <div className="form-btn float-center">
+                        <input
+                            id="sub"
+                            className="btn btn-primary btn-block"
+                            type="submit"
+                            value="ingresar"
+                        />
+                    </div>
                 </div>
-                <div className="input-group-prepend">
-                    <input
-                        id="pass"
-                        onChange={this.handleChange}
-                        placeholder="Ingrese Password"
-                        type={this.state.aux.chk}
-                        className="form-control form-input"
-                    />
-                    <input
-                        type="checkbox"
-                        aria-label="Checkbox for following text input"
-                        className="form-input-ch"
-                        onChange={this.handleChangeChk}
-                    />
-                </div>
-                <div className="form-btn float-center">
-                    <input
-                        id="sub"
-                        className="btn btn-primary btn-block"
-                        type="submit"
-                        value="ingresar"
-                    />
-                </div>
-            </div>
             </form>
         )
     }

@@ -1,0 +1,26 @@
+
+    [{
+    "id": 1,
+    "title": "Clientes",
+    "description": "Para agregar, editar y eliminar clientes, tambien crear recibo de equipo ",    
+    "leftColor": "#A74CF2",
+    "rightColor": "#617BFB"
+},{
+    "id": 2,
+    "title": "Trabajos",
+    "description": "Para cargar,editar, eliminar todos los trabajos a realizar, y generar remito",   
+    "leftColor": "#17EAD9",
+    "rightColor": "#6078EA"
+},{
+    "id": 3,
+    "title": "Ayudante",
+    "description": "para visualizar todo lo relacionado con el/los colaboradores",    
+    "leftColor": "#FAD961",
+    "rightColor": "#F76B1C"
+},{
+    "id": 4,
+    "title": "Ganancias",
+    "description": "En este modulo se visualizara las gananacias",    
+    "leftColor": "grey",
+    "rightColor": "red"
+}]
