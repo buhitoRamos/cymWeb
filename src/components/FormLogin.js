@@ -3,7 +3,7 @@ import "../components/styles/FormLogin.css"
 import $ from "jquery"
 
 class FormLogin extends React.Component {
-    
+
     state = {
         data: {
             user: "",
@@ -15,7 +15,9 @@ class FormLogin extends React.Component {
             aproved: false
         },
         aux: {
-            chk: "password"
+            chk: "password",
+            toInto: "false",
+            url:"#"
         }
     }
 
@@ -50,6 +52,12 @@ class FormLogin extends React.Component {
             (this.state.recived.user + this.state.recived.pass)
         ) {
             console.log("es igual")
+            this.setState({
+                aux: {
+                    toInto: true,
+                }
+            })
+            console.log(this.state.aux.toInto)
         } else {
             console.log("datos que tengo: " + this.state.data.user + " " + this.state.data.pass)
             console.log("datos que llegan: " + this.state.recived.user + " " + this.state.recived.pass)
@@ -123,7 +131,7 @@ class FormLogin extends React.Component {
                             className="btn btn-primary btn-block"
                             type="submit"
                             value="ingresar"
-                        />
+                        />                        
                     </div>
                 </div>
             </form>

@@ -2,9 +2,14 @@ import React from "react"
 import Logo from "../components/Logo"
 import FormLogin from "../components/FormLogin"
 import NavBar from "../components/NavBar"
+import $ from "jquery"
 
 class Login extends React.Component {
-    state = {}
+    
+    state = {
+        toInto:false
+    }  
+
     render() {
         return (
             <div>
@@ -13,7 +18,8 @@ class Login extends React.Component {
                 />
                 <div className="float-left">
                     <Logo />
-                    <FormLogin />
+                    <FormLogin
+                     />
 
                 </div>
             </div>
