@@ -18,6 +18,7 @@ class Login extends React.Component {
         },
         aux: {
             chk: "password",
+            selected:false,
             toInto: "false",
             url: "/login",
             
@@ -36,10 +37,12 @@ class Login extends React.Component {
             myCheck = "text"
         } else {
             myCheck = "password"
-        }
+        }       
+        
         this.setState({
             aux: {
-                chk: myCheck
+                chk: myCheck,                
+                
             }
         })
 
@@ -123,7 +126,7 @@ class Login extends React.Component {
                         handleChangeChk={this.handleChangeChk}
                         handleClick={this.handleClick}
                         handleSubmit={this.handleSubmit}
-                        estado={this.state}
+                        estado={this.state}                        
                     />
                 </div>
             </div>

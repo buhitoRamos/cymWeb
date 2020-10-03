@@ -3,10 +3,13 @@ import "../components/styles/FormLogin.css"
 import $ from "jquery"
 
 class FormLogin extends React.Component {
-
+    
+   
    
 
     render() {
+       
+
         const {handleChange, handleChangeChk, handleSubmit, handleClick, estado} = this.props
         return (
             <form onSubmit={handleSubmit}>
@@ -17,7 +20,7 @@ class FormLogin extends React.Component {
                             onChange={handleChange}
                             placeholder="Ingrese Usuario"
                             type="text"
-                            className="form-control form-input"
+                            className="form-control form-input rounded-pill"
                         />
                     </div>
                     <div className="input-group-prepend">
@@ -26,11 +29,12 @@ class FormLogin extends React.Component {
                             onChange={handleChange}
                             placeholder="Ingrese Password"
                             type={estado.aux.chk}
-                            className="form-control form-input"
+                            className="form-control form-input rounded-pill"
                         />
                         <input
-                            type="checkbox"
-                            aria-label="Checkbox for following text input"
+                            type="checkbox"                            
+                            checked={estado.aux.selected}
+                            aria-label="Text input with checkbox"                           
                             className="form-input-ch"
                             onChange={handleChangeChk}
                         />
