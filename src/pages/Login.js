@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar"
 import $ from "jquery"
 
 class Login extends React.Component {
-    
+
     state = {
         data: {
             user: "",
@@ -19,7 +19,8 @@ class Login extends React.Component {
         aux: {
             chk: "password",
             toInto: "false",
-            url:""
+            url: "/login",
+            
         }
     }
 
@@ -41,6 +42,7 @@ class Login extends React.Component {
                 chk: myCheck
             }
         })
+
     }
 
     setStateRecived = (user, pass) => {
@@ -56,18 +58,24 @@ class Login extends React.Component {
             console.log("es igual")
             this.setState({
                 aux: {
-                    toInto: true,
-                    url: ""
+                    toInto: "token-31576533",
+                    url: "/seleccion"
                 }
             })
-            console.log("toInto: "+this.state.aux.toInto)
-            
-            
+            this.saveToken(this.state.aux.toInto)
+
+            this.props.history.push('/seleccion')  
         } else {
             console.log("datos que tengo: " + this.state.data.user + " " + this.state.data.pass)
             console.log("datos que llegan: " + this.state.recived.user + " " + this.state.recived.pass)
             console.log("es diferente")
         }
+    }
+
+    saveToken (toInto){
+        let token=JSON.stringify(toInto)
+        localStorage.setItem('token', token);
+
     }
 
     handleChange = e => {
@@ -77,9 +85,8 @@ class Login extends React.Component {
                 [e.target.id]: e.target.value,
             }
         })
+
     }
-
-
 
     handleClick = () => {
         $.ajax({
@@ -102,11 +109,8 @@ class Login extends React.Component {
         })
     }
 
-
-
-
-
     render() {
+        const {history}=this.props
         return (
             <div>
                 <NavBar
@@ -115,13 +119,12 @@ class Login extends React.Component {
                 <div className="float-left">
                     <Logo />
                     <FormLogin
-                    handleChange={this.handleChange}
-                    handleChangeChk={this.handleChangeChk}
-                    handleClick={this.handleClick}
-                    handleSubmit={this.handleSubmit}
-                    estado={this.state}
-                     />                    
-
+                        handleChange={this.handleChange}
+                        handleChangeChk={this.handleChangeChk}
+                        handleClick={this.handleClick}
+                        handleSubmit={this.handleSubmit}
+                        estado={this.state}
+                    />
                 </div>
             </div>
         )
