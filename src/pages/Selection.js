@@ -2,9 +2,9 @@ import React from 'react'
 import CardList from '../components/CardList'
 import NavBar from '../components/NavBar'
 import CardInfo from '../components/CardInfo.json'
-import NotFound from '../pages/NotFound'
+import NotFound from './NotFound'
 
-class Seleccion extends React.Component {
+class Selection extends React.Component {
 
     state = {
 
@@ -52,4 +52,4 @@ class Seleccion extends React.Component {
 
     }
 }
-export default Seleccion
+export default Selection

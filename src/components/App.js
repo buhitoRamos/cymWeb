@@ -1,7 +1,7 @@
 import React from "react"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Login from "../pages/Login"
-import Seleccion from '../pages/Seleccion'
+import Selection from '../pages/Selection'
 import NotFound from '../pages/NotFound'
 
 const App = () => (
@@ -10,7 +10,7 @@ const App = () => (
         <BrowserRouter>
             <Switch>
                 <Route path='/login' component={Login} />
-                <Route path='/seleccion' component={Seleccion} />
+                <Route path='/seleccion' component={Selection} />
                 <Route component={NotFound} />
             </Switch>
         </BrowserRouter>
