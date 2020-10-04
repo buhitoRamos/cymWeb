@@ -18,10 +18,11 @@ class Login extends React.Component {
         },
         aux: {
             chk: "password",
+            selected: true,
             toInto: "false",
             url: "/login",
-            wrongUser:""
-            
+            wrongUser: ""
+
         }
     }
 
@@ -31,19 +32,19 @@ class Login extends React.Component {
     }
 
     handleChangeChk = () => {
-       
+
         var myCheck = this.state.aux.chk
-        console.log("handlechangeCHK: "+myCheck)
+        console.log("handlechangeCHK: " + myCheck)
         if (myCheck == "password") {
             myCheck = "text"
         } else {
             myCheck = "password"
-        }       
-        
+        }
+
         this.setState({
             aux: {
-                chk: myCheck,                
-                
+                chk: myCheck,
+
             }
         })
 
@@ -67,26 +68,27 @@ class Login extends React.Component {
                 }
             })
             this.saveToken(this.state.aux.toInto)
-
-            this.props.history.push('/seleccion')  
+            this.props.history.push('/seleccion')
         }
-    }   
+    }
 
-    saveToken= (toInto)=>{
-        let token=JSON.stringify(toInto)
+    saveToken = (toInto) => {
+        let token = JSON.stringify(toInto)
         localStorage.setItem('token', token);
 
     }
 
     handleChange = e => {
-        console.log("handlechange: " +this.state.aux.chk)
+        console.log("handlechange: " + this.state.aux.chk)
         this.setState({
             data: {
                 ...this.state.data,
                 [e.target.id]: e.target.value,
             },
             aux: {
-                wrongUser:""
+                ...this.state.aux,
+
+                wrongUser: ""
             }
         })
 
@@ -110,16 +112,18 @@ class Login extends React.Component {
                     pass = ""
                     this.setState({
                         aux: {
-                            wrongUser:"Ingrese usuario y password válidos"
+                            wrongUser: "Ingrese usuario y password válidos"
                         }
                     })
+                    this.saveToken(this.state.aux.toInto)
+                    
                 }
             }
         })
     }
 
     render() {
-        const {history}=this.props
+        const { history } = this.props
         return (
             <div>
                 <NavBar
@@ -132,7 +136,7 @@ class Login extends React.Component {
                         handleChangeChk={this.handleChangeChk}
                         handleClick={this.handleClick}
                         handleSubmit={this.handleSubmit}
-                        estado={this.state}                        
+                        estado={this.state}
                     />
                 </div>
             </div>

@@ -2,14 +2,28 @@ import React from 'react'
 import circleImg from '../images/circles.png'
 import './styles/Card.css'
 class Card extends React.Component {
-    render() {
 
-        const { title, description, rightColor, leftColor } = this.props
+    handleClick = e =>{   
+            
+        var goTo=this.props.title
+        goTo = goTo.toString().toLowerCase() 
+        goTo="/"+goTo       
+        console.log("/"+goTo)
+        this.props.history.push(goTo)
+
+    }
+
+    render() {
+        
+        const { title, description, rightColor, leftColor, history } = this.props
+        
+        
         return (
-            <div className="card mx-auto Work-Card"
+            <div className="card mx-auto Work-Card"                       
                 style={{
                     backgroundImage: `url(${circleImg}), linear-gradient(to right, ${rightColor}, ${leftColor})`
-                }}
+                }}            
+            onClick={this.handleClick} 
             >
                 <div className="card-body">
                     <div className="row center">                        

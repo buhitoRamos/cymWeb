@@ -22,8 +22,10 @@ class Selection extends React.Component {
             isLoged: validaToken
         })
     }
+    
 
     render() {
+        const { history } = this.props 
         if (this.state.isLoged) {
             return (
                 <div>
@@ -34,7 +36,8 @@ class Selection extends React.Component {
                     </div>
                     <div className="container">
                         <CardList
-                            card={this.state.data}
+                        history={history}
+                        card={this.state.data}
                         />
                     </div>
                 </div>

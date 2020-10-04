@@ -35,6 +35,7 @@ class FormLogin extends React.Component {
                         />
                         <input
                             type="checkbox"
+                            checked={estado.aux.selected}
                             className="checkbox checkbox-primary form-input-ch"
                             defaultChecked="true"
                             onChange={handleChangeChk}
