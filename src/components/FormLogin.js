@@ -8,9 +8,11 @@ class FormLogin extends React.Component {
    
 
     render() {
-       
+              
 
-        const {handleChange, handleChangeChk, handleSubmit, handleClick, estado} = this.props
+        const {handleChange, handleChangeChk, handleSubmit, estado} = this.props
+
+        
         return (
             <form onSubmit={handleSubmit}>
                 <div className="container form-login">
@@ -34,6 +36,7 @@ class FormLogin extends React.Component {
                         <input
                             type="checkbox"
                             className="checkbox checkbox-primary form-input-ch"
+                            defaultChecked="true"
                             onChange={handleChangeChk}
                         />
                     </div>
@@ -43,7 +46,12 @@ class FormLogin extends React.Component {
                             className="btn btn-primary btn-block"
                             type="submit"
                             value="ingresar"
-                        />                        
+                        /> 
+                        <div 
+                        className="text-primary text-center">
+                            <p>{estado.aux.wrongUser}</p>
+                        </div>
+                                               
                     </div>
                 </div>
             </form>

@@ -18,9 +18,9 @@ class Login extends React.Component {
         },
         aux: {
             chk: "password",
-            selected:false,
             toInto: "false",
             url: "/login",
+            wrongUser:""
             
         }
     }
@@ -31,8 +31,9 @@ class Login extends React.Component {
     }
 
     handleChangeChk = () => {
+       
         var myCheck = this.state.aux.chk
-        console.log(myCheck)
+        console.log("handlechangeCHK: "+myCheck)
         if (myCheck == "password") {
             myCheck = "text"
         } else {
@@ -68,24 +69,24 @@ class Login extends React.Component {
             this.saveToken(this.state.aux.toInto)
 
             this.props.history.push('/seleccion')  
-        } else {
-            console.log("datos que tengo: " + this.state.data.user + " " + this.state.data.pass)
-            console.log("datos que llegan: " + this.state.recived.user + " " + this.state.recived.pass)
-            console.log("es diferente")
         }
-    }
+    }   
 
-    saveToken (toInto){
+    saveToken= (toInto)=>{
         let token=JSON.stringify(toInto)
         localStorage.setItem('token', token);
 
     }
 
     handleChange = e => {
+        console.log("handlechange: " +this.state.aux.chk)
         this.setState({
             data: {
                 ...this.state.data,
                 [e.target.id]: e.target.value,
+            },
+            aux: {
+                wrongUser:""
             }
         })
 
@@ -107,6 +108,11 @@ class Login extends React.Component {
                 } catch {
                     user = ""
                     pass = ""
+                    this.setState({
+                        aux: {
+                            wrongUser:"Ingrese usuario y password válidos"
+                        }
+                    })
                 }
             }
         })
