@@ -32,10 +32,8 @@ class FormLogin extends React.Component {
                             className="form-control form-input rounded-pill"
                         />
                         <input
-                            type="checkbox"                            
-                            checked={estado.aux.selected}
-                            aria-label="Text input with checkbox"                           
-                            className="form-input-ch"
+                            type="checkbox"
+                            className="checkbox checkbox-primary form-input-ch"
                             onChange={handleChangeChk}
                         />
                     </div>
