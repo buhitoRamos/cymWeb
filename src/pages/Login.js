@@ -86,8 +86,7 @@ class Login extends React.Component {
                 [e.target.id]: e.target.value,
             },
             aux: {
-                ...this.state.aux,
-
+                ...this.state.aux,                
                 wrongUser: ""
             }
         })
@@ -112,6 +111,7 @@ class Login extends React.Component {
                     pass = ""
                     this.setState({
                         aux: {
+                            chk: "password",
                             wrongUser: "Ingrese usuario y password válidos"
                         }
                     })
