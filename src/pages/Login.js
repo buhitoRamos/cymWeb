@@ -130,6 +130,8 @@ class Login extends React.Component {
                     txt="Login"
                     type="hidden"
                     history={history}
+                    btnExit="hidden"
+                    btnHome="hidden"
                 />
                 <div className="float-left">
                     <Logo />

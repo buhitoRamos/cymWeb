@@ -5,6 +5,7 @@ import "../components/styles/Tbody.css"
 import CustomerTable from "../components/CustomerTable"
 
 
+
 class Customers extends React.Component {
     state = {
         cliente: '',

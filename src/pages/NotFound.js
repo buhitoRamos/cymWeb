@@ -7,6 +7,8 @@ const NotFound = () => (
         <NavBar
             txt="Not Found"
             type="hidden"
+            btnExit="hidden"
+            btnHome="hidden"
         />
         <div>
             <BtnNavegation

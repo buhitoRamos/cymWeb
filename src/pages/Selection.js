@@ -25,14 +25,17 @@ class Selection extends React.Component {
     
 
     render() {
-        const { history } = this.props 
+        
         if (this.state.isLoged) {
+            const { history } = this.props 
             return (
                 <div>
                     <div>
                         <NavBar
                             txt="Selección"
                             type="hidden"
+                            history={history}
+                            btnHome="hidden"
                         />
                     </div>
                     <div className="container">
