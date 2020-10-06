@@ -51,6 +51,15 @@ class Customers extends React.Component {
         console.log(e.target.value)
         this.loadCustomers()
     }
+    handleCustomer = e =>{
+        const id=e.target.innerHTML
+       // console.log(id)
+        const id2=e.target.parentNode
+        
+        console.log(id2)
+       
+}
+    
 
 
     render() {
@@ -67,7 +76,10 @@ class Customers extends React.Component {
                 />
                 <div className="">
                 <table className="table table-hover table-dark"
-                cellspacing="10" cellpadding="10" border="3">
+                cellspacing="10" cellpadding="10" border="3"
+                id="customers"
+                onClick={this.handleCustomer}
+                >
                     <thead className="bg-danger">
                         <tr>
                             <th

@@ -8,7 +8,8 @@ class CustomerTable extends React.Component {
         return (
             <tr>
             
-                <th scope="row">{id}</th>
+                <th scope="row"
+                id="id" >{id}</th>
                 <td>{nombre}</td>
                 <td>{direccion}</td>
                 <td>{telefono}</td>

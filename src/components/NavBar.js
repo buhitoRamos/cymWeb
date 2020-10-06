@@ -31,6 +31,14 @@ class NavBar extends React.Component {
                             type={type}
                             placeholder={type}
                             onChange={handleChange} />
+                        <div    
+                            hidden={btnHome}>
+                            <img src={back}
+                                onClick={this.handleHome}
+                                className="btn float-right"
+                                width="60"
+                            />
+                        </div>
                         <div
                             hidden={btnExit}>
                             <img src={exit}
@@ -39,14 +47,7 @@ class NavBar extends React.Component {
                                 width="60"
                             />
                         </div>
-                        <div
-                            hidden={btnHome}>
-                            <img src={back}
-                                onClick={this.handleHome}
-                                className="btn float-right"
-                                width="60"
-                            />
-                        </div>
+
                     </form>
                 </nav>
 

@@ -35,7 +35,7 @@ class Login extends React.Component {
 
         var myCheck = this.state.aux.chk
         console.log("handlechangeCHK: " + myCheck)
-        if (myCheck == "password") {
+        if (myCheck === "password") {
             myCheck = "text"
         } else {
             myCheck = "password"
