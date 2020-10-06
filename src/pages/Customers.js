@@ -1,7 +1,8 @@
 import React from 'react'
 import NavBar from "../components/NavBar"
-import CustoList from "../components/CustoList"
 import $ from "jquery"
+import "../components/styles/Tbody.css"
+import CustomerTable from "../components/CustomerTable"
 
 
 class Customers extends React.Component {
@@ -12,10 +13,10 @@ class Customers extends React.Component {
         cliente: '',
         listaClientes: [
             {
-                idCliente: "     ",
-                nombre: "       ",
-                direccion: "          ",
-                telefono: "           "
+                idCliente: "",
+                nombre: "",
+                direccion: "",
+                telefono: ""
             }
 
         ],
@@ -39,13 +40,7 @@ class Customers extends React.Component {
             success: (response) => {
                 this.setState({
                     listaClientes: response,
-
-
                 })
-
-
-
-
             }
         })
     }
@@ -54,36 +49,46 @@ class Customers extends React.Component {
     render() {
         return (
 
-            <div onClick={this.loadCustomers}>
+            <div>
 
                 <NavBar
                     txt="Clientes"
+                    type="search"
                 />
-                <div className="table-responsive">
+                <div className="">
                 <table className="table table-bordered ">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Direccion</th>
-                                <th scope="col">Telefono</th>
-                            </tr>
-                        </thead>
-                        <CustoList
-                            customer={this.state.listaClientes}
-                        />
+                    <thead className="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Direccion</th>
+                            <th>Telefono</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                    {
+            this.state.listaClientes.map(customer=>{
+                return(
+                    <CustomerTable
+                    id={customer.idCliente}
+                    nombre={customer.nombre}
+                    direccion={customer.direccion}
+                    telefono={customer.telefono}
+                    />
+                )
+            })
+        }
+                        
+                    </tbody>
                     </table>
 
-                </div>
-                
-                   
+               
                 </div>
 
+            </div>
 
-           
         )
-
-
 
     }
 

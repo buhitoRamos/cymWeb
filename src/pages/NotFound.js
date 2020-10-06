@@ -6,6 +6,7 @@ const NotFound = () => (
     <div>
         <NavBar
             txt="Not Found"
+            type="hidden"
         />
         <div>
             <BtnNavegation

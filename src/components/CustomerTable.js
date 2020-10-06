@@ -6,21 +6,15 @@ class CustomerTable extends React.Component {
     render() {
         const { id, nombre, direccion, telefono } = this.props
         return (
-            <div>
+            <tr>
+            
+                <th>{id}</th>
+                <td>{nombre}</td>
+                <td>{direccion}</td>
+                <td>{telefono}</td>
+            
 
-                
-                    <tbody>
-                        <tr className= "col">
-                            <th scope="row">{id}</th>
-                            <td>{nombre}</td>
-                            <td>{direccion}</td>
-                            <td>{telefono}</td>
-                        </tr>
-                    </tbody>
-               
-            </div>
-
-
+                </tr>
         )
 
     }
