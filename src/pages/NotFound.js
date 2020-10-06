@@ -10,7 +10,7 @@ const NotFound = () => (
         />
         <div>
             <BtnNavegation
-                url="/login"
+                url="/login"                
             />
         </div>
 

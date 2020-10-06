@@ -6,9 +6,6 @@ import CustomerTable from "../components/CustomerTable"
 
 
 class Customers extends React.Component {
-
-
-
     state = {
         cliente: '',
         listaClientes: [
@@ -44,9 +41,19 @@ class Customers extends React.Component {
             }
         })
     }
+    handleChange=e=>{
+        
+        this.setState({
+            ...this.state.cliente,
+            cliente:e.target.value
+        })
+        console.log(e.target.value)
+        this.loadCustomers()
+    }
 
 
     render() {
+        const {history}=this.props
         return (
 
             <div>
@@ -54,15 +61,22 @@ class Customers extends React.Component {
                 <NavBar
                     txt="Clientes"
                     type="search"
+                    history={history}
+                    handleChange={this.handleChange}
                 />
                 <div className="">
-                <table className="table table-bordered ">
-                    <thead className="thead-dark">
+                <table className="table table-hover table-dark"
+                cellspacing="10" cellpadding="10" border="3">
+                    <thead className="bg-danger">
                         <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Direccion</th>
-                            <th>Telefono</th>
+                            <th
+                            className="text-center">ID</th>
+                            <th
+                            className="text-center">Nombre</th>
+                            <th
+                            className="text-center">Direccion</th>
+                            <th
+                            className="text-center">Telefono</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,20 +92,14 @@ class Customers extends React.Component {
                     />
                 )
             })
-        }
-                        
+        }               
                     </tbody>
-                    </table>
-
-               
+                </table>
                 </div>
 
             </div>
-
         )
-
     }
-
 }
 export default Customers
 

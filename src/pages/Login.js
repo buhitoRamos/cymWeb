@@ -128,6 +128,8 @@ class Login extends React.Component {
             <div>
                 <NavBar
                     txt="Login"
+                    type="hidden"
+                    history={history}
                 />
                 <div className="float-left">
                     <Logo />

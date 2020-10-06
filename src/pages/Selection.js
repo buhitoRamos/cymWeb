@@ -32,6 +32,7 @@ class Selection extends React.Component {
                     <div>
                         <NavBar
                             txt="Selección"
+                            type="hidden"
                         />
                     </div>
                     <div className="container">
