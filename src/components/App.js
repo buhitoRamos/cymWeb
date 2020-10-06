@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Login from "../pages/Login"
 import Selection from '../pages/Selection'
 import NotFound from '../pages/NotFound'
-import Clientes from '../pages/Clientes'
+import Customers from '../pages/Customers'
 
 const App = () => (
 
@@ -12,7 +12,7 @@ const App = () => (
             <Switch>
                 <Route path='/login' component={Login} />
                 <Route path='/seleccion' component={Selection} />
-                <Route path='/clientes' component={Clientes} />
+                <Route path='/clientes' component={Customers} />
                 <Route component={NotFound} />
             </Switch>
         </BrowserRouter>
