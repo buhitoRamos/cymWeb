@@ -1,13 +1,16 @@
 import React from 'react'
-import btn from '../images/btn.png'
+import btnLogin from '../images/btn.png'
 import { Link } from 'react-router-dom'
 
+
 const BtnNavegation = ({ url }) => (
+
 
     <div>
         <Link to={url}>
             <div className="container">
-                <img src={btn}
+                <img src={btnLogin}
+                    alt="log"
                     className="rounded mx-auto d-block p-5"
                 />
             </div>
@@ -22,4 +25,5 @@ const BtnNavegation = ({ url }) => (
 
 
 )
+
 export default BtnNavegation

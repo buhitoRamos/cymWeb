@@ -15,10 +15,11 @@ class Card extends React.Component {
 
     render() {
         
-        const { title, description, rightColor, leftColor, history } = this.props
+        const { title, description, rightColor, leftColor } = this.props
         
         
         return (
+            <div className="row row-cols-2">
             <div className="card mx-auto Work-Card"                       
                 style={{
                     backgroundImage: `url(${circleImg}), linear-gradient(to right, ${rightColor}, ${leftColor})`
@@ -33,6 +34,7 @@ class Card extends React.Component {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         )
     }

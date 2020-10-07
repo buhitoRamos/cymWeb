@@ -5,6 +5,7 @@ import "../components/styles/Logo.css"
 const Logo = () =>(
     <div>
         <img 
+        alt=""
         src={img}
         className="float-left logo"
         />

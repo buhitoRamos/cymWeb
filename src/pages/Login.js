@@ -57,7 +57,7 @@ class Login extends React.Component {
                 pass: pass
             }
         })
-        if ((this.state.data.user + this.state.data.pass) ==
+        if ((this.state.data.user + this.state.data.pass) ===
             (this.state.recived.user + this.state.recived.pass)
         ) {
             console.log("es igual")

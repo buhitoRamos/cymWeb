@@ -8,7 +8,7 @@ import CustomerTable from "../components/CustomerTable"
 
 class Customers extends React.Component {
     state = {
-        cliente: '',
+        cliente:"",
         listaClientes: [
             {
                 idCliente: "",
@@ -26,9 +26,12 @@ class Customers extends React.Component {
     componentDidMount() {
         this.loadCustomers();
     }
+    
 
 
     loadCustomers = () => {
+
+                
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
             data: { cl: this.state.cliente },
@@ -42,43 +45,38 @@ class Customers extends React.Component {
             }
         })
     }
-    handleChange=e=>{
-        
+    
+    handleChange=e=>{ 
         this.setState({
             ...this.state.cliente,
             cliente:e.target.value
         })
-        console.log(e.target.value)
-        this.loadCustomers()
+        setTimeout(()=>this.loadCustomers(),2000)
     }
-    handleCustomer = e =>{
-        const id=e.target.innerHTML
-       // console.log(id)
-        const id2=e.target.parentNode
-        
-        console.log(id2)
+    handleCustomer = id =>{
        
-}
-    
+        console.log(id)
+        const customer = this.state.listaClientes.find(c => c.idCliente === id);
+        console.log(customer.idCliente)
+}   
 
 
     render() {
         const {history}=this.props
         return (
 
-            <div>
-
+            <div>                
                 <NavBar
                     txt="Clientes"
                     type="search"
                     history={history}
-                    handleChange={this.handleChange}
+                    handleChange={this.handleChange}                                       
                 />
                 <div className="">
                 <table className="table table-hover table-dark"
-                cellspacing="10" cellpadding="10" border="3"
+                cellSpacing="10" cellPadding="10" border="3"
                 id="customers"
-                onClick={this.handleCustomer}
+                
                 >
                     <thead className="bg-danger">
                         <tr>
@@ -98,6 +96,8 @@ class Customers extends React.Component {
             this.state.listaClientes.map(customer=>{
                 return(
                     <CustomerTable
+                    key={customer.idCliente}
+                    handleCustomer={this.handleCustomer}
                     id={customer.idCliente}
                     nombre={customer.nombre}
                     direccion={customer.direccion}

@@ -18,7 +18,7 @@ class NavBar extends React.Component {
         e.preventDefault();
     }
     render() {
-        const { txt, type, history, handleChange, btnExit, btnHome } = this.props
+        const { txt, type, handleChange, btnExit, btnHome } = this.props
 
         return (
             <div>
@@ -30,10 +30,12 @@ class NavBar extends React.Component {
                             id="search"
                             type={type}
                             placeholder={type}
-                            onChange={handleChange} />
-                        <div    
+                            onChange={handleChange}
+                        />
+                        <div
                             hidden={btnHome}>
                             <img src={back}
+                                alt=""
                                 onClick={this.handleHome}
                                 className="btn float-right"
                                 width="60"
@@ -42,6 +44,7 @@ class NavBar extends React.Component {
                         <div
                             hidden={btnExit}>
                             <img src={exit}
+                                alt=""
                                 onClick={this.handleExit}
                                 className="btn float-right"
                                 width="60"

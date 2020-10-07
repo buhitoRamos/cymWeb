@@ -1,18 +1,10 @@
 import React from "react"
 import "../components/styles/FormLogin.css"
-import $ from "jquery"
 
 class FormLogin extends React.Component {
-    
-   
-   
-
     render() {
-              
-
         const {handleChange, handleChangeChk, handleSubmit, estado} = this.props
 
-        
         return (
             <form onSubmit={handleSubmit}>
                 <div className="container form-login">
