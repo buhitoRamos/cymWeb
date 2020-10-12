@@ -1,14 +1,16 @@
 import React from 'react'
 import NavBar from "../components/NavBar"
 import $ from "jquery"
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
 import "../components/styles/Tbody.css"
 import CustomerTable from "../components/CustomerTable"
 import EditCustomerForm from "../components/EditCustomerForm"
 
 
-
 class Customers extends React.Component {
     state = {
+        newCustomer:false,
         id: "",
         nombre: "",
         formUpdate: "true",
@@ -22,9 +24,9 @@ class Customers extends React.Component {
                 direccion: "",
                 telefono: ""
             }
-
         ],
     }
+
     componentDidMount() {
         this.loadCustomers();
     }
@@ -48,7 +50,7 @@ class Customers extends React.Component {
 
     handleChange = e => {
         e.preventDefault();
-        console.log(e.target.id)
+        console.log("seleccion")
         this.setState({
             ...this.state.cliente,
             cliente: e.target.value
@@ -58,6 +60,7 @@ class Customers extends React.Component {
 
     handleCancel = () => {
         this.setState({
+            newCustomer:false,
             formUpdate: "true",
             nombre:"",
             telefono:"",
@@ -67,7 +70,18 @@ class Customers extends React.Component {
         
     }
 
-    handleAcepted = () => {
+    handleNewCustomerForm = () =>{
+        this.setState({
+            nombre:"Ingrese Nombre",
+            telefono:"Ingrese Teléfono",
+            direccion:"Ingrese Dirección",
+            newCustomer:true,            
+            formUpdate: "",
+        })
+    }
+
+    handleEditCustomer = () =>{
+        console.log("handleEditCustomer")
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
             data: {
@@ -86,27 +100,94 @@ class Customers extends React.Component {
                 })
             }
         })
+
     }
+
+    handleNewCustomer = () =>{
+        $.ajax({
+            url: "http://localhost/backend/Clientes.php",
+            data: {
+                el: 3,
+                nombre: this.state.nombre,
+                direccion: this.state.direccion,
+                telefono: this.state.telefono,
+            },
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            success: (response) => {
+                this.setState({
+                    listaClientes: response,
+                })
+            }
+        })
+    }
+
+    handleDeletedConfirm = () =>{
+        $.ajax({
+            url: "http://localhost/backend/Clientes.php",
+            data: {
+                el: 4,                
+                idCliente: this.state.id,
+            },
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            success: (response) => {
+                this.setState({
+                    listaClientes: response,
+                })
+            }
+        })
+    }
+
+    handleDeleted = () =>{
+        console.log("alert")
+        confirmAlert({
+            title: 'Estas por eliminar a '+this.state.nombre,
+            message: '¿Estas Seguro?.',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    this.handleDeletedConfirm()
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => alert('No se Efectuaron cambios')
+              }
+            ]
+          });
+        
+    }
+
+    handleAcepted = e => {
+        e.preventDefault();
+        if(!this.state.newCustomer){
+            this.handleEditCustomer();
+
+        }else{
+            this.handleNewCustomer();
+        }
+    }
+
     handleOnChangeValue = e => {
         e.preventDefault();
 
         this.setState({
+            newCustomer:false,
             ...this.state,
             [e.target.id]: e.target.value
         })
-
-
-
     }
 
     handleCustomer = id => {
-
         console.log(id)
         const customer = this.state.listaClientes.find(c => c.idCliente === id);
-
         console.log(customer.idCliente)
 
-        this.setState({
+        this.setState({            
             id: id,
             formUpdate: "",
             nombre: customer.nombre,
@@ -127,6 +208,7 @@ class Customers extends React.Component {
                         type="search"
                         history={history}
                         handleChange={this.handleChange}
+                        handleNewCustomerForm={this.handleNewCustomerForm}
                     />
                 </div>
                 <div
@@ -139,13 +221,13 @@ class Customers extends React.Component {
                         handleCancel={this.handleCancel}
                         handleAcepted={this.handleAcepted}
                         handleOnChangeValue={this.handleOnChangeValue}
+                        handleDeleted={this.handleDeleted}
                     />
                 </div>
                 <div className="">
                     <table className="table table-hover table-dark"
                         cellSpacing="10" cellPadding="10" border="3"
                         id="customers"
-
                     >
                         <thead className="bg-danger">
                             <tr>
@@ -185,4 +267,3 @@ class Customers extends React.Component {
 }
 export default Customers
 
-// En esta pagina utilizare hooks
