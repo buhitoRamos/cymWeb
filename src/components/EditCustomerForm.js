@@ -4,7 +4,7 @@ class EditCustomerForm extends React.Component {
    
     render() {
         const { nombre, direccion, telefono, handleAcepted,
-             handleCancel, handleOnChangeValue ,handleDeleted} = this.props
+             handleCancel, handleOnChangeValue ,handleDeleted, handleEntry} = this.props
 
         return (
             <div>
@@ -52,6 +52,13 @@ class EditCustomerForm extends React.Component {
                     className="btn btn-danger btn-line m-2"
                     value="Borrar"
                     onClick={handleDeleted}
+                    type="button"
+                />
+                <input
+                    id="ingreso"
+                    className="btn btn-success btn-line m-2"
+                    value="Ingreso"
+                    onClick={handleEntry}
                     type="button"
                 />
                 </div>

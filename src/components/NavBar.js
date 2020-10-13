@@ -19,7 +19,7 @@ class NavBar extends React.Component {
         e.preventDefault();
     }
     render() {
-        const { txt, type, handleChange, btnExit, btnHome, handleNewCustomerForm } = this.props
+        const { txt, type, handleChange, btnExit, btnHome, handleNewCustomerForm, NewCustomer } = this.props
 
         return (
             <div>
@@ -34,7 +34,7 @@ class NavBar extends React.Component {
                             onChange={handleChange}
                         />
                         <div
-                            hidden={btnHome}>
+                            hidden={NewCustomer}>
                             <img src={newCustomer}
                                 alt="New customer"
                                 onClick={handleNewCustomerForm}

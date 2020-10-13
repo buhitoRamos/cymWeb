@@ -5,10 +5,12 @@ import "../components/styles/Logo.css"
 const Logo = () =>(
     <div>
         <img 
-        alt=""
+        alt="Logotipo"
         src={img}
         className="float-left logo"
         />
+        
+        
     </div>
 
 )

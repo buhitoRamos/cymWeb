@@ -196,6 +196,14 @@ class Customers extends React.Component {
         })
     }
 
+    handleEntry= e =>{
+        this.props.history.push({
+            pathname: '/ingreso',
+            idCliente:  this.state.id})
+        e.preventDefault();
+
+    }
+
 
     render() {
         const { history } = this.props
@@ -222,6 +230,7 @@ class Customers extends React.Component {
                         handleAcepted={this.handleAcepted}
                         handleOnChangeValue={this.handleOnChangeValue}
                         handleDeleted={this.handleDeleted}
+                        handleEntry={this.handleEntry}
                     />
                 </div>
                 <div className="">
