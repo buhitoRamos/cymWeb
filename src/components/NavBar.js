@@ -26,7 +26,7 @@ class NavBar extends React.Component {
                 <nav className="navbar  navbar-dark bg-primary">
                     <h1 className="navbar-brand h1">{txt}</h1>
 
-                    <form className="form-inline float-right">
+                    <div className="form-inline float-right">
                         <input className="form-control mr-sm-2"
                             id="search"
                             type={type}
@@ -61,7 +61,7 @@ class NavBar extends React.Component {
                             />
                         </div>
 
-                    </form>
+                    </div>
                 </nav>
 
             </div>

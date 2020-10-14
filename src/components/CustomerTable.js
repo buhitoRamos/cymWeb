@@ -2,9 +2,7 @@ import React from 'react'
 
 
 class CustomerTable extends React.Component {
-    state={
-        idCliente:""
-    }
+    
 
     render() {
         const { id, nombre, direccion, telefono, handleCustomer } = this.props

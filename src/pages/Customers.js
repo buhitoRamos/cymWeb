@@ -13,7 +13,7 @@ class Customers extends React.Component {
         newCustomer:false,
         id: "",
         nombre: "",
-        formUpdate: "true",
+        formUpdate: true,
         cliente: "",
         direccion: "",
         telefono: "",
@@ -61,7 +61,7 @@ class Customers extends React.Component {
     handleCancel = () => {
         this.setState({
             newCustomer:false,
-            formUpdate: "true",
+            formUpdate: true,
             nombre:"",
             telefono:"",
             direccion:""
@@ -76,7 +76,7 @@ class Customers extends React.Component {
             telefono:"Ingrese Teléfono",
             direccion:"Ingrese Dirección",
             newCustomer:true,            
-            formUpdate: "",
+            formUpdate: false,
         })
     }
 
@@ -189,7 +189,7 @@ class Customers extends React.Component {
 
         this.setState({            
             id: id,
-            formUpdate: "",
+            formUpdate: false,
             nombre: customer.nombre,
             direccion: customer.direccion,
             telefono: customer.telefono
@@ -219,9 +219,8 @@ class Customers extends React.Component {
                         handleNewCustomerForm={this.handleNewCustomerForm}
                     />
                 </div>
-                <div
-                    className="container"
-                    hidden={this.state.formUpdate}>
+                <div className="container"
+                     hidden={this.state.formUpdate}>
                     <EditCustomerForm
                         nombre={this.state.nombre}
                         direccion={this.state.direccion}
@@ -231,6 +230,7 @@ class Customers extends React.Component {
                         handleOnChangeValue={this.handleOnChangeValue}
                         handleDeleted={this.handleDeleted}
                         handleEntry={this.handleEntry}
+                        hiddenTa="hidden"
                     />
                 </div>
                 <div className="">
