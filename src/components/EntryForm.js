@@ -32,8 +32,8 @@ class EntryForm extends React.Component {
                             className="ml-1 form-input rounded-pill form-line text-center text-primary"
                         />
                     </div>
-                    <div className="form-group">
-                        <label className="p-1  bg-primary text-white rounded-pill">Detalle</label>
+                    <div className="form-group text-center">
+                        <label className="form-control form-input bg-primary text-white rounded-pill form-line">Detalle</label>
                         <textarea className="form-control" id="detalle" rows="5"
                         defaultValue={ing.detalle}
                         onChange={handleOnChangeValue}
