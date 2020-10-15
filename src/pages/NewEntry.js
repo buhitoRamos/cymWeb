@@ -77,6 +77,11 @@ class NewEntry extends React.Component {
             }
         })
     }
+    handleNewEntry=()=>{
+        this.setState({
+            formUpdate:false
+        })
+    }
 
     render() {
 
@@ -88,6 +93,7 @@ class NewEntry extends React.Component {
                     type="hidden"
                     history={history}
                     NewCustomer="hidden"
+                    handleNewEntry={this.handleNewEntry}
                 />
 
                 <div className="container"

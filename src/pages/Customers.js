@@ -10,7 +10,7 @@ import EditCustomerForm from "../components/EditCustomerForm"
 
 class Customers extends React.Component {
     state = {
-        newCustomer:false,
+        newCustomer: false,
         id: "",
         nombre: "",
         formUpdate: true,
@@ -60,27 +60,27 @@ class Customers extends React.Component {
 
     handleCancel = () => {
         this.setState({
-            newCustomer:false,
+            newCustomer: false,
             formUpdate: true,
-            nombre:"",
-            telefono:"",
-            direccion:""
+            nombre: "",
+            telefono: "",
+            direccion: ""
         })
         this.loadCustomers();
-        
+
     }
 
-    handleNewCustomerForm = () =>{
+    handleNewCustomerForm = () => {
         this.setState({
-            nombre:"Ingrese Nombre",
-            telefono:"Ingrese Teléfono",
-            direccion:"Ingrese Dirección",
-            newCustomer:true,            
+            nombre: "Ingrese Nombre",
+            telefono: "Ingrese Teléfono",
+            direccion: "Ingrese Dirección",
+            newCustomer: true,
             formUpdate: false,
         })
     }
 
-    handleEditCustomer = () =>{
+    handleEditCustomer = () => {
         console.log("handleEditCustomer")
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
@@ -103,7 +103,7 @@ class Customers extends React.Component {
 
     }
 
-    handleNewCustomer = () =>{
+    handleNewCustomer = () => {
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
             data: {
@@ -123,11 +123,11 @@ class Customers extends React.Component {
         })
     }
 
-    handleDeletedConfirm = () =>{
+    handleDeletedConfirm = () => {
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
             data: {
-                el: 4,                
+                el: 4,
                 idCliente: this.state.id,
             },
             dataType: 'json',
@@ -141,33 +141,33 @@ class Customers extends React.Component {
         })
     }
 
-    handleDeleted = () =>{
+    handleDeleted = () => {
         console.log("alert")
         confirmAlert({
-            title: 'Estas por eliminar a '+this.state.nombre,
+            title: 'Estas por eliminar a ' + this.state.nombre,
             message: '¿Estas Seguro?.',
             buttons: [
-              {
-                label: 'Yes',
-                onClick: () => {
-                    this.handleDeletedConfirm()
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        this.handleDeletedConfirm()
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => alert('No se Efectuaron cambios')
                 }
-              },
-              {
-                label: 'No',
-                onClick: () => alert('No se Efectuaron cambios')
-              }
             ]
-          });
-        
+        });
+
     }
 
     handleAcepted = e => {
         e.preventDefault();
-        if(!this.state.newCustomer){
+        if (!this.state.newCustomer) {
             this.handleEditCustomer();
 
-        }else{
+        } else {
             this.handleNewCustomer();
         }
     }
@@ -176,7 +176,7 @@ class Customers extends React.Component {
         e.preventDefault();
 
         this.setState({
-            newCustomer:false,
+            newCustomer: false,
             ...this.state,
             [e.target.id]: e.target.value
         })
@@ -187,7 +187,7 @@ class Customers extends React.Component {
         const customer = this.state.listaClientes.find(c => c.idCliente === id);
         console.log(customer.idCliente)
 
-        this.setState({            
+        this.setState({
             id: id,
             formUpdate: false,
             nombre: customer.nombre,
@@ -196,10 +196,11 @@ class Customers extends React.Component {
         })
     }
 
-    handleEntry= e =>{
+    handleEntry = e => {
         this.props.history.push({
             pathname: '/ingreso',
-            idCliente:  this.state.id})
+            idCliente: this.state.id
+        })
         e.preventDefault();
 
     }
@@ -217,10 +218,11 @@ class Customers extends React.Component {
                         history={history}
                         handleChange={this.handleChange}
                         handleNewCustomerForm={this.handleNewCustomerForm}
+                        newEntry="hidden"
                     />
                 </div>
                 <div className="container"
-                     hidden={this.state.formUpdate}>
+                    hidden={this.state.formUpdate}>
                     <EditCustomerForm
                         nombre={this.state.nombre}
                         direccion={this.state.direccion}
@@ -233,7 +235,7 @@ class Customers extends React.Component {
                         hiddenTa="hidden"
                     />
                 </div>
-                <div className="">
+                <div className="Tab">
                     <table className="table table-hover table-dark"
                         cellSpacing="10" cellPadding="10" border="3"
                         id="customers"
@@ -249,7 +251,9 @@ class Customers extends React.Component {
                                 <th
                                     className="text-center">Telefono</th>
                             </tr>
+                            
                         </thead>
+                        
                         <tbody>
 
                             {
@@ -267,6 +271,7 @@ class Customers extends React.Component {
                                 })
                             }
                         </tbody>
+                       
                     </table>
                 </div>
 

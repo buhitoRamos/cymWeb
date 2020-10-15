@@ -37,6 +37,7 @@ class Selection extends React.Component {
                             history={history}
                             btnHome="hidden"
                             NewCustomer="hidden"
+                            newEntry="hidden"
                         />
                     </div>
                     <div className="container">

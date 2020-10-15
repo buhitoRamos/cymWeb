@@ -132,6 +132,8 @@ class Login extends React.Component {
                     history={history}
                     btnExit="hidden"
                     btnHome="hidden"
+                    newEntry="hidden"
+                    NewCustomer="hidden"
                 />
                 <div className="float-left">
                     <Logo />

@@ -22,7 +22,8 @@ class EntryForm extends React.Component {
                             type="text"
                             onChange={handleOnChangeValue}
                             className="ml-1 form-input rounded-pill form-line text-center text-primary"
-                        />                    
+                        /> 
+                        <div className="float-right">                   
                         <label className=" ml-2 p-1  bg-primary text-white rounded-pill">Fecha</label>
                         <input
                             id="fecha"
@@ -31,6 +32,7 @@ class EntryForm extends React.Component {
                             onChange={handleOnChangeValue}
                             className="ml-1 form-input rounded-pill form-line text-center text-primary"
                         />
+                        </div>
                     </div>
                     <div className="form-group text-center">
                         <label className="form-control form-input bg-primary text-white rounded-pill form-line">Detalle</label>

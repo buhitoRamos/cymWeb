@@ -1,6 +1,7 @@
 import React from 'react'
 import exit from "../images/exit.png"
 import back from "../images/back.png"
+import NewEntry from "../images/NewEntry.png"
 import newCustomer from "../images/newCustomer.png"
 
 class NavBar extends React.Component {
@@ -19,7 +20,8 @@ class NavBar extends React.Component {
         e.preventDefault();
     }
     render() {
-        const { txt, type, handleChange, btnExit, btnHome, handleNewCustomerForm, NewCustomer } = this.props
+        const { txt, type, handleChange, btnExit, btnHome,
+             handleNewCustomerForm, NewCustomer, newEntry, handleNewEntry } = this.props
 
         return (
             <div>
@@ -40,6 +42,14 @@ class NavBar extends React.Component {
                                 onClick={handleNewCustomerForm}
                                 className="btn float-right"
                                 width="60"
+                            />
+                        </div>
+                        <div
+                            hidden={newEntry}>
+                            <img src={NewEntry}
+                                alt="New Entry"
+                                onClick={handleNewEntry}
+                                width="35"
                             />
                         </div>
                         <div

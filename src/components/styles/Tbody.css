@@ -6,3 +6,10 @@
     min-width: 100px;
     
 }
+.Tab {  
+    height: 600px !important;
+    overflow: scroll;
+}​
+.o{
+    display: inline;
+}

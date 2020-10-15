@@ -2,6 +2,11 @@ import React from 'react'
 import circleImg from '../images/circles.png'
 import './styles/Card.css'
 class Card extends React.Component {
+    state={
+        clasOrigin:"card mx-auto Work-Card",
+        clasOver:"card mx-auto Work-Card border border-dark",
+        actualClas:"card mx-auto Work-Card"
+    }
 
     handleClick = e =>{   
             
@@ -12,6 +17,18 @@ class Card extends React.Component {
         this.props.history.push(goTo)
 
     }
+    hadleOver = e =>{
+        this.setState({
+            actualClas:this.state.clasOver
+        })
+    }
+    handleOut=()=>{
+        this.setState({
+            actualClas:this.state.clasOrigin
+        })
+    }
+
+    
 
     render() {
         
@@ -20,11 +37,13 @@ class Card extends React.Component {
         
         return (
             <div className="row row-cols-2">
-            <div className="card mx-auto Work-Card"                       
+            <div className={this.state.actualClas}                       
                 style={{
                     backgroundImage: `url(${circleImg}), linear-gradient(to right, ${rightColor}, ${leftColor})`
                 }}            
-            onClick={this.handleClick} 
+            onClick={this.handleClick}
+            onMouseOver={this.hadleOver}
+            onMouseOut={this.handleOut} 
             >
                 <div className="card-body">
                     <div className="row center">                        
