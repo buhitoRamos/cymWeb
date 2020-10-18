@@ -7,10 +7,8 @@ const Logo = () =>(
         <img 
         alt="Logotipo"
         src={img}
-        className="float-left logo"
+        className="float-left logo"        
         />
-        
-        
     </div>
 
 )

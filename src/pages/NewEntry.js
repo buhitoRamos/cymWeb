@@ -7,14 +7,16 @@ class NewEntry extends React.Component {
 
     state = {
         id:"",
+        fecha:"",
         formUpdate:true,
         idCliente: this.props.location.idCliente,
+        detalle:"",
         ingresoElejido:{
             id:"",
-            detalle:"",
+            detalle:'',
             fecha:""
 
-        },
+        },        
         listaIngreso: [
             {
                 idingreso: "",
@@ -25,9 +27,9 @@ class NewEntry extends React.Component {
     }
     componentDidMount() {
         console.log("el id del cliente es:" + this.state.idCliente)
-        this.load();
-
+        this.load()    
     }
+
     handleCancel = () => {
         this.setState({
             formUpdate:true
@@ -55,9 +57,9 @@ class NewEntry extends React.Component {
                 detalle:ingreso.detalle,
                 fecha:ingreso.fecha                
             }
-        })
+        })        
         console.log("detalle: "+this.state.ingresoElejido.detalle)
-        console.log(this.state.ingresoElejido)
+        
 
     }
 
@@ -66,7 +68,9 @@ class NewEntry extends React.Component {
     load = () => {
         $.ajax({
             url: "http://localhost/backend/Ingreso.php",
-            data: { id: this.state.idCliente },
+            data: { id: this.state.idCliente,
+                    el:1 
+                },
             dataType: 'json',
             type: 'POST',
             async: true,
@@ -77,10 +81,44 @@ class NewEntry extends React.Component {
             }
         })
     }
-    handleNewEntry=()=>{
-        this.setState({
-            formUpdate:false
+
+    handleSubmitNewEntry=()=>{
+
+        /*
+        En detalle utilizo this.state.detalle que se genera por el handleOnchangeValue
+        */
+        
+        $.ajax({
+            url: "http://localhost/backend/Ingreso.php",
+            data: { id: this.state.idCliente,
+                    el:2,
+                    fe:this.state.ingresoElejido.fecha,
+                    de: this.state.detalle,
+                },
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            success: (response) => {
+                this.setState({
+                    listaIngreso: response
+                })
+            }
         })
+    }
+
+
+    handleNewEntry=()=>{
+        var f= new Date()
+        this.setState({
+            formUpdate:false,
+            ingresoElejido:{
+                id:"",
+                detalle:"* INGRESO:\n* MARCA:\n* MODELO:\n* CARGADOR:\n* FALLA:",
+                fecha: f.getDate() +"-"+ (f.getMonth() + 1 )+"-" +f.getFullYear()
+
+            }
+        })
+        console.log(this.state.ingresoElejido)
     }
 
     render() {
@@ -104,7 +142,8 @@ class NewEntry extends React.Component {
                         handleAcepted=""
                         handleOnChangeValue={this.handleOnChangeValue}
                         handleDeleted=""
-                        handleEntry=""
+                        handleEntry={this.handleSubmitNewEntry}
+                                                
                     />
                 </div>
                 <div className="">

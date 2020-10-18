@@ -5,6 +5,7 @@ class EntryForm extends React.Component {
     state={
         ing:this.props.ing
     }
+   
     
 
     render() {
@@ -27,7 +28,7 @@ class EntryForm extends React.Component {
                         <label className=" ml-2 p-1  bg-primary text-white rounded-pill">Fecha</label>
                         <input
                             id="fecha"
-                            defaultValue={ing.fecha}
+                            defaultValue={ing.fecha}                            
                             type="text"
                             onChange={handleOnChangeValue}
                             className="ml-1 form-input rounded-pill form-line text-center text-primary"
