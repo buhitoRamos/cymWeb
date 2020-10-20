@@ -87,11 +87,15 @@ class NewEntry extends React.Component {
             async: true,
             success: (response) => {
                 this.setState({
-                    listaIngreso: response
+                    listaIngreso: response,
+                    
                 })
             }
         })
+        console.log(this.state.listaIngreso.nombre)
     }
+
+    
 
     //Guarda un nuevo ingreso
     handleSubmitNewEntry=()=>{
@@ -117,6 +121,31 @@ class NewEntry extends React.Component {
         })
     }
 
+    //Esta función elimina el ingreso
+    deletedEntry=()=>{
+        console.log("id ingreso "+this.state.ingresoElejido.id
+                   + " idCliente: "+this.state.idCliente)
+        $.ajax({
+            url: "http://localhost/backend/Ingreso.php",
+            data: { el:3,
+                    idCl: this.state.idCliente,                    
+                    id:this.state.ingresoElejido.id                    
+                },
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            success: (response) => {
+                this.setState({
+                    listaIngreso: response
+                })
+            }
+        })
+        
+
+
+
+    }
+
     /*Este evento setea los detalles que requiere un nuevo ingreso,
     muestra la fecha y los valores de detalle por default
     */
@@ -126,6 +155,7 @@ class NewEntry extends React.Component {
             formUpdate:false,
             ingresoElejido:{
                 id:"",
+                nombre:this.state.ingresoElejido.nombre,
                 detalle:"* INGRESO:\n* MARCA:\n* MODELO:\n* CARGADOR:\n* FALLA:",
                 fecha: f.getDate() +"-"+ (f.getMonth() + 1 )+"-" +f.getFullYear()
             }
@@ -151,7 +181,7 @@ class NewEntry extends React.Component {
                         handleCancel={this.handleCancel}
                         handleAcepted=""
                         handleOnChangeValue={this.handleOnChangeValue}
-                        handleDeleted=""
+                        handleDeleted={this.deletedEntry}
                         handleEntry={this.handleSubmitNewEntry}
                                                 
                     />
