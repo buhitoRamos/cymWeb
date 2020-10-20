@@ -8,7 +8,7 @@ import EntryForm from "../components/EntryForm"
 class NewEntry extends React.Component {
 
     state = {
-        id:"",
+        id:"",        
         fecha:"",
         formUpdate:true,
         idCliente: this.props.location.idCliente,
@@ -16,6 +16,7 @@ class NewEntry extends React.Component {
         ingresoElejido:{
             id:"",
             detalle:'',
+            nombre:"Ingreso",
             fecha:""
         },        
         listaIngreso: [
@@ -39,10 +40,10 @@ class NewEntry extends React.Component {
             ingresoElejido:{
                 id:"",
                 detalle:'',
-                fecha:""
+                fecha:"",
+                nombre:"Ingreso"
             },
-        })
-        
+        })        
     }
 
     //Evento que escucha todo lo que se tipea y guarda los valores en el estado.
@@ -54,7 +55,6 @@ class NewEntry extends React.Component {
             ...this.state,
             [e.target.id]: e.target.value
         })
-        console.log(e.target.id + " valor: "+e.target.value)
     }
     
     /*
@@ -69,12 +69,10 @@ class NewEntry extends React.Component {
             ingresoElejido:{
                 id:ingreso.idingreso,
                 detalle:ingreso.detalle,
-                fecha:ingreso.fecha                
+                fecha:ingreso.fecha,
+                nombre:ingreso.nombre               
             }
-        })        
-        console.log("detalle: "+this.state.ingresoElejido.detalle)
-        
-
+        })   
     }
 
     //Esta funcion carga la base de datos.
@@ -139,7 +137,7 @@ class NewEntry extends React.Component {
         return (
             <div>
                 <NavBar
-                    txt="Ingreso"
+                    txt={this.state.ingresoElejido.nombre}
                     type="hidden"
                     history={history}
                     NewCustomer="hidden"
