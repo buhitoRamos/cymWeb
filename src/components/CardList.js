@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '../components/Card'
 
-
+//Componente que genera la listas de tarjetas para elejir los diferentes modulos.
 const CardList = ({ card, history }) => (
     <div>
         {
@@ -20,6 +20,4 @@ const CardList = ({ card, history }) => (
         }
     </div>
 )
-
-
 export default CardList

@@ -2,6 +2,7 @@ import React from "react"
 import Logo from "../components/Logo"
 import NavBar from "../components/NavBar"
 
+//Esta es la pagina de impresión de remito y comprobante de recibo
 class ToPrint extends React.Component {
 
     render() {
@@ -18,7 +19,6 @@ class ToPrint extends React.Component {
                     <div className="">
                         <Logo />
                     </div>
-
                     <div>
                         <h4> <span className="badge badge-info">Ingreso N°:</span>
                             <span className="badge badge-secondary m-1">100</span>
@@ -39,7 +39,6 @@ class ToPrint extends React.Component {
                                 Rivadavia xxxx, Ramos Mejia
                                 </span>
                         </h4>
-
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">
                                 <h2><span className="badge badge-primary p-2 mt-3">
@@ -58,14 +57,9 @@ class ToPrint extends React.Component {
                                     * Los presupuestos de hasta $1500 se reparan directo.
                                 </p>
                     </div>
-
-
-
                 </div>
             </div>
         )
     }
-
-
 }
 export default ToPrint

@@ -7,7 +7,7 @@ import "../components/styles/Tbody.css"
 import CustomerTable from "../components/CustomerTable"
 import EditCustomerForm from "../components/EditCustomerForm"
 
-
+//Pagina de clientes, para ver/editar/borrar y agregar nuevos.
 class Customers extends React.Component {
     state = {
         newCustomer: false,
@@ -27,12 +27,12 @@ class Customers extends React.Component {
         ],
     }
 
+    //Evento que carga a todos los clientes al ingresar.
     componentDidMount() {
         this.loadCustomers();
     }
-
-
-
+    
+    //Funcion que carga todos los clientes o cliente tipeado.
     loadCustomers = () => {
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
@@ -48,9 +48,9 @@ class Customers extends React.Component {
         })
     }
 
+    //Evento que escucha todo lo que se tipea y guarda en estado.
     handleChange = e => {
         e.preventDefault();
-        console.log("seleccion")
         this.setState({
             ...this.state.cliente,
             cliente: e.target.value
@@ -58,6 +58,7 @@ class Customers extends React.Component {
         setTimeout(() => this.loadCustomers(), 2000)
     }
 
+    //Cuando se cancela un ingreso/edicion de contacto.
     handleCancel = () => {
         this.setState({
             newCustomer: false,
@@ -67,9 +68,9 @@ class Customers extends React.Component {
             direccion: ""
         })
         this.loadCustomers();
-
     }
 
+    //Esta Función nos levanta el formulario para crear nuevos clientes.
     handleNewCustomerForm = () => {
         this.setState({
             nombre: "Ingrese Nombre",
@@ -80,6 +81,7 @@ class Customers extends React.Component {
         })
     }
 
+    //Para editar clientes.
     handleEditCustomer = () => {
         console.log("handleEditCustomer")
         $.ajax({
@@ -103,6 +105,7 @@ class Customers extends React.Component {
 
     }
 
+    //Envia al back los datos para guardar el nuevo cliente.
     handleNewCustomer = () => {
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
@@ -123,6 +126,7 @@ class Customers extends React.Component {
         })
     }
 
+    //Este evento borra el cliente luego de que sea confirmado.
     handleDeletedConfirm = () => {
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
@@ -141,8 +145,8 @@ class Customers extends React.Component {
         })
     }
 
-    handleDeleted = () => {
-        console.log("alert")
+    //Solicita confirmar para borrar.
+    handleDeleted = () => {        
         confirmAlert({
             title: 'Estas por eliminar a ' + this.state.nombre,
             message: '¿Estas Seguro?.',

@@ -4,6 +4,7 @@ import FormLogin from "../components/FormLogin"
 import NavBar from "../components/NavBar"
 import $ from "jquery"
 
+//Esta es la pagina del login
 class Login extends React.Component {
 
     state = {
@@ -26,30 +27,36 @@ class Login extends React.Component {
         }
     }
 
+    //Este evento se encarga dl logeo
     handleSubmit = e => {
         this.handleClick()
         e.preventDefault();
     }
 
+    /*
+    Este evento cambia el tipo de input de texto a password
+    para poder visualizar la clave tipeada
+    */
     handleChangeChk = () => {
 
         var myCheck = this.state.aux.chk
-        console.log("handlechangeCHK: " + myCheck)
         if (myCheck === "password") {
             myCheck = "text"
         } else {
             myCheck = "password"
         }
-
         this.setState({
             aux: {
                 chk: myCheck,
-
             }
         })
-
     }
 
+    /*
+    Esta función se encarga de comprar el usuario y clave que se envia que coinsida
+    con el que llega en el response, si es válido genera el token y redirecciona
+    a seleccion
+    */
     setStateRecived = (user, pass) => {
         this.setState({
             recived: {
@@ -72,12 +79,14 @@ class Login extends React.Component {
         }
     }
 
+    //Esta función guarda en el localStorage el token
     saveToken = (toInto) => {
         let token = JSON.stringify(toInto)
         localStorage.setItem('token', token);
 
     }
 
+    //Este evento capura lo que se registra en los input.
     handleChange = e => {
         console.log("handlechange: " + this.state.aux.chk)
         this.setState({
@@ -92,7 +101,8 @@ class Login extends React.Component {
         })
 
     }
-
+    
+    //Envia usuario y clave al backend, y muestra leyenda si es incorrecto.
     handleClick = () => {
         $.ajax({
             url: "http://localhost/backend/Login.php",

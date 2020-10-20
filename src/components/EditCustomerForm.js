@@ -1,8 +1,16 @@
 import React from 'react'
+//Componente formulario que utilizo para generar un nuevo ingreso/editarlo/borrarlo.
 
 class EditCustomerForm extends React.Component {
 
+    state={
+        nombre:this.props.nombre,
+        direccion:this.props.direccion,
+        telefono:this.props.telefono
+    }
+
     render() {
+        
         const { nombre, direccion, telefono, handleAcepted,
             handleCancel, handleOnChangeValue, handleDeleted, handleEntry } = this.props
 
@@ -11,7 +19,8 @@ class EditCustomerForm extends React.Component {
                 <form>
                     <input
                         id="nombre"
-                        defaultValue={nombre}
+                        defaultValue={this.state.nombre}
+                        placeholder={nombre}
                         type="text"
                         onChange={handleOnChangeValue}
                         className="form-control form-input rounded-pill form-line"
@@ -19,14 +28,16 @@ class EditCustomerForm extends React.Component {
 
                     <input
                         id="direccion"
-                        defaultValue={direccion}
+                        defaultValue={this.state.direccion}
+                        placeholder={direccion}
                         type="text"
                         onChange={handleOnChangeValue}
                         className="form-control form-input rounded-pill form-line"
                     />                    
                     <input
                         id="telefono"
-                        defaultValue={telefono}
+                        defaultValue={this.state.telefono}
+                        placeholder={telefono}
                         type="text"
                         onChange={handleOnChangeValue}
                         className="form-control form-input rounded-pill form-line"
@@ -64,8 +75,6 @@ class EditCustomerForm extends React.Component {
                     </div>
                 </form>
             </div>
-
-
         )
     }
 

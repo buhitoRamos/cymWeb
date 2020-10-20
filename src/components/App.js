@@ -7,8 +7,9 @@ import Customers from '../pages/Customers'
 import ToPrint from '../pages/ToPrint'
 import NewEntry from '../pages/NewEntry'
 
-const App = () => (
+//Componente de ruteo de paginas.
 
+const App = () => (
     <div>
         <BrowserRouter>
             <Switch>
@@ -20,9 +21,6 @@ const App = () => (
                 <Route component={NotFound} />
             </Switch>
         </BrowserRouter>
-
-
     </div>
 )
-
 export default App

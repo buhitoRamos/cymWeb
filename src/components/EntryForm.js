@@ -1,20 +1,20 @@
 import React from 'react'
-import { isElement } from 'react-dom/test-utils'
+
+//Componente formulario para crear nuevos/editar/borrar ingresos.
 
 class EntryForm extends React.Component {
+
     state={
         ing:this.props.ing
     }
-   
     
-
     render() {
         const { id, handleOnChangeValue, fecha, detalle, handleCancel,
             handleDeleted, handleEntry, handleUpdate, ing } = this.props
 
         return (
             <div>
-                <form>
+                <form className="form">
                     <div className="form-group">
                         <label className="p-1  bg-primary text-white rounded-pill">ID</label>
                         <input
@@ -39,8 +39,7 @@ class EntryForm extends React.Component {
                         <label className="form-control form-input bg-primary text-white rounded-pill form-line">Detalle</label>
                         <textarea className="form-control" id="detalle" rows="5"
                         defaultValue={ing.detalle}
-                        onChange={handleOnChangeValue}
-                            
+                        onChange={handleOnChangeValue}                            
                         />
                     </div>
                     <input

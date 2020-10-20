@@ -3,6 +3,8 @@ import NavBar from "../components/NavBar"
 import $ from "jquery"
 import EntryForm from "../components/EntryForm"
 
+//Esta es la pagina donse se generan/actualizan/borran ingresos.
+
 class NewEntry extends React.Component {
 
     state = {
@@ -15,7 +17,6 @@ class NewEntry extends React.Component {
             id:"",
             detalle:'',
             fecha:""
-
         },        
         listaIngreso: [
             {
@@ -25,17 +26,26 @@ class NewEntry extends React.Component {
             }
         ]
     }
+
+    //El metodo load se carga al renderizar el componente
     componentDidMount() {
-        console.log("el id del cliente es:" + this.state.idCliente)
-        this.load()    
+          this.load()    
     }
 
+    //Este evento se da cuando se preciona el boton cancelar
     handleCancel = () => {
         this.setState({
-            formUpdate:true
+            formUpdate:true,
+            ingresoElejido:{
+                id:"",
+                detalle:'',
+                fecha:""
+            },
         })
+        
     }
 
+    //Evento que escucha todo lo que se tipea y guarda los valores en el estado.
     handleOnChangeValue = e => {
         e.preventDefault();
 
@@ -46,7 +56,11 @@ class NewEntry extends React.Component {
         })
         console.log(e.target.id + " valor: "+e.target.value)
     }
-
+    
+    /*
+    Este evento se dispara cuando se clickea un ingreso ya generado
+    muestra el formulario para editar o visyalizar en detalle el ingreso.
+    */
     handleClick = id =>{
         console.log(id)
         const ingreso = this.state.listaIngreso.find(i => i.idingreso === id);
@@ -63,8 +77,7 @@ class NewEntry extends React.Component {
 
     }
 
-
-
+    //Esta funcion carga la base de datos.
     load = () => {
         $.ajax({
             url: "http://localhost/backend/Ingreso.php",
@@ -82,8 +95,8 @@ class NewEntry extends React.Component {
         })
     }
 
+    //Guarda un nuevo ingreso
     handleSubmitNewEntry=()=>{
-
         /*
         En detalle utilizo this.state.detalle que se genera por el handleOnchangeValue
         */
@@ -106,7 +119,9 @@ class NewEntry extends React.Component {
         })
     }
 
-
+    /*Este evento setea los detalles que requiere un nuevo ingreso,
+    muestra la fecha y los valores de detalle por default
+    */
     handleNewEntry=()=>{
         var f= new Date()
         this.setState({
@@ -115,14 +130,11 @@ class NewEntry extends React.Component {
                 id:"",
                 detalle:"* INGRESO:\n* MARCA:\n* MODELO:\n* CARGADOR:\n* FALLA:",
                 fecha: f.getDate() +"-"+ (f.getMonth() + 1 )+"-" +f.getFullYear()
-
             }
-        })
-        console.log(this.state.ingresoElejido)
+        })        
     }
 
     render() {
-
         const { history } = this.props
         return (
             <div>
@@ -134,7 +146,7 @@ class NewEntry extends React.Component {
                     handleNewEntry={this.handleNewEntry}
                 />
 
-                <div className="container"
+                <div className="container bg-light"
                     hidden={this.state.formUpdate}>
                     <EntryForm
                         ing={this.state.ingresoElejido}                        
@@ -177,14 +189,8 @@ class NewEntry extends React.Component {
                         </tbody>
                     </table>
                 </div>
-
-
-
-
             </div>
-
         )
     }
-
 }
 export default NewEntry

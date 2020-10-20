@@ -4,14 +4,20 @@ import NavBar from '../components/NavBar'
 import CardInfo from '../components/CardInfo.json'
 import NotFound from './NotFound'
 
+/*
+Esta es la pagina donse se seleccionan los diferentes modulos del sistema.
+*/
+
 class Selection extends React.Component {
 
     state = {
-
         data: CardInfo,
         isLoged: false
     }
 
+    /*
+    Este Evento verifica que el token sea correcto, si no lo es te manda al login
+    */
     componentDidMount() {
         let token = ""
         let tk = localStorage.getItem('token')
@@ -21,8 +27,7 @@ class Selection extends React.Component {
         this.setState({
             isLoged: validaToken
         })
-    }
-    
+    }    
 
     render() {
         
@@ -58,7 +63,6 @@ class Selection extends React.Component {
                 </div>
             )
         }
-
     }
 }
 export default Selection

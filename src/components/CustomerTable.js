@@ -1,8 +1,7 @@
 import React from 'react'
 
-
-class CustomerTable extends React.Component {
-    
+//Este componente carga el body de la tabla de clientes.
+class CustomerTable extends React.Component {  
 
     render() {
         const { id, nombre, direccion, telefono, handleCustomer } = this.props
@@ -17,10 +16,6 @@ class CustomerTable extends React.Component {
                 <td>{telefono}</td>
                 </tr>
         )
-
     }
-
-
-
 }
 export default CustomerTable

@@ -1,6 +1,8 @@
 import React from "react"
 import "../components/styles/FormLogin.css"
 
+//Componente formulario para realizar el login.
+
 class FormLogin extends React.Component {
     render() {
         const {handleChange, handleChangeChk, handleSubmit, estado} = this.props
