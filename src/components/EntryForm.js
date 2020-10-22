@@ -9,8 +9,8 @@ class EntryForm extends React.Component {
     }
     
     render() {
-        const { id, handleOnChangeValue, fecha, detalle, handleCancel,
-            handleDeleted, handleEntry, handleUpdate, ing } = this.props
+        const { id, handleOnChangeValue, handleCancel,
+            handleDeleted, handleEntry, handleUpdate, ing, toPrint } = this.props
 
         return (
             <div>
@@ -69,6 +69,13 @@ class EntryForm extends React.Component {
                         className="btn btn-danger btn-line m-2"
                         value="Borrar"
                         onClick={handleDeleted}
+                        type="button"
+                    />
+                    <input
+                        id="imprimir"
+                        className="btn btn-danger btn-line m-2"
+                        value="imprimir"
+                        onClick={toPrint}
                         type="button"
                     />
                 </form>

@@ -17,7 +17,8 @@ class NewEntry extends React.Component {
             id:"",
             detalle:'',
             nombre:"Ingreso",
-            fecha:""
+            fecha:"",
+            direccion:""
         },        
         listaIngreso: [
             {
@@ -70,7 +71,8 @@ class NewEntry extends React.Component {
                 id:ingreso.idingreso,
                 detalle:ingreso.detalle,
                 fecha:ingreso.fecha,
-                nombre:ingreso.nombre               
+                nombre:ingreso.nombre,
+                direccion:ingreso.direccion               
             }
         })   
     }
@@ -93,6 +95,24 @@ class NewEntry extends React.Component {
             }
         })
         console.log(this.state.listaIngreso.nombre)
+    }
+
+    //lleva a la pagina de impresión con todos los datos para imprimir el comprobante
+    goToPrint = e => {
+        
+        this.props.history.push({
+            pathname: '/comprobante',
+            id: this.state.ingresoElejido.id,
+            nombre:this.state.ingresoElejido.nombre,
+            detalle:this.state.ingresoElejido.detalle,
+            direccion:this.state.ingresoElejido.direccion,
+            fecha:this.state.ingresoElejido.fecha,
+            tipo:"Ingreso N°:",
+            detalleTipo:"Detalle de Ingreso"
+        })
+        e.preventDefault();
+        
+
     }
 
     
@@ -183,6 +203,7 @@ class NewEntry extends React.Component {
                         handleOnChangeValue={this.handleOnChangeValue}
                         handleDeleted={this.deletedEntry}
                         handleEntry={this.handleSubmitNewEntry}
+                        toPrint={this.goToPrint}
                                                 
                     />
                 </div>
