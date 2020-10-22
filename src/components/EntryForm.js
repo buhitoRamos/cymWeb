@@ -1,15 +1,12 @@
 import React from 'react'
 
-//Componente formulario para crear nuevos/editar/borrar ingresos.
 
+//Componente formulario para crear nuevos/editar/borrar ingresos.
 class EntryForm extends React.Component {
 
-    state={
-        ing:this.props.ing
-    }
-    
     render() {
-        const { id, handleOnChangeValue, handleCancel,
+
+        const { handleOnChangeValue, handleCancel, hiddenPrint,
             handleDeleted, handleEntry, handleUpdate, ing, toPrint } = this.props
 
         return (
@@ -19,27 +16,27 @@ class EntryForm extends React.Component {
                         <label className="p-1  bg-primary text-white rounded-pill">ID</label>
                         <input
                             id="id"
-                           value={ing.id}
-                            type="text"
-                            onChange={handleOnChangeValue}
-                            className="ml-1 form-input rounded-pill form-line text-center text-primary"
-                        /> 
-                        <div className="float-right">                   
-                        <label className=" ml-2 p-1  bg-primary text-white rounded-pill">Fecha</label>
-                        <input
-                            id="fecha"
-                            defaultValue={ing.fecha}                            
+                            value={ing.id}
                             type="text"
                             onChange={handleOnChangeValue}
                             className="ml-1 form-input rounded-pill form-line text-center text-primary"
                         />
+                        <div className="float-right">
+                            <label className=" ml-2 p-1  bg-primary text-white rounded-pill">Fecha</label>
+                            <input
+                                id="fecha"
+                                defaultValue={ing.fecha}
+                                type="text"
+                                onChange={handleOnChangeValue}
+                                className="ml-1 form-input rounded-pill form-line text-center text-primary"
+                            />
                         </div>
                     </div>
                     <div className="form-group text-center">
                         <label className="form-control form-input bg-primary text-white rounded-pill form-line">Detalle</label>
                         <textarea className="form-control" id="detalle" rows="5"
-                        defaultValue={ing.detalle}
-                        onChange={handleOnChangeValue}                            
+                            defaultValue={ing.detalle}
+                            onChange={handleOnChangeValue}
                         />
                     </div>
                     <input
@@ -54,8 +51,7 @@ class EntryForm extends React.Component {
                         className="btn btn-success btn-line m-2"
                         value="Ingreso"
                         onClick={handleEntry}
-                        type="button"                        
-
+                        type="button"
                     />
                     <input
                         id="actualizar"
@@ -77,6 +73,7 @@ class EntryForm extends React.Component {
                         value="imprimir"
                         onClick={toPrint}
                         type="button"
+                        hidden={hiddenPrint}
                     />
                 </form>
             </div>

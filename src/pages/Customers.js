@@ -31,7 +31,7 @@ class Customers extends React.Component {
     componentDidMount() {
         this.loadCustomers();
     }
-    
+
     //Funcion que carga todos los clientes o cliente tipeado.
     loadCustomers = () => {
         $.ajax({
@@ -82,8 +82,7 @@ class Customers extends React.Component {
     }
 
     //Para editar clientes.
-    handleEditCustomer = () => {       
-        
+    handleEditCustomer = () => {
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
             data: {
@@ -98,11 +97,10 @@ class Customers extends React.Component {
             async: true,
             success: (response) => {
                 this.setState({
-                    listaClientes: response,                    
+                    listaClientes: response,
                 })
             }
         })
-
     }
 
     //Envia al back los datos para guardar el nuevo cliente.
@@ -127,7 +125,7 @@ class Customers extends React.Component {
     }
 
     //Este evento borra el cliente luego de que sea confirmado.
-    handleDeletedConfirm = () => {
+    deleteCustomer = () => {
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
             data: {
@@ -146,7 +144,7 @@ class Customers extends React.Component {
     }
 
     //Solicita confirmar para borrar.
-    handleDeleted = () => {        
+    confirmDelete = () => {
         confirmAlert({
             title: 'Estas por eliminar a ' + this.state.nombre,
             message: '¿Estas Seguro?.',
@@ -154,37 +152,34 @@ class Customers extends React.Component {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        this.handleDeletedConfirm()
+                        this.deleteCustomer()
+                        this.setState({
+                            formUpdate: true
+                        })
                     }
                 },
                 {
                     label: 'No',
-                    onClick: () => alert('No se Efectuaron cambios')
+                    // onClick: () => alert('No se Efectuaron cambios')
                 }
             ]
         });
-
     }
 
     handleAcepted = e => {
         e.preventDefault();
         if (!this.state.newCustomer) {
             this.handleEditCustomer();
-            
-
         } else {
-            
-           this.handleNewCustomer();
-           this.setState({
-               formUpdate:true,
-           })
-           
+            this.handleNewCustomer();
+            this.setState({
+                formUpdate: true,
+            })
         }
     }
 
     handleOnChangeValue = e => {
         e.preventDefault();
-
         this.setState({
             newCustomer: true,
             ...this.state,
@@ -193,10 +188,7 @@ class Customers extends React.Component {
     }
 
     handleCustomer = id => {
-        console.log(id)
         const customer = this.state.listaClientes.find(c => c.idCliente === id);
-        console.log(customer.idCliente)
-
         this.setState({
             id: id,
             formUpdate: false,
@@ -212,14 +204,12 @@ class Customers extends React.Component {
             idCliente: this.state.id
         })
         e.preventDefault();
-
     }
-
 
     render() {
         const { history } = this.props
-        return (
 
+        return (
             <div>
                 <div>
                     <NavBar
@@ -240,7 +230,7 @@ class Customers extends React.Component {
                         handleCancel={this.handleCancel}
                         handleAcepted={this.handleAcepted}
                         handleOnChangeValue={this.handleOnChangeValue}
-                        handleDeleted={this.handleDeleted}
+                        handleDeleted={this.confirmDelete}
                         handleEntry={this.handleEntry}
                         hiddenTa="hidden"
                     />
@@ -261,11 +251,8 @@ class Customers extends React.Component {
                                 <th
                                     className="text-center">Telefono</th>
                             </tr>
-                            
                         </thead>
-                        
                         <tbody>
-
                             {
                                 this.state.listaClientes.map(customer => {
                                     return (
@@ -281,10 +268,8 @@ class Customers extends React.Component {
                                 })
                             }
                         </tbody>
-                       
                     </table>
                 </div>
-
             </div>
         )
     }

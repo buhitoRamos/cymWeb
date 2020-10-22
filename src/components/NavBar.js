@@ -14,7 +14,6 @@ class NavBar extends React.Component {
         localStorage.setItem('token', token);
         this.props.history.push('/login')
         e.preventDefault();
-
     }
 
     //Direcciona al modulo de /seleccion
