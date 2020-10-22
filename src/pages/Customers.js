@@ -82,8 +82,8 @@ class Customers extends React.Component {
     }
 
     //Para editar clientes.
-    handleEditCustomer = () => {
-        console.log("handleEditCustomer")
+    handleEditCustomer = () => {       
+        
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
             data: {
@@ -98,7 +98,7 @@ class Customers extends React.Component {
             async: true,
             success: (response) => {
                 this.setState({
-                    listaClientes: response,
+                    listaClientes: response,                    
                 })
             }
         })
@@ -170,9 +170,15 @@ class Customers extends React.Component {
         e.preventDefault();
         if (!this.state.newCustomer) {
             this.handleEditCustomer();
+            
 
         } else {
-            this.handleNewCustomer();
+            
+           this.handleNewCustomer();
+           this.setState({
+               formUpdate:true,
+           })
+           
         }
     }
 
@@ -180,7 +186,7 @@ class Customers extends React.Component {
         e.preventDefault();
 
         this.setState({
-            newCustomer: false,
+            newCustomer: true,
             ...this.state,
             [e.target.id]: e.target.value
         })

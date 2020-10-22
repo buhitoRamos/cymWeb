@@ -73,7 +73,7 @@ class EntryForm extends React.Component {
                     />
                     <input
                         id="imprimir"
-                        className="btn btn-danger btn-line m-2"
+                        className="btn btn-warning btn-line m-2"
                         value="imprimir"
                         onClick={toPrint}
                         type="button"
