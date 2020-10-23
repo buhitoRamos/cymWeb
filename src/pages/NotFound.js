@@ -10,6 +10,8 @@ const NotFound = () => (
             type="hidden"
             btnExit="hidden"
             btnHome="hidden"
+            newEntry="hidden"
+            NewCustomer="hidden"
         />
         <div>
             <BtnNavegation

@@ -136,7 +136,9 @@ class NewEntry extends React.Component {
             async: true,
             success: (response) => {
                 this.setState({
-                    listaIngreso: response
+                    listaIngreso: response,
+                    formUpdate:true
+
                 })
             }
         })
