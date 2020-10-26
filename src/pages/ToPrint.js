@@ -17,6 +17,7 @@ function ToPrint(props) {
     const [detalleTipo, setDetalleTipo] = useState(props.location.detalleTipo);
     const [tyc, setTyc] = useState(props.location.tyc);
     const history=useHistory();
+    
         
         return (
             <div >
