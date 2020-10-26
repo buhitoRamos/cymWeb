@@ -6,6 +6,7 @@ import NotFound from '../pages/NotFound'
 import Customers from '../pages/Customers'
 import ToPrint from '../pages/ToPrint'
 import NewEntry from '../pages/NewEntry'
+import Works from '../pages/Works'
 
 //Componente de ruteo de paginas.
 
@@ -18,6 +19,7 @@ const App = () => (
                 <Route path='/clientes' component={Customers} />
                 <Route path='/comprobante' component={ToPrint} />
                 <Route path='/ingreso' component={NewEntry} />
+                <Route path='/trabajos' component={Works} />
                 <Route component={NotFound} />
             </Switch>
         </BrowserRouter>
