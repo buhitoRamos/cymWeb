@@ -1,3 +1,7 @@
+.Tab {  
+    height: 600px !important;
+    overflow: scroll;
+}
 .Tbody{
     padding: 20px;
     max-height: 100px;
@@ -6,10 +10,10 @@
     min-width: 100px;
     
 }
-.Tab {  
-    height: 600px !important;
+.Work {  
+    height: 220px !important;
     overflow: scroll;
-}​
+}​​
 .o{
     display: inline;
-}
+}   

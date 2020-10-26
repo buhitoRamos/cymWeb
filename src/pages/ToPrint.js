@@ -8,14 +8,14 @@ import { useHistory } from "react-router-dom";
 //Componente realizado con Hooks
 function ToPrint(props) {
 
-    const [nombre, setNombre] = useState(props.location.nombre);
-    const [detalle, setDetalle] = useState(props.location.detalle);
-    const [fecha, setFecha] = useState(props.location.fecha);
-    const [direccion, setDireccion] = useState(props.location.direccion);
-    const [id, setId] = useState(props.location.id);
-    const [tipo, setTipo] = useState(props.location.tipo);
-    const [detalleTipo, setDetalleTipo] = useState(props.location.detalleTipo);
-    const [tyc, setTyc] = useState(props.location.tyc);
+    const [nombre] = useState(props.location.nombre);
+    const [detalle] = useState(props.location.detalle);
+    const [fecha] = useState(props.location.fecha);
+    const [direccion] = useState(props.location.direccion);
+    const [id] = useState(props.location.id);
+    const [tipo] = useState(props.location.tipo);
+    const [detalleTipo] = useState(props.location.detalleTipo);
+    const [tyc] = useState(props.location.tyc);
     const history=useHistory();
     
         
