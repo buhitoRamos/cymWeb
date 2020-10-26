@@ -1,23 +1,21 @@
-import React from 'react'
-import Logo from "../components/Logo"
-import NavBar from "../components/NavBar"
+import React, { useState } from 'react';
+import Logo from "../components/Logo";
+import NavBar from "../components/NavBar";
 
 
 //Esta es la pagina de impresión de remito y comprobante de recibo
-class ToPrint extends React.Component {
-    state = {
-        nombre: this.props.location.nombre,
-        detalle: this.props.location.detalle,
-        fecha: this.props.location.fecha,
-        direccion: this.props.location.direccion,
-        id: this.props.location.id,
-        tipo: this.props.location.tipo,
-        detalleTipo:this.props.location.detalleTipo,
-        tyc: this.props.location.tyc
+function ToPrint({props}) {
+    
+    const [nombre, setNombre] = useState(props.location.nombre);
+    const [detalle, setDetalle] = useState(this.props.location.detalle);
+    const [fecha, setFecha] = useState(this.props.location.fecha);
+    const [direccion, setDireccion] = useState(this.props.location.direccion);
+    const [id, setId] = useState(this.props.location.id);
+    const [tipo, setTipo] = useState(this.props.location.tipo);
+    const [detalleTipo, setDetalleTipo] = useState(this.props.location.detalleTipo);
+    const [tyc, setTyc] = useState(this.props.location.tyc);
 
-    }
-
-    render() {
+   
         const { history } = this.props
         
         
@@ -76,5 +74,5 @@ class ToPrint extends React.Component {
             </div>
         )
     }
-}
+
 export default ToPrint
