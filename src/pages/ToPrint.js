@@ -1,26 +1,23 @@
-import React from 'react'
-import Logo from "../components/Logo"
-import NavBar from "../components/NavBar"
+import React, { useState } from 'react';
+import Logo from "../components/Logo";
+import NavBar from "../components/NavBar";
+import { useHistory } from "react-router-dom";
 
 
 //Esta es la pagina de impresión de remito y comprobante de recibo
-class ToPrint extends React.Component {
-    state = {
-        nombre: this.props.location.nombre,
-        detalle: this.props.location.detalle,
-        fecha: this.props.location.fecha,
-        direccion: this.props.location.direccion,
-        id: this.props.location.id,
-        tipo: this.props.location.tipo,
-        detalleTipo:this.props.location.detalleTipo,
-        tyc: this.props.location.tyc
+//Componente realizado con Hooks
+function ToPrint(props) {
 
-    }
-
-    render() {
-        const { history } = this.props
-        
-        
+    const [nombre, setNombre] = useState(props.location.nombre);
+    const [detalle, setDetalle] = useState(props.location.detalle);
+    const [fecha, setFecha] = useState(props.location.fecha);
+    const [direccion, setDireccion] = useState(props.location.direccion);
+    const [id, setId] = useState(props.location.id);
+    const [tipo, setTipo] = useState(props.location.tipo);
+    const [detalleTipo, setDetalleTipo] = useState(props.location.detalleTipo);
+    const [tyc, setTyc] = useState(props.location.tyc);
+    const history=useHistory();
+    
         
         return (
             <div >
@@ -36,9 +33,9 @@ class ToPrint extends React.Component {
                         <Logo />
                     </div>
                     <div>
-                        <h4> <span className="badge badge-info">{this.state.tipo}</span>
-                            <span className="badge badge-secondary m-1">{this.state.id}</span>
-                            <span className="badge badge-secondary float-right m-1">{this.state.fecha}</span>
+                        <h4> <span className="badge badge-info">{tipo}</span>
+                            <span className="badge badge-secondary m-1">{id}</span>
+                            <span className="badge badge-secondary float-right m-1">{fecha}</span>
                         </h4>
                         <h5> 
                             <span className="badge badge-info float-center">
@@ -48,25 +45,25 @@ class ToPrint extends React.Component {
                     </div>
                     <div>
                         <h4> <span className="badge badge-info mt-4">Nombre:</span>
-                            <span className="m-1 h5">{this.state.nombre}</span>
+                            <span className="m-1 h5">{nombre}</span>
                         </h4>
                         <h4> <span className="badge badge-info mt-1">Dirección:</span>
                             <span className=" m-1 h5">
-                                {this.state.direccion}
+                                {direccion}
                             </span>
                         </h4>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">
                                 <h2><span className="badge badge-primary p-2 mt-3">
-                                    {this.state.detalleTipo}
+                                    {detalleTipo}
                             </span></h2>
                             </label>
                         </div>
 
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="8">
-                            {this.state.detalle}
+                            {detalle}
                         </textarea>
-                        <p hidden={this.state.tyc}>
+                        <p hidden={tyc}>
                             * Pasado los 90 dias de no retirar el equipo, la casa no se responsabiliza
                               por perdidas y/o extravio del mismo. <br></br>
                             * Los presupuestos de hasta $1500 se reparan directo.
@@ -76,5 +73,5 @@ class ToPrint extends React.Component {
             </div>
         )
     }
-}
+
 export default ToPrint
