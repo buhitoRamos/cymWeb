@@ -11,12 +11,20 @@ function Works() {
     const [cliente, setCliente] = useState("");
     const [id, setId] = useState(0);
     const [nombre, setNombre] = useState("");
-    const [hiddenForm, sethiddenForm] = useState('hidden')
-    const [hiddenTable, setHiddentable] = useState(false)
+    const [hiddenForm, sethiddenForm] = useState('hidden');
+    const [hiddenTable, setHiddentable] = useState(false);
+    const [fecha, setFecha] = useState("");
+    const [garantia, setGarantia] = useState("");
 
     //Hook de efecto similar a componentDidMount/DidUpdate
     useEffect(() => {
         loadCustomers();
+        var f = new Date();
+        var g = f;
+        f = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
+        g = g.getDate() + "-" + (g.getMonth() + 2) + "-" + g.getFullYear();
+        setFecha(f);
+        setGarantia(g)
 
     })
 
@@ -53,7 +61,7 @@ function Works() {
     }
 
     //Deja de mostrar el formulario de ingreso y muestra clientes.
-    function handleCancel (){
+    function handleCancel() {
         setHiddentable(false)
         sethiddenForm("hidden")
     }
@@ -69,34 +77,53 @@ function Works() {
                 handleChange={handleChange}
 
             />
-            <div hidden={hiddenForm}>
+            <div hidden={hiddenForm}
+            className="container">
                 <br></br>
                 <form className="form-inline">
                     <div className="form-group">
-                        <label for="nombreCliente">Nombre</label>
+                        <label for="nombreCliente"
+                            className="form-control form-input bg-primary text-white rounded-pill form-line">
+                            Nombre</label>
                         <input type="text"
                             id="nombreCliente"
-                            class="form-control mx-sm-3"
+                            class="form-control ml-1 mr-2"
                             aria-describedby="nombreCliente"
                             value={nombre} />
-                            <button className="btn btn-info mr-3">limpiar Datos</button>
-                            <label for="garantia" className="margin auto">Garantía</label>
-                            <input type="text"
+                        <button className="btn btn-info mr-3 ml-2"
+                            onClick="">limpiar Datos</button>
+                        <label for="garantia"
+                            className="form-control form-input bg-primary text-white rounded-pill form-line">
+                            Garantía</label>
+                        <input type="text"
                             id="garantia"
-                            class="form-control mx-sm-3"
+                            class="form-control ml-1 mr-2"
                             aria-describedby="garantia"
-                            defaultValue="12/10/2021" />
-                            <label for="fecha" className="margin auto">Fecha</label>
-                            <input type="text"
+                            defaultValue={garantia} />
+                        <label for="fecha"
+                            className="form-control form-input bg-primary text-white rounded-pill form-line ml-2">
+                            Fecha</label>
+                        <input type="text"
                             id="fecha"
-                            class="form-control mx-sm-3"
+                            class="form-control ml-1 mr-2"
                             aria-describedby="fecha"
-                            defaultValue="12/10/2020" />
-                            <button className="btn btn-primary mr-3"
+                            defaultValue={fecha} />
+                        <button className="btn btn-info ml-2"
                             onClick={handleCancel}>Cancelar</button>
 
                     </div>
+                    
+                    
                 </form>
+                <div className="container text-center">
+
+                        <label className="form-control form-input bg-primary text-white rounded-pill form-line mr-3">
+                            Detalle</label>
+                        <textarea className="col col-10" id="detalle" rows="7"
+                            defaultValue=""
+                            onChange=""
+                        />
+                    </div>
             </div>
 
             <div className="Work"
