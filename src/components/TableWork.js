@@ -5,11 +5,42 @@ import "../components/styles/Tbody.css";
 function TableWork(props) {
 
     const [listaTrabajo, setListaTrabajo] = useState([]);
+    const [idCliente, setidCliente]=useState(props.idCliente);
+    const [contador, setContador] = useState(0);
 
     useEffect(() => {
-
-        loadWorks();
+        loadWorks(); 
+             
     }, [])
+
+    useEffect(() => {
+        setidCliente(props.idCliente);
+        if(idCliente>1 & contador<2){
+            loadWorksId(props.idCliente); 
+        }
+    })
+
+    function loadWorksId(Id){
+        if(contador<1){
+            $.ajax({
+                url: "http://localhost/backend/Trabajos.php",
+                data: { el: 2, id: Id  },
+                dataType: 'json',
+                type: 'POST',
+                async: true,
+                success: (response) => {
+                    setListaTrabajo(response)
+                    
+                }
+            })
+            console.log("paso por aca")
+
+        }
+        
+        
+        setContador(2);
+
+    }
 
 
     function loadWorks() {
@@ -30,6 +61,7 @@ function TableWork(props) {
             <table className="table table-hover table-dark"
                 cellSpacing="5" cellPadding="10" border="3"
                 id="customers"
+                onClick={()=>{loadWorksId(props.idCliente);}}
             >
                 <thead className="bg-danger">
                     <t6>Trabajos</t6>

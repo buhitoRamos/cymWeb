@@ -59,7 +59,7 @@ function Works() {
     function handleChange(e) {
         e.preventDefault();
         setCliente(e.target.value)
-        //  setTimeout(() => loadCustomers(), 2000)
+          setTimeout(() => loadCustomers(), 2000)
     }
 
     //Deja de mostrar el formulario de ingreso y muestra clientes.
@@ -125,6 +125,7 @@ function Works() {
                 
             </div>
             <TableWork
+            idCliente={id}
             />
 
         </div>
