@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import "../components/styles/Tbody.css";
 import CustomerTable from "../components/CustomerTable";
 import NewWork from "../components/NewWork"
+import TableWork from"../components/TableWork";
 import $ from "jquery"
 
 function Works() {
@@ -17,7 +18,9 @@ function Works() {
     const [fecha, setFecha] = useState("");
     const [garantia, setGarantia] = useState("");
 
-    //Hook de efecto similar a componentDidMount/DidUpdate
+    /*Hook de efecto similar a componentDidMount/DidUpdate,
+    funadamental poner ,[] asi funciona como componentDidMount
+    */
     useEffect(() => {
         loadCustomers();
         var f = new Date();
@@ -27,7 +30,7 @@ function Works() {
         setFecha(f);
         setGarantia(g)
 
-    })
+    },[])
 
     //funcion que asigna almancena id y nombre del cliente seleccionado.
     function handleCustomer(id) {
@@ -56,19 +59,18 @@ function Works() {
     function handleChange(e) {
         e.preventDefault();
         setCliente(e.target.value)
-
-
         //  setTimeout(() => loadCustomers(), 2000)
     }
 
     //Deja de mostrar el formulario de ingreso y muestra clientes.
-    function handleCancel() {
+    function handleCancel(e) {
+        e.preventDefault();
         setHiddentable(false)
-        
+
     }
 
     return (
-        <div>
+        <div>            
             <NavBar
                 txt="Trabajos"
                 type="search"
@@ -78,11 +80,11 @@ function Works() {
                 handleChange={handleChange}
 
             />
-            <NewWork  
-            hiddenForm={hiddenForm}
-            nombre={nombre}
-            garantia={garantia}
-            fecha={fecha}/>           
+            <NewWork
+                hiddenForm={hiddenForm}
+                nombre={nombre}
+                garantia={garantia}
+                fecha={fecha} />
 
             <div className="Work"
                 hidden={hiddenTable}>
@@ -91,6 +93,7 @@ function Works() {
                     id="customers"
                 >
                     <thead className="bg-danger">
+                        <h6>Clientes</h6>
                         <tr>
                             <th
                                 className="text-center">ID</th>
@@ -119,7 +122,10 @@ function Works() {
                         }
                     </tbody>
                 </table>
+                
             </div>
+            <TableWork
+            />
 
         </div>
     )

@@ -1,26 +1,26 @@
 
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 function NewWork(props) {
 
     const [hiddenForm, setHiddenForm] = useState(props.hiddenForm);
-    const [nombre,setNombre] = useState(props.nombre);
+    const [nombre, setNombre] = useState(props.nombre);
     const [garantia, setGarantia] = useState(props.garantia);
     const [fecha, setFecha] = useState(props.fecha);
 
     useEffect(() => {
-       setNombre(props.nombre);
-       setHiddenForm(props.hiddenForm);
-       setGarantia(props.garantia);
-       setFecha(props.fecha);
-     
+        setNombre(props.nombre);
+        setHiddenForm(props.hiddenForm);
+        setGarantia(props.garantia);
+        setFecha(props.fecha);
+
     })
 
     function handleCancel() {
         setHiddenForm("hidden")
-        
+
     }
-    
+
 
     return (
         <div hidden={hiddenForm}

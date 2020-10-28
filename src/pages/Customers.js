@@ -257,7 +257,7 @@ class Customers extends React.Component {
                                 this.state.listaClientes.map(customer => {
                                     return (
                                         <CustomerTable
-                                            key={customer.idCliente}
+                                            // key={customer.idCliente}
                                             handleCustomer={this.handleCustomer}
                                             id={customer.idCliente}
                                             nombre={customer.nombre}
