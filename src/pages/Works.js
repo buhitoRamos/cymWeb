@@ -84,7 +84,8 @@ function Works() {
                 hiddenForm={hiddenForm}
                 nombre={nombre}
                 garantia={garantia}
-                fecha={fecha} />
+                fecha={fecha}
+                id={id} />
 
             <div className="Work"
                 hidden={hiddenTable}>

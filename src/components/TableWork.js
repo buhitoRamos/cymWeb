@@ -34,12 +34,8 @@ function TableWork(props) {
                 }
             })
             console.log("paso por aca")
-
         }
-        
-        
         setContador(2);
-
     }
 
 
