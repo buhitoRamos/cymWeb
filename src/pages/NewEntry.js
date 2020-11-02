@@ -163,6 +163,29 @@ class NewEntry extends React.Component {
         });
     }
 
+    //Esta función actualiza el ingreso.
+    handleUpdate = () =>{
+        $.ajax({
+            url: "http://localhost/backend/Ingreso.php",
+            data: {
+                el: 4,                
+                idCl: this.state.idCliente,
+                id: this.state.ingresoElejido.id,
+                fe: this.state.fecha,
+                de: this.state.detalle,
+            },
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            success: (response) => {
+                this.setState({
+                    listaIngreso: response
+                })
+            }
+        })
+
+    }
+
     //Esta función elimina definitivamente un ingreso.
     deleteEntry = () => {
         $.ajax({
@@ -217,7 +240,7 @@ class NewEntry extends React.Component {
                     <EntryForm
                         ing={this.state.ingresoElejido}
                         handleCancel={this.handleCancel}
-                        handleAcepted=""
+                        handleUpdate={this.handleUpdate}
                         handleOnChangeValue={this.handleOnChangeValue}
                         handleDeleted={this.handleConfirmDelete}
                         handleEntry={this.handleSubmitNewEntry}
