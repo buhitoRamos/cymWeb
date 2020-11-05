@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar";
 import "../components/styles/Tbody.css";
 import CustomerTable from "../components/CustomerTable";
 import NewWork from "../components/NewWork"
-import TableWork from"../components/TableWork";
+import TableWork from "../components/TableWork";
 import $ from "jquery"
 
 function Works() {
@@ -17,6 +17,7 @@ function Works() {
     const [hiddenTable, setHiddentable] = useState(false);
     const [fecha, setFecha] = useState("");
     const [garantia, setGarantia] = useState("");
+    const [trabajoSeleccionado, setTrabajoSeleccionado] = useState([]);
 
     /*Hook de efecto similar a componentDidMount/DidUpdate,
     funadamental poner ,[] asi funciona como componentDidMount
@@ -29,17 +30,30 @@ function Works() {
         g = g.getDate() + "-" + (g.getMonth() + 2) + "-" + g.getFullYear();
         setFecha(f);
         setGarantia(g)
+        let trabajo = {
+            id: "", nombre: "", detalle: "", importe: "", pago: "", costo: "", ayudante: "",
+            garantia: "", fecha: ""
+        }
+        setTrabajoSeleccionado(trabajo)
 
-    },[])
+    }, [])
 
     //funcion que asigna almancena id y nombre del cliente seleccionado.
     function handleCustomer(id) {
         const customer = listaClientes.find(c => c.idCliente === id);
         setId(customer.idCliente);
         setNombre(customer.nombre);
-        setHiddenForm(false)
-        setHiddentable('hidden')
+        setHiddenForm(false);
+        setHiddentable('hidden');
+        
     }
+
+    function handleCancelNewWork() {
+        setHiddenForm("hidden") 
+        setHiddentable(false)
+        setId(0) 
+      }
+
 
     //Carga la lista de clientes completa o filtrada.
     function loadCustomers() {
@@ -59,18 +73,14 @@ function Works() {
     function handleChange(e) {
         e.preventDefault();
         setCliente(e.target.value)
-          setTimeout(() => loadCustomers(), 2000)
+        setTimeout(() => loadCustomers(), 2000)
     }
 
-    //Deja de mostrar el formulario de ingreso y muestra clientes.
-    function handleCancel(e) {
-        e.preventDefault();
-        setHiddentable(false)
-
-    }
+    
 
     return (
-        <div>            
+        <div
+        onClick={()=>(console.log(id))}>
             <NavBar
                 txt="Trabajos"
                 type="search"
@@ -78,14 +88,15 @@ function Works() {
                 NewCustomer="hidden"
                 newEntry="hidden"
                 handleChange={handleChange}
-
             />
             <NewWork
                 hiddenForm={hiddenForm}
                 nombre={nombre}
                 garantia={garantia}
                 fecha={fecha}
-                id={id} />
+                id={id}
+                trabajoSeleccionado={trabajoSeleccionado}
+                handleCancelNewWork={handleCancelNewWork} />
 
             <div className="Work"
                 hidden={hiddenTable}>
@@ -123,10 +134,13 @@ function Works() {
                         }
                     </tbody>
                 </table>
-                
+
             </div>
             <TableWork
-            idCliente={id}
+                idCliente={id}
+                trabajoSeleccionado={trabajoSeleccionado}
+                setTrabajoSeleccionado={setTrabajoSeleccionado}
+
             />
 
         </div>

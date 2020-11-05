@@ -2,33 +2,34 @@
 import React, { useState, useEffect } from 'react';
 
 function NewWork(props) {
-
-    const [hiddenForm, setHiddenForm] = useState(props.hiddenForm);
-    const [nombre, setNombre] = useState(props.nombre);
-    const [garantia, setGarantia] = useState(props.garantia);
-    const [fecha, setFecha] = useState(props.fecha);
+    const [campos, setCampos] =useState(props)         
     const [id, setId] = useState(props.id);
-
+    
+    
     useEffect(() => {
-        setNombre(props.nombre);
-        setHiddenForm(props.hiddenForm);
-        setGarantia(props.garantia);
-        setFecha(props.fecha);
+        
+                    
         setId(props.id);
+        setCampos(props)
+        
 
     })
 
-    function handleCancel() {
-        setHiddenForm("hidden")
+    
 
+    function _clean(){
+      
+        console.log(props.hiddenForm)
+        
+        
     }
 
 
     return (
-        <div hidden={hiddenForm}
+        <div hidden={props.hiddenForm}
             className="container">
             <br></br>
-            <form className="form-inline">
+            <div className="form-inline">
                 <div className="form-group">
                     <label for="nombreCliente"
                         className="form-control form-input bg-primary text-white rounded-pill form-line">
@@ -40,9 +41,9 @@ function NewWork(props) {
                         id="nombreCliente"
                         class="form-control ml-1 mr-2"
                         aria-describedby="nombreCliente"
-                        defaultValue={nombre} />
+                        defaultValue={campos.nombre} />
                     <button className="btn btn-info mr-3 ml-2"
-                        onClick="">limpiar Datos</button>
+                        onClick={_clean}>limpiar Datos</button>
                     <label for="garantia"
                         className="form-control form-input bg-primary text-white rounded-pill form-line">
                         Garantía</label>
@@ -50,7 +51,7 @@ function NewWork(props) {
                         id="garantia"
                         class="form-control ml-1 mr-2"
                         aria-describedby="garantia"
-                        defaultValue={garantia} />
+                        defaultValue={campos.garantia} />
                     <label for="fecha"
                         className="form-control form-input bg-primary text-white rounded-pill form-line ml-2">
                         Fecha</label>
@@ -58,12 +59,12 @@ function NewWork(props) {
                         id="fecha"
                         class="form-control ml-1 mr-2"
                         aria-describedby="fecha"
-                        defaultValue={fecha} />
+                        defaultValue={campos.fecha} />
                     <button className="btn btn-info ml-2"
-                        onClick={handleCancel}>Cancelar</button>
+                        onClick={props.handleCancelNewWork}>Cancelar</button>
                 </div>
 
-            </form>
+            </div>
 
             <div className="container">
                 <label className="form-control form-input bg-primary text-white rounded-pill form-line text-center">
@@ -71,7 +72,7 @@ function NewWork(props) {
 
                 <textarea className="col col-5" id="detalle" rows="7"
                     placeholder="Ingrese descripción del trabajo"
-                    defaultValue=""
+                    defaultValue={campos.trabajoSeleccionado.detalle}
                     onChange=""
                 />
                 <spam className="float-left mr-1">
@@ -83,7 +84,7 @@ function NewWork(props) {
                                 className=" p-1 m-1"
                                 id="importe"
                                 aria-describedby="importe"
-                                defaultValue="" />
+                                defaultValue={campos.trabajoSeleccionado.importe} />
                         </label>
                     </div>
 
@@ -95,7 +96,7 @@ function NewWork(props) {
                                 className=" pl-2 p-1 ml-3"
                                 id="pago"
                                 aria-describedby="Pago"
-                                defaultValue="" />
+                                defaultValue={campos.trabajoSeleccionado.pago} />
                         </label>
                     </div>
                     <div>
@@ -116,7 +117,7 @@ function NewWork(props) {
                                 className=" p-1 m-1"
                                 id="Ayudante"
                                 aria-describedby="Ayudante"
-                                defaultValue="" />
+                                defaultValue={campos.trabajoSeleccionado.ayudante} />
                         </label>
                     </div>
 
@@ -128,7 +129,7 @@ function NewWork(props) {
                                 className=" pl-2 p-1 ml-3"
                                 id="Costo"
                                 aria-describedby="Costo"
-                                defaultValue="" />
+                                defaultValue={campos.trabajoSeleccionado.costo} />
                         </label>
                     </div>
                     <div>
