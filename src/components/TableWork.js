@@ -3,31 +3,7 @@ import $ from "jquery"
 import "../components/styles/Tbody.css";
 
 function TableWork(props) {   
-    const [load]=useState(props.loadWorks)
-    
-
-    /*
-    Esta funcnion selecciona el trabajo, compara con la lista de trabajos del
-    cliente con el id seleccionado para asignar mediante setTrabajos que viene de works 
-    (props) y asi en Works ya tenga el trabajo para enviarlo a NewWork
-    */
-    function handleClick(id){        
-       const eleccion = props.listaTrabajo.find(t => t.ID === id);
-       props.setTrabajoSeleccionado({
-         id:eleccion.ID,
-         nombre:eleccion.Nombre,
-         detalle:eleccion.Detalle,
-         importe:eleccion.Importe,
-         pago:eleccion.Pago,
-         costo:eleccion.Costo,
-         ayudante:eleccion.costoAyudante,
-        garantia:eleccion.Garantia, 
-        fecha:eleccion.Fecha})  
-              
-    }
-
-    
-
+   
 
     return (
         <div className="Work">
@@ -61,7 +37,7 @@ function TableWork(props) {
                         props.listaTrabajo.map(t => {
                             return (
                                 <tr
-                               onClick={() => handleClick(t.ID)}
+                               onClick={() => props.handleClickWork(t.ID)}
                                 >
                                     <th scope="row">{t.ID}</th>
                                     <td>{t.Nombre}</td>

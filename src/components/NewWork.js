@@ -6,23 +6,11 @@ function NewWork(props) {
     const [id, setId] = useState(props.id);
     
     
+    
     useEffect(() => {
-        
-                    
         setId(props.id);
         setCampos(props)
-        
-
     })
-
-    
-
-    function _clean(){
-      
-        console.log(props.hiddenForm)
-        
-        
-    }
 
 
     return (
@@ -43,7 +31,7 @@ function NewWork(props) {
                         aria-describedby="nombreCliente"
                         defaultValue={campos.nombre} />
                     <button className="btn btn-info mr-3 ml-2"
-                        onClick={_clean}>limpiar Datos</button>
+                        onClick={"_clean"}>limpiar Datos</button>
                     <label for="garantia"
                         className="form-control form-input bg-primary text-white rounded-pill form-line">
                         Garantía</label>
@@ -51,7 +39,7 @@ function NewWork(props) {
                         id="garantia"
                         class="form-control ml-1 mr-2"
                         aria-describedby="garantia"
-                        defaultValue={campos.garantia} />
+                        defaultValue={campos.trabajoSeleccionado.garantia} />
                     <label for="fecha"
                         className="form-control form-input bg-primary text-white rounded-pill form-line ml-2">
                         Fecha</label>
@@ -59,7 +47,7 @@ function NewWork(props) {
                         id="fecha"
                         class="form-control ml-1 mr-2"
                         aria-describedby="fecha"
-                        defaultValue={campos.fecha} />
+                        defaultValue={campos.trabajoSeleccionado.fecha} />
                     <button className="btn btn-info ml-2"
                         onClick={props.handleCancelNewWork}>Cancelar</button>
                 </div>

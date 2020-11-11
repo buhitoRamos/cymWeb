@@ -26,6 +26,7 @@ function Works() {
     */
     useEffect(() => {
         loadCustomers();
+        loadWorks();
         
         var f = new Date();
         var g = f;
@@ -35,11 +36,11 @@ function Works() {
         setGarantia(g)
         let trabajo = {
             id: "", nombre: "", detalle: "", importe: "", pago: "", costo: "", ayudante: "",
-            garantia: "", fecha: ""
+            garantia: g, fecha: f
         }
         setTrabajoSeleccionado(trabajo)
 
-    }, [])
+    },[])
    
 
     //funcion que asigna almancena id y nombre del cliente seleccionado.
@@ -60,16 +61,30 @@ function Works() {
         loadCustomers();
     }
 
+    /*
+    Esta funcnion selecciona el trabajo, compara con la lista de trabajos del
+    cliente con el id seleccionado para asignar mediante setTrabajos que viene de works 
+    (props) y asi en Works ya tenga el trabajo para enviarlo a NewWork
+    */
+   function handleClickWork(id){        
+    const eleccion = listaTrabajo.find(t => t.ID === id);
+    setTrabajoSeleccionado({
+      id:eleccion.ID,
+      nombre:eleccion.Nombre,
+      detalle:eleccion.Detalle,
+      importe:eleccion.Importe,
+      pago:eleccion.Pago,
+      costo:eleccion.Costo,
+      ayudante:eleccion.costoAyudante,
+     garantia:eleccion.Garantia, 
+     fecha:eleccion.Fecha})  
+           
+ }
+
 
     //Esta función carga los trabajos.
     function loadWorks() {        
-        var ELECCION;
-        var f = new Date();
-        var g = f;
-        f = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
-        g = g.getDate() + "-" + (g.getMonth() + 2) + "-" + g.getFullYear();
-        setFecha(f);
-        setGarantia(g)
+        var ELECCION;        
 
         if(id>0){            
             ELECCION=2;
@@ -78,9 +93,7 @@ function Works() {
         } else{
             ELECCION=1
 
-        }        
-        
-        
+        }  
         $.ajax({
             url: "http://localhost/backend/Trabajos.php",
             data: { el: ELECCION, id:id },
@@ -90,9 +103,6 @@ function Works() {
                 setListaTrabajo(response)
             }
         })
-        
-        
-
     }
    
 
@@ -123,7 +133,7 @@ function Works() {
     return (
         <div
         onClick={loadWorks}>
-            <div onClick={console.log(trabajoSeleccionado)}>
+            <div>
             <NavBar
                 txt="Trabajos"
                 type="search"
@@ -182,13 +192,10 @@ function Works() {
 
             </div>
             
-            <TableWork     
-                loadWorks={loadWorks}           
-                idCliente={id}
-                trabajoSeleccionado={trabajoSeleccionado}
-                setTrabajoSeleccionado={setTrabajoSeleccionado}
+            <TableWork           
+                idCliente={id}                
                 listaTrabajo={listaTrabajo}
-
+                handleClickWork={handleClickWork}
             />
             
 
