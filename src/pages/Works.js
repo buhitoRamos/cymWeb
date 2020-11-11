@@ -18,12 +18,15 @@ function Works() {
     const [fecha, setFecha] = useState("");
     const [garantia, setGarantia] = useState("");
     const [trabajoSeleccionado, setTrabajoSeleccionado] = useState([]);
+    const [listaTrabajo, setListaTrabajo] = useState([]);
+    const [contador, setContador] =useState(0);
 
     /*Hook de efecto similar a componentDidMount/DidUpdate,
     funadamental poner ,[] asi funciona como componentDidMount
     */
     useEffect(() => {
         loadCustomers();
+        
         var f = new Date();
         var g = f;
         f = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
@@ -37,6 +40,7 @@ function Works() {
         setTrabajoSeleccionado(trabajo)
 
     }, [])
+   
 
     //funcion que asigna almancena id y nombre del cliente seleccionado.
     function handleCustomer(id) {
@@ -45,14 +49,52 @@ function Works() {
         setNombre(customer.nombre);
         setHiddenForm(false);
         setHiddentable('hidden');
-        
+
     }
 
     function handleCancelNewWork() {
-        setHiddenForm("hidden") 
-        setHiddentable(false)
-        setId(0) 
-      }
+        setHiddenForm("hidden");
+        setHiddentable(false);
+        setId(0);
+        setCliente("");
+        loadCustomers();
+    }
+
+
+    //Esta función carga los trabajos.
+    function loadWorks() {        
+        var ELECCION;
+        var f = new Date();
+        var g = f;
+        f = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
+        g = g.getDate() + "-" + (g.getMonth() + 2) + "-" + g.getFullYear();
+        setFecha(f);
+        setGarantia(g)
+
+        if(id>0){            
+            ELECCION=2;
+        setFecha(trabajoSeleccionado.fecha);
+        setGarantia(trabajoSeleccionado.garantia)
+        } else{
+            ELECCION=1
+
+        }        
+        
+        
+        $.ajax({
+            url: "http://localhost/backend/Trabajos.php",
+            data: { el: ELECCION, id:id },
+            dataType: 'json',
+            type: 'POST',
+            success: (response) => {
+                setListaTrabajo(response)
+            }
+        })
+        
+        
+
+    }
+   
 
 
     //Carga la lista de clientes completa o filtrada.
@@ -76,11 +118,12 @@ function Works() {
         setTimeout(() => loadCustomers(), 2000)
     }
 
-    
+
 
     return (
         <div
-        onClick={()=>(console.log(id))}>
+        onClick={loadWorks}>
+            <div onClick={console.log(trabajoSeleccionado)}>
             <NavBar
                 txt="Trabajos"
                 type="search"
@@ -89,6 +132,7 @@ function Works() {
                 newEntry="hidden"
                 handleChange={handleChange}
             />
+            </div>
             <NewWork
                 hiddenForm={hiddenForm}
                 nombre={nombre}
@@ -100,6 +144,7 @@ function Works() {
 
             <div className="Work"
                 hidden={hiddenTable}>
+                    
                 <table className="table table-hover table-dark"
                     cellSpacing="5" cellPadding="10" border="3"
                     id="customers"
@@ -136,12 +181,16 @@ function Works() {
                 </table>
 
             </div>
-            <TableWork
+            
+            <TableWork     
+                loadWorks={loadWorks}           
                 idCliente={id}
                 trabajoSeleccionado={trabajoSeleccionado}
                 setTrabajoSeleccionado={setTrabajoSeleccionado}
+                listaTrabajo={listaTrabajo}
 
             />
+            
 
         </div>
     )

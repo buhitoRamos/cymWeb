@@ -36,7 +36,7 @@ class Customers extends React.Component {
     loadCustomers = () => {
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
-            data: { cl: this.state.cliente, el: 1 },
+            data: { cl: "", el: 1 },
             dataType: 'json',
             type: 'POST',
             async: true,
