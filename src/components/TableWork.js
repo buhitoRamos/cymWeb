@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import $ from "jquery"
 import "../components/styles/Tbody.css";
 
 function TableWork(props) {   
@@ -38,6 +37,7 @@ function TableWork(props) {
                             return (
                                 <tr
                                onClick={() => props.handleClickWork(t.ID)}
+                               key={t.ID.toString()}
                                 >
                                     <th scope="row">{t.ID}</th>
                                     <td>{t.Nombre}</td>

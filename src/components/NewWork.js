@@ -10,6 +10,7 @@ function NewWork(props) {
     useEffect(() => {
         setId(props.id);
         setCampos(props)
+       
     })
 
 
@@ -27,7 +28,7 @@ function NewWork(props) {
                         Nombre</label>
                     <input type="text"
                         id="nombreCliente"
-                        class="form-control ml-1 mr-2"
+                        className="form-control ml-1 mr-2"
                         aria-describedby="nombreCliente"
                         defaultValue={campos.nombre} />
                     <button className="btn btn-info mr-3 ml-2"

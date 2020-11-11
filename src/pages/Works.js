@@ -19,7 +19,6 @@ function Works() {
     const [garantia, setGarantia] = useState("");
     const [trabajoSeleccionado, setTrabajoSeleccionado] = useState([]);
     const [listaTrabajo, setListaTrabajo] = useState([]);
-    const [contador, setContador] =useState(0);
 
     /*Hook de efecto similar a componentDidMount/DidUpdate,
     funadamental poner ,[] asi funciona como componentDidMount
@@ -27,7 +26,7 @@ function Works() {
     useEffect(() => {
         loadCustomers();
         loadWorks();
-        
+
         var f = new Date();
         var g = f;
         f = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
@@ -40,8 +39,8 @@ function Works() {
         }
         setTrabajoSeleccionado(trabajo)
 
-    },[])
-   
+    }, [])
+
 
     //funcion que asigna almancena id y nombre del cliente seleccionado.
     function handleCustomer(id) {
@@ -50,6 +49,7 @@ function Works() {
         setNombre(customer.nombre);
         setHiddenForm(false);
         setHiddentable('hidden');
+
 
     }
 
@@ -66,45 +66,47 @@ function Works() {
     cliente con el id seleccionado para asignar mediante setTrabajos que viene de works 
     (props) y asi en Works ya tenga el trabajo para enviarlo a NewWork
     */
-   function handleClickWork(id){        
-    const eleccion = listaTrabajo.find(t => t.ID === id);
-    setTrabajoSeleccionado({
-      id:eleccion.ID,
-      nombre:eleccion.Nombre,
-      detalle:eleccion.Detalle,
-      importe:eleccion.Importe,
-      pago:eleccion.Pago,
-      costo:eleccion.Costo,
-      ayudante:eleccion.costoAyudante,
-     garantia:eleccion.Garantia, 
-     fecha:eleccion.Fecha})  
-           
- }
+    function handleClickWork(id) {
+        const eleccion = listaTrabajo.find(t => t.ID === id);
+        setTrabajoSeleccionado({
+            id: eleccion.ID,
+            nombre: eleccion.Nombre,
+            detalle: eleccion.Detalle,
+            importe: eleccion.Importe,
+            pago: eleccion.Pago,
+            costo: eleccion.Costo,
+            ayudante: eleccion.costoAyudante,
+            garantia: eleccion.Garantia,
+            fecha: eleccion.Fecha,
+        })
+    }
 
 
     //Esta función carga los trabajos.
-    function loadWorks() {        
-        var ELECCION;        
+    function loadWorks() {
+        var ELECCION;
 
-        if(id>0){            
-            ELECCION=2;
-        setFecha(trabajoSeleccionado.fecha);
-        setGarantia(trabajoSeleccionado.garantia)
-        } else{
-            ELECCION=1
+        if (id > 0) {
+            ELECCION = 2;
+            setFecha(trabajoSeleccionado.fecha);
+            setGarantia(trabajoSeleccionado.garantia)
 
-        }  
+        } else {
+            ELECCION = 1
+        }
         $.ajax({
             url: "http://localhost/backend/Trabajos.php",
-            data: { el: ELECCION, id:id },
+            data: { el: ELECCION, id: id },
             dataType: 'json',
             type: 'POST',
+            async: true,
             success: (response) => {
                 setListaTrabajo(response)
             }
         })
+        console.log(listaTrabajo)
     }
-   
+
 
 
     //Carga la lista de clientes completa o filtrada.
@@ -132,16 +134,16 @@ function Works() {
 
     return (
         <div
-        onClick={loadWorks}>
+            onClick={loadWorks}>
             <div>
-            <NavBar
-                txt="Trabajos"
-                type="search"
-                history={history}
-                NewCustomer="hidden"
-                newEntry="hidden"
-                handleChange={handleChange}
-            />
+                <NavBar
+                    txt="Trabajos"
+                    type="search"
+                    history={history}
+                    NewCustomer="hidden"
+                    newEntry="hidden"
+                    handleChange={handleChange}
+                />
             </div>
             <NewWork
                 hiddenForm={hiddenForm}
@@ -150,11 +152,12 @@ function Works() {
                 fecha={fecha}
                 id={id}
                 trabajoSeleccionado={trabajoSeleccionado}
-                handleCancelNewWork={handleCancelNewWork} />
+                handleCancelNewWork={handleCancelNewWork}
+            />
 
             <div className="Work"
                 hidden={hiddenTable}>
-                    
+
                 <table className="table table-hover table-dark"
                     cellSpacing="5" cellPadding="10" border="3"
                     id="customers"
@@ -189,15 +192,14 @@ function Works() {
                         }
                     </tbody>
                 </table>
-
             </div>
-            
-            <TableWork           
-                idCliente={id}                
+
+            <TableWork
+                idCliente={id}
                 listaTrabajo={listaTrabajo}
                 handleClickWork={handleClickWork}
             />
-            
+
 
         </div>
     )
