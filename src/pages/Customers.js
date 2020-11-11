@@ -5,6 +5,7 @@ import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import "../components/styles/Tbody.css"
 import CustomerTable from "../components/CustomerTable"
+import TableCustomer from "../components/TableCustomers"
 import EditCustomerForm from "../components/EditCustomerForm"
 
 //Pagina de clientes, para ver/editar/borrar y agregar nuevos.
@@ -189,13 +190,14 @@ class Customers extends React.Component {
 
     handleCustomer = id => {
         const customer = this.state.listaClientes.find(c => c.idCliente === id);
-        this.setState({
-            id: id,
-            formUpdate: false,
-            nombre: customer.nombre,
-            direccion: customer.direccion,
-            telefono: customer.telefono
-        })
+        console.log("el id que llega es: "+id)
+        // this.setState({
+        //     id: id,
+        //     formUpdate: false,
+        //     nombre: customer.nombre,
+        //     direccion: customer.direccion,
+        //     telefono: customer.telefono
+        // })
     }
 
     handleEntry = e => {
@@ -235,6 +237,15 @@ class Customers extends React.Component {
                         hiddenTa="hidden"
                     />
                 </div>
+                <div>
+                    <TableCustomer 
+                    listaClientes={this.state.listaClientes}
+                    handleCustomer={this.handleCustomer}
+                    />
+
+                </div>
+
+                {/* aca comienza tabla
                 <div className="Tab">
                     <table className="table table-hover table-dark"
                         cellSpacing="10" cellPadding="10" border="3"
@@ -269,7 +280,8 @@ class Customers extends React.Component {
                             }
                         </tbody>
                     </table>
-                </div>
+                </div> */}
+                {/* aca termina la tabla */}
             </div>
         )
     }
