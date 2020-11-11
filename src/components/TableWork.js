@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "../components/styles/Tbody.css";
 
-function TableWork(props) {   
-   
+function TableWork(props) {      
 
     return (
         <div className="Work">
