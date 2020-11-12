@@ -237,9 +237,9 @@ class Customers extends React.Component {
                     />
                 </div>
                 <div>
-                    <TableCustomer 
-                    listaClientes={this.state.listaClientes}
-                    handleCustomer={this.handleCustomer}
+                    <TableCustomer
+                        listaClientes={this.state.listaClientes}
+                        handleCustomer={this.handleCustomer}
                     />
 
                 </div>

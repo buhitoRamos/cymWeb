@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import "../components/styles/Tbody.css";
-import CustomerTable from "../components/CustomerTable";
+import TableCustomers from "../components/TableCustomers";
 import NewWork from "../components/NewWork"
 import TableWork from "../components/TableWork";
 import $ from "jquery"
@@ -38,7 +38,6 @@ function Works() {
             garantia: g, fecha: f
         }
         setTrabajoSeleccionado(trabajo)
-
     }, [])
 
 
@@ -49,8 +48,6 @@ function Works() {
         setNombre(customer.nombre);
         setHiddenForm(false);
         setHiddentable('hidden');
-
-
     }
 
     function handleCancelNewWork() {
@@ -107,8 +104,6 @@ function Works() {
         console.log(listaTrabajo)
     }
 
-
-
     //Carga la lista de clientes completa o filtrada.
     function loadCustomers() {
         $.ajax({
@@ -129,8 +124,6 @@ function Works() {
         setCliente(e.target.value)
         setTimeout(() => loadCustomers(), 2000)
     }
-
-
 
     return (
         <div
@@ -154,53 +147,18 @@ function Works() {
                 trabajoSeleccionado={trabajoSeleccionado}
                 handleCancelNewWork={handleCancelNewWork}
             />
-
             <div className="Work"
                 hidden={hiddenTable}>
-
-                <table className="table table-hover table-dark"
-                    cellSpacing="5" cellPadding="10" border="3"
-                    id="customers"
-                >
-                    <thead className="bg-danger">
-                        <h6>Clientes</h6>
-                        <tr>
-                            <th
-                                className="text-center">ID</th>
-                            <th
-                                className="text-center">Nombre</th>
-                            <th
-                                className="text-center">Direccion</th>
-                            <th
-                                className="text-center">Telefono</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            listaClientes.map(customer => {
-                                return (
-                                    <CustomerTable
-                                        key={customer.idCliente}
-                                        handleCustomer={handleCustomer}
-                                        id={customer.idCliente}
-                                        nombre={customer.nombre}
-                                        direccion={customer.direccion}
-                                        telefono={customer.telefono}
-                                    />
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
+                <TableCustomers
+                    listaClientes={listaClientes}
+                    handleCustomer={handleCustomer}
+                />
             </div>
-
             <TableWork
                 idCliente={id}
                 listaTrabajo={listaTrabajo}
                 handleClickWork={handleClickWork}
             />
-
-
         </div>
     )
 
