@@ -27,8 +27,7 @@ function TableCustomer(props) {
                         props.listaClientes.map(customer => {
                             return (
                                 <tr
-                                    onClick={() => props.handleCustomer(customer.id)}
-                                    
+                                    onClick={() => props.handleCustomer(customer.idCliente)}                                    
                                     key={customer.id}>
                                     <th scope="row">{customer.id}</th>
                                     <td>{customer.nombre}</td>

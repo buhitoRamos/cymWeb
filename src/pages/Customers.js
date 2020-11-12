@@ -190,14 +190,13 @@ class Customers extends React.Component {
 
     handleCustomer = id => {
         const customer = this.state.listaClientes.find(c => c.idCliente === id);
-        console.log("el id que llega es: "+id)
-        // this.setState({
-        //     id: id,
-        //     formUpdate: false,
-        //     nombre: customer.nombre,
-        //     direccion: customer.direccion,
-        //     telefono: customer.telefono
-        // })
+        this.setState({
+            id: id,
+            formUpdate: false,
+            nombre: customer.nombre,
+            direccion: customer.direccion,
+            telefono: customer.telefono
+        })
     }
 
     handleEntry = e => {
