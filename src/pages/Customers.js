@@ -4,7 +4,6 @@ import $ from "jquery"
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import "../components/styles/Tbody.css"
-import CustomerTable from "../components/CustomerTable"
 import TableCustomer from "../components/TableCustomers"
 import EditCustomerForm from "../components/EditCustomerForm"
 
