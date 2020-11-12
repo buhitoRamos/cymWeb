@@ -243,44 +243,6 @@ class Customers extends React.Component {
                     />
 
                 </div>
-
-                {/* aca comienza tabla
-                <div className="Tab">
-                    <table className="table table-hover table-dark"
-                        cellSpacing="10" cellPadding="10" border="3"
-                        id="customers"
-                    >
-                        <thead className="bg-danger">
-                            <tr>
-                                <th
-                                    className="text-center">ID</th>
-                                <th
-                                    className="text-center">Nombre</th>
-                                <th
-                                    className="text-center">Direccion</th>
-                                <th
-                                    className="text-center">Telefono</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.listaClientes.map(customer => {
-                                    return (
-                                        <CustomerTable
-                                            // key={customer.idCliente}
-                                            handleCustomer={this.handleCustomer}
-                                            id={customer.idCliente}
-                                            nombre={customer.nombre}
-                                            direccion={customer.direccion}
-                                            telefono={customer.telefono}
-                                        />
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div> */}
-                {/* aca termina la tabla */}
             </div>
         )
     }
