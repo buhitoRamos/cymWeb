@@ -49,7 +49,7 @@ function NewWork(props) {
                         class="form-control ml-1 mr-2"
                         aria-describedby="fecha"
                         defaultValue={campos.trabajoSeleccionado.fecha} />
-                    <button className="btn btn-info ml-2"
+                    <button className="btn btn-info ml-2"                        
                         onClick={props.handleCancelNewWork}>Cancelar</button>
                 </div>
 

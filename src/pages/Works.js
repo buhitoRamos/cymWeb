@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import "../components/styles/Tbody.css";
@@ -19,6 +19,7 @@ function Works() {
     const [garantia, setGarantia] = useState("");
     const [trabajoSeleccionado, setTrabajoSeleccionado] = useState([]);
     const [listaTrabajo, setListaTrabajo] = useState([]);
+    const [count, setCount]=useState(1);
 
     /*Hook de efecto similar a componentDidMount/DidUpdate,
     funadamental poner ,[] asi funciona como componentDidMount
@@ -27,6 +28,7 @@ function Works() {
         loadCustomers();
         loadWorks();
 
+
         var f = new Date();
         var g = f;
         f = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
@@ -34,11 +36,15 @@ function Works() {
         setFecha(f);
         setGarantia(g)
         let trabajo = {
-            id: "", nombre: "", detalle: "", importe: "", pago: "", costo: "", ayudante: "",
+            id: "", nombre: "", detalle: "", importe: "", pago: "", costo: "", deuda: "",
+            ganancia: "", proveedor: "", ayudante: "",
             garantia: g, fecha: f
         }
         setTrabajoSeleccionado(trabajo)
-    }, [])
+    }, [count])
+
+    
+
 
 
     //funcion que asigna almancena id y nombre del cliente seleccionado.
@@ -48,14 +54,16 @@ function Works() {
         setNombre(customer.nombre);
         setHiddenForm(false);
         setHiddentable('hidden');
+        setCount(count+1)
+
     }
 
     function handleCancelNewWork() {
         setHiddenForm("hidden");
         setHiddentable(false);
         setId(0);
-        setCliente("");
-        loadCustomers();
+        setCliente(""); 
+        setCount(count+1)    
     }
 
     /*
@@ -72,6 +80,9 @@ function Works() {
             importe: eleccion.Importe,
             pago: eleccion.Pago,
             costo: eleccion.Costo,
+            deuda: eleccion.Costo,
+            ganancia: eleccion.Ganancia,
+            proveedor: eleccion.Proveedor,
             ayudante: eleccion.costoAyudante,
             garantia: eleccion.Garantia,
             fecha: eleccion.Fecha,
@@ -101,8 +112,9 @@ function Works() {
                 setListaTrabajo(response)
             }
         })
-        console.log(listaTrabajo)
     }
+
+
 
     //Carga la lista de clientes completa o filtrada.
     function loadCustomers() {
@@ -126,8 +138,7 @@ function Works() {
     }
 
     return (
-        <div
-            onClick={loadWorks}>
+        <div>
             <div>
                 <NavBar
                     txt="Trabajos"
@@ -138,15 +149,18 @@ function Works() {
                     handleChange={handleChange}
                 />
             </div>
-            <NewWork
-                hiddenForm={hiddenForm}
-                nombre={nombre}
-                garantia={garantia}
-                fecha={fecha}
-                id={id}
-                trabajoSeleccionado={trabajoSeleccionado}
-                handleCancelNewWork={handleCancelNewWork}
-            />
+            <div>
+                <NewWork
+                    hiddenForm={hiddenForm}
+                    nombre={nombre}
+                    garantia={garantia}
+                    fecha={fecha}
+                    id={id}
+                    trabajoSeleccionado={trabajoSeleccionado}
+                    handleCancelNewWork={handleCancelNewWork}
+                    
+                />
+            </div>
             <div className="Work"
                 hidden={hiddenTable}>
                 <TableCustomers

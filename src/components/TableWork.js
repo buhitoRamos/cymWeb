@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import "../components/styles/Tbody.css";
 
-function TableWork(props) {      
+function TableWork(props) {
+    
 
     return (
         <div className="Work">
             <table className="table table-hover table-dark"
                 cellSpacing="5" cellPadding="10" border="3"
-                id="customers"                
+                id="customers"
             >
-                <thead className="bg-danger">
+                <thead className="bg-danger ">
                     <t6>Trabajos</t6>
                     <tr>
-                        <th
-                            className="text-center">ID</th>
-                        <th
-                            className="text-center">Nombre</th>
-                        <th
-                            className="text-center">Detalle</th>
-                        <th
-                            className="text-center">Importe</th>
-                        <th
-                            className="text-center">Pago</th>
-                        <th
-                            className="text-center">Costo</th>
-                        <th
-                            className="text-center">Garantia</th>
-                        <th
-                            className="text-center">Fecha</th>
+                        <th className="text-center">ID</th>
+                        <th className="text-center">Nombre</th>
+                        <th className="text-center">Detalle</th>
+                        <th className="text-center">Importe</th>
+                        <th className="text-center">Pago</th>
+                        <th className="text-center">Costo</th>
+                        <th className="text-center">Deuda</th>
+                        <th className="text-center">Ganancia</th>
+                        <th className="text-center">Proveedor</th>
+                        <th  className="text-center">Garantia</th>
+                        <th className="text-center">Fecha</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,8 +31,8 @@ function TableWork(props) {
                         props.listaTrabajo.map(t => {
                             return (
                                 <tr
-                               onClick={() => props.handleClickWork(t.ID)}
-                               key={t.ID.toString()}
+                                    onClick={() => props.handleClickWork(t.ID)}
+                                    key={t.ID.toString()}
                                 >
                                     <th scope="row">{t.ID}</th>
                                     <td>{t.Nombre}</td>
@@ -44,6 +40,9 @@ function TableWork(props) {
                                     <td>{t.Importe}</td>
                                     <td>{t.Pago}</td>
                                     <td>{t.Costo}</td>
+                                    <td>{t.Deuda}</td>
+                                    <td>{t.Ganancia}</td>
+                                    <td>{t.Proveedor}</td>
                                     <td>{t.Garantia}</td>
                                     <td>{t.Fecha}</td>
                                 </tr>
