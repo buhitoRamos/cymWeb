@@ -132,7 +132,7 @@ function NewWork(props) {
                         <button className="btn btn-info ml-2"
                             onClick="">Gastos </button>
                         <button className="btn btn-secondary ml-2"
-                            onClick="">Remito</button>
+                            onClick={props.goToPrint}>Remito</button>
 
                     </div>
                 </spam>

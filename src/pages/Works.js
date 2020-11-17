@@ -19,13 +19,18 @@ function Works() {
     const [garantia, setGarantia] = useState("");
     const [trabajoSeleccionado, setTrabajoSeleccionado] = useState([]);
     const [listaTrabajo, setListaTrabajo] = useState([]);
-    const [count, setCount]=useState(1);
+    const [count, setCount] = useState(1);
 
     /*Hook de efecto similar a componentDidMount/DidUpdate,
     funadamental poner ,[] asi funciona como componentDidMount
     */
     useEffect(() => {
-        
+        _cleanWork()
+
+    }, [])
+
+    //Esta funcion setea los campos de trabajo seleccionado solo con la fecha
+    function _cleanWork() {
         var f = new Date();
         var g = f;
         f = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
@@ -33,18 +38,19 @@ function Works() {
         setFecha(f);
         setGarantia(g)
         let trabajo = {
-            id: "", nombre: "", detalle: "", importe: "", pago: "", costo: "", deuda: "",
+            id: "", nombre: "", direccion:"", detalle: "", importe: "", pago: "", costo: "", deuda: "",
             ganancia: "", proveedor: "", ayudante: "",
             garantia: g, fecha: f
         }
         setTrabajoSeleccionado(trabajo)
-    },[])
 
-    useEffect(()=>{
+    }
+
+    useEffect(() => {
         loadCustomers();
         loadWorks();
 
-    },[count])
+    }, [count])
 
     //funcion que asigna almancena id y nombre del cliente seleccionado.
     function handleCustomer(id) {
@@ -53,17 +59,35 @@ function Works() {
         setNombre(customer.nombre);
         setHiddenForm(false);
         setHiddentable('hidden');
-        setCount(count+1)
-        console.log("lista trabajos customer: "+listaTrabajo)
-
+        setCount(count + 1);
     }
 
+    //lleva a la pagina de impresión con todos los datos para imprimir el comprobante
+   function  goToPrint () {
+      const Detalle=trabajoSeleccionado.detalle+
+       "\n" + "El trabajo cuenta con una garantía válida hasta "+trabajoSeleccionado.garantia
+            history.push({
+            pathname: '/comprobante',
+            id: trabajoSeleccionado.id,
+            nombre: trabajoSeleccionado.nombre,
+            detalle: Detalle,
+            direccion: trabajoSeleccionado.direccion,
+            fecha: trabajoSeleccionado.fecha,
+            tipo: "Remito N°:",
+            detalleTipo: "Detalle de Trabajo",
+            tyc:"hidden",
+            verGarantia:true
+        })
+    }
+
+    //Esconde cancela el formulario actual.
     function handleCancelNewWork() {
         setHiddenForm("hidden");
         setHiddentable(false);
         setId(0);
-        setCliente(""); 
-        setCount(count+1)    
+        setCliente("");
+        setCount(count + 1);
+        _cleanWork();
     }
 
     /*
@@ -76,6 +100,7 @@ function Works() {
         setTrabajoSeleccionado({
             id: eleccion.ID,
             nombre: eleccion.Nombre,
+            direccion: eleccion.Direccion,
             detalle: eleccion.Detalle,
             importe: eleccion.Importe,
             pago: eleccion.Pago,
@@ -87,7 +112,6 @@ function Works() {
             garantia: eleccion.Garantia,
             fecha: eleccion.Fecha,
         })
-        console.log(listaTrabajo)
     }
 
 
@@ -159,7 +183,8 @@ function Works() {
                     id={id}
                     trabajoSeleccionado={trabajoSeleccionado}
                     handleCancelNewWork={handleCancelNewWork}
-                    
+                    goToPrint={goToPrint}
+
                 />
             </div>
             <div className="Work"
@@ -172,7 +197,7 @@ function Works() {
             <TableWork
                 idCliente={id}
                 listaTrabajo={listaTrabajo}
-                handleClickWork={handleClickWork}
+                handleClickWork={handleClickWork}                
             />
         </div>
     )

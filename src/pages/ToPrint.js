@@ -9,14 +9,16 @@ import { useHistory } from "react-router-dom";
 function ToPrint(props) {
 
     const [nombre] = useState(props.location.nombre);
-    const [detalle] = useState(props.location.detalle);
-    const [fecha] = useState(props.location.fecha);
+    const [detalle, setDetalle] = useState(props.location.detalle);
+    const [fecha] = useState(props.location.fecha);      
     const [direccion] = useState(props.location.direccion);
     const [id] = useState(props.location.id);
     const [tipo] = useState(props.location.tipo);
     const [detalleTipo] = useState(props.location.detalleTipo);
     const [tyc] = useState(props.location.tyc);
     const history=useHistory();
+
+    
     
         
         return (
@@ -61,7 +63,7 @@ function ToPrint(props) {
                         </div>
 
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="8">
-                            {detalle}
+                            {detalle}                           
                         </textarea>
                         <p hidden={tyc}>
                             * Pasado los 90 dias de no retirar el equipo, la casa no se responsabiliza
