@@ -25,10 +25,7 @@ function Works() {
     funadamental poner ,[] asi funciona como componentDidMount
     */
     useEffect(() => {
-        loadCustomers();
-        loadWorks();
-
-
+        
         var f = new Date();
         var g = f;
         f = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
@@ -41,11 +38,13 @@ function Works() {
             garantia: g, fecha: f
         }
         setTrabajoSeleccionado(trabajo)
-    }, [count])
+    },[])
 
-    
+    useEffect(()=>{
+        loadCustomers();
+        loadWorks();
 
-
+    },[count])
 
     //funcion que asigna almancena id y nombre del cliente seleccionado.
     function handleCustomer(id) {
@@ -55,6 +54,7 @@ function Works() {
         setHiddenForm(false);
         setHiddentable('hidden');
         setCount(count+1)
+        console.log("lista trabajos customer: "+listaTrabajo)
 
     }
 
@@ -87,6 +87,7 @@ function Works() {
             garantia: eleccion.Garantia,
             fecha: eleccion.Fecha,
         })
+        console.log(listaTrabajo)
     }
 
 

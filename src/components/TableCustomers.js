@@ -28,8 +28,8 @@ function TableCustomer(props) {
                             return (
                                 <tr
                                     onClick={() => props.handleCustomer(customer.idCliente)}                                    
-                                    key={customer.id}>
-                                    <th scope="row">{customer.id}</th>
+                                    key={customer.idCliente}>
+                                    <th scope="row">{customer.idCliente}</th>
                                     <td>{customer.nombre}</td>
                                     <td>{customer.direccion}</td>
                                     <td>{customer.telefono}</td>
