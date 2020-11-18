@@ -239,6 +239,7 @@ class Customers extends React.Component {
                     <TableCustomer
                         listaClientes={this.state.listaClientes}
                         handleCustomer={this.handleCustomer}
+                        tab="Tab"
                     />
 
                 </div>

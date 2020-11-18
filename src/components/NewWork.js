@@ -59,7 +59,7 @@ function NewWork(props) {
                 <label className="form-control form-input bg-primary text-white rounded-pill form-line text-center">
                     Detalle</label>
 
-                <textarea className="col col-5" id="detalle" rows="7"
+                <textarea className="col col-5" id="detalle" rows="10"
                     placeholder="Ingrese descripción del trabajo"
                     defaultValue={campos.trabajoSeleccionado.detalle}
                     onChange=""
@@ -86,6 +86,18 @@ function NewWork(props) {
                                 id="pago"
                                 aria-describedby="Pago"
                                 defaultValue={campos.trabajoSeleccionado.pago} />
+                        </label>
+                    </div>
+                    <div className="container">
+                        <label for="cobrar"
+                            className="bg-primary text-white  pl-2 pr-2 p-2 ">
+                            cobrar:
+                        <input type="number"
+                                className="p-1 ml-2"
+                                id="cobrar"
+                                aria-describedby="cobrar"
+                                defaultValue="{campos.trabajoSeleccionado.pago}" />
+                                
                         </label>
                     </div>
                     <div>

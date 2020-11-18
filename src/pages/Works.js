@@ -95,11 +95,13 @@ function Works() {
     cliente con el id seleccionado para asignar mediante setTrabajos que viene de works 
     (props) y asi en Works ya tenga el trabajo para enviarlo a NewWork
     */
-    function handleClickWork(id) {
+    function handleClickWork(id) {       
+        
         const eleccion = listaTrabajo.find(t => t.ID === id);
         setTrabajoSeleccionado({
             id: eleccion.ID,
             nombre: eleccion.Nombre,
+            idCliente: eleccion.idCliente,
             direccion: eleccion.Direccion,
             detalle: eleccion.Detalle,
             importe: eleccion.Importe,
@@ -112,6 +114,7 @@ function Works() {
             garantia: eleccion.Garantia,
             fecha: eleccion.Fecha,
         })
+        handleCustomer(eleccion.idCliente)
     }
 
 

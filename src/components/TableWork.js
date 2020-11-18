@@ -10,7 +10,7 @@ function TableWork(props) {
                 cellSpacing="5" cellPadding="10" border="3"
                 id="customers"
             >
-                <thead className="bg-danger ">
+                <thead className="bg-danger">
                     <t6>Trabajos</t6>
                     <tr>
                         <th className="text-center">ID</th>
@@ -40,7 +40,7 @@ function TableWork(props) {
                                     <td>{t.Importe}</td>
                                     <td>{t.Pago}</td>
                                     <td>{t.Costo}</td>
-                                    <td>{t.Deuda}</td>
+                                    <td className="text-danger">{t.Deuda}</td>
                                     <td>{t.Ganancia}</td>
                                     <td>{t.Proveedor}</td>
                                     <td>{t.Garantia}</td>

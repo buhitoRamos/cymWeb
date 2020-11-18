@@ -5,7 +5,7 @@ function TableCustomer(props) {
 
     return (
 
-        <div className="Tab">
+        <div className={props.tab}>
             <table className="table table-hover table-dark"
                 cellSpacing="10" cellPadding="10" border="3"
                 id="customers"
@@ -22,10 +22,12 @@ function TableCustomer(props) {
                             className="text-center">Telefono</th>
                     </tr>
                 </thead>
-                <tbody>
+                
+                <tbody >
                     {
                         props.listaClientes.map(customer => {
                             return (
+                                
                                 <tr
                                     onClick={() => props.handleCustomer(customer.idCliente)}                                    
                                     key={customer.idCliente}>
