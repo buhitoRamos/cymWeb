@@ -13,7 +13,7 @@ function Works() {
     const [cliente, setCliente] = useState("");
     const [id, setId] = useState(0);
     const [nombre, setNombre] = useState("");
-    const [hiddenForm, setHiddenForm] = useState('hidden');
+    const [hiddenForm, setHiddenForm] = useState(false);
     const [hiddenTable, setHiddentable] = useState(false);
     const [fecha, setFecha] = useState("");
     const [garantia, setGarantia] = useState("");
@@ -38,7 +38,7 @@ function Works() {
         setFecha(f);
         setGarantia(g)
         let trabajo = {
-            id: "", nombre: "", direccion:"", detalle: "", importe: "", pago: "", costo: "", deuda: "",
+            id: "", nombre: "", direccion: "", detalle: "", importe: "", pago: "", costo: "", deuda: "",
             ganancia: "", proveedor: "", ayudante: "",
             garantia: g, fecha: f
         }
@@ -54,19 +54,20 @@ function Works() {
 
     //funcion que asigna almancena id y nombre del cliente seleccionado.
     function handleCustomer(id) {
+
         const customer = listaClientes.find(c => c.idCliente === id);
         setId(customer.idCliente);
         setNombre(customer.nombre);
-        setHiddenForm(false);
+        setHiddenForm(true);
         setHiddentable('hidden');
         setCount(count + 1);
     }
 
     //lleva a la pagina de impresión con todos los datos para imprimir el comprobante
-   function  goToPrint () {
-      const Detalle=trabajoSeleccionado.detalle+
-       "\n" + "El trabajo cuenta con una garantía válida hasta "+trabajoSeleccionado.garantia
-            history.push({
+    function goToPrint() {
+        const Detalle = trabajoSeleccionado.detalle +
+            "\n" + "El trabajo cuenta con una garantía válida hasta " + trabajoSeleccionado.garantia
+        history.push({
             pathname: '/comprobante',
             id: trabajoSeleccionado.id,
             nombre: trabajoSeleccionado.nombre,
@@ -75,14 +76,14 @@ function Works() {
             fecha: trabajoSeleccionado.fecha,
             tipo: "Remito N°:",
             detalleTipo: "Detalle de Trabajo",
-            tyc:"hidden",
-            verGarantia:true
+            tyc: "hidden",
+            verGarantia: true
         })
     }
 
     //Esconde cancela el formulario actual.
     function handleCancelNewWork() {
-        setHiddenForm("hidden");
+        setHiddenForm(false);
         setHiddentable(false);
         setId(0);
         setCliente("");
@@ -95,8 +96,8 @@ function Works() {
     cliente con el id seleccionado para asignar mediante setTrabajos que viene de works 
     (props) y asi en Works ya tenga el trabajo para enviarlo a NewWork
     */
-    function handleClickWork(id) {       
-        
+    function handleClickWork(id) {
+
         const eleccion = listaTrabajo.find(t => t.ID === id);
         setTrabajoSeleccionado({
             id: eleccion.ID,
@@ -114,6 +115,8 @@ function Works() {
             garantia: eleccion.Garantia,
             fecha: eleccion.Fecha,
         })
+        console.log(trabajoSeleccionado)
+        
         handleCustomer(eleccion.idCliente)
     }
 
@@ -126,10 +129,10 @@ function Works() {
             ELECCION = 2;
             setFecha(trabajoSeleccionado.fecha);
             setGarantia(trabajoSeleccionado.garantia)
-
         } else {
             ELECCION = 1
         }
+
         $.ajax({
             url: "http://localhost/backend/Trabajos.php",
             data: { el: ELECCION, id: id },
@@ -138,8 +141,17 @@ function Works() {
             async: true,
             success: (response) => {
                 setListaTrabajo(response)
+
             }
         })
+    }
+
+    //Este evento onChange setea los nuevos valores de fecha, garantia y detalles del trabajo
+    function handleOnChangeNewWork(e) {
+        const { id, value } = e.target;
+        setTrabajoSeleccionado({ ...trabajoSeleccionado, [id]: value });
+
+      console.log(trabajoSeleccionado)
     }
 
 
@@ -187,7 +199,7 @@ function Works() {
                     trabajoSeleccionado={trabajoSeleccionado}
                     handleCancelNewWork={handleCancelNewWork}
                     goToPrint={goToPrint}
-
+                    onChange={handleOnChangeNewWork}
                 />
             </div>
             <div className="Work"
@@ -200,7 +212,7 @@ function Works() {
             <TableWork
                 idCliente={id}
                 listaTrabajo={listaTrabajo}
-                handleClickWork={handleClickWork}                
+                handleClickWork={handleClickWork}
             />
         </div>
     )
