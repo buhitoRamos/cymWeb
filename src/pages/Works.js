@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import "../components/styles/Tbody.css";
@@ -20,6 +20,7 @@ function Works() {
     const [trabajoSeleccionado, setTrabajoSeleccionado] = useState([]);
     const [listaTrabajo, setListaTrabajo] = useState([]);
     const [count, setCount] = useState(1);
+    const [porcentaje, setPorcenataje]=useState(50)
 
     /*Hook de efecto similar a componentDidMount/DidUpdate,
     funadamental poner ,[] asi funciona como componentDidMount
@@ -29,7 +30,7 @@ function Works() {
 
     }, [])
 
-    //Esta funcion setea los campos de trabajo seleccionado solo con la fecha
+    //Esta funcion setea los campos de trabajo seleccionado solo con la fecha, y porcentajeAyudante
     function _cleanWork() {
         var f = new Date();
         var g = f;
@@ -39,7 +40,7 @@ function Works() {
         setGarantia(g)
         let trabajo = {
             id: "", nombre: "", direccion: "", detalle: "", importe: "", pago: "", costo: "", deuda: "",
-            ganancia: "", proveedor: "", ayudante: "",
+            ganancia: "", proveedor: "", ayudante: "", porcentajeAyudante:porcentaje,
             garantia: g, fecha: f
         }
         setTrabajoSeleccionado(trabajo)
@@ -62,6 +63,14 @@ function Works() {
         setHiddentable('hidden');
         setCount(count + 1);
     }
+
+    
+
+    //Eevento setea la comisión del ayudante
+function loadAssistant(e){
+
+
+}
 
     //lleva a la pagina de impresión con todos los datos para imprimir el comprobante
     function goToPrint() {
@@ -112,12 +121,23 @@ function Works() {
             ganancia: eleccion.Ganancia,
             proveedor: eleccion.Proveedor,
             ayudante: eleccion.costoAyudante,
+            porcentajeAyudante:_percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante),
             garantia: eleccion.Garantia,
             fecha: eleccion.Fecha,
         })
+        setPorcenataje(trabajoSeleccionado.porcentajeAyudante);
         console.log(trabajoSeleccionado)
         
         handleCustomer(eleccion.idCliente)
+    }
+
+    //Esta función setea el porcentaje de ayudante
+    function _percentajeAssistan(ganancia, ayudante){
+        let gan=parseFloat(ganancia);
+        let ayu=parseFloat(ayudante);        
+        let rta=gan+ayu;
+        rta=ayu*100/rta;    
+        return rta;
     }
 
 
@@ -149,7 +169,11 @@ function Works() {
     //Este evento onChange setea los nuevos valores de fecha, garantia y detalles del trabajo
     function handleOnChangeNewWork(e) {
         const { id, value } = e.target;
+        if(id==="porcentaje"){
+            setPorcenataje(value)            
+        }
         setTrabajoSeleccionado({ ...trabajoSeleccionado, [id]: value });
+        
 
       console.log(trabajoSeleccionado)
     }
