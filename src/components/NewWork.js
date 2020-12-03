@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 function NewWork(props) {
+   
     
 
     /*
@@ -99,7 +100,7 @@ function NewWork(props) {
                                     className="p-1 ml-2"
                                     id="cobrar"
                                     aria-describedby="cobrar"
-                                    value="{campos.trabajoSeleccionado.pago}" />
+                                    />
 
                             </label>
                         </div>
@@ -114,12 +115,13 @@ function NewWork(props) {
                     </spam>
                     <spam className="float-right mr-3">
                         <div className="container">
-                        <label
+                        <label for="porcentaje"
                                 className="bg-primary text-white  pl-2 pr-2 p-1 ml-1">
                                 %:
                                        <input size="2"
+                                       type="text"
                                        id="porcentaje"
-                                    className="ml text-center"
+                                    className="ml text-center"                                
                                     value={props.trabajoSeleccionado.porcentajeAyudante} />
                             </label>
                             <label 

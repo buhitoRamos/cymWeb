@@ -22,13 +22,7 @@ function Works() {
     const [count, setCount] = useState(1);
     const [porcentaje, setPorcenataje]=useState(50)
 
-    /*Hook de efecto similar a componentDidMount/DidUpdate,
-    funadamental poner ,[] asi funciona como componentDidMount
-    */
-    useEffect(() => {
-        _cleanWork()
-
-    }, [])
+   
 
     //Esta funcion setea los campos de trabajo seleccionado solo con la fecha, y porcentajeAyudante
     function _cleanWork() {
@@ -50,6 +44,9 @@ function Works() {
     useEffect(() => {
         loadCustomers();
         loadWorks();
+        if(count<1){
+            _cleanWork()
+        }       
 
     }, [count])
 
@@ -108,7 +105,9 @@ function loadAssistant(e){
     function handleClickWork(id) {
 
         const eleccion = listaTrabajo.find(t => t.ID === id);
-        setTrabajoSeleccionado({
+        setTrabajoSeleccionado({            
+            porcentajeAyudante:_percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante),
+            ayudante: eleccion.costoAyudante, 
             id: eleccion.ID,
             nombre: eleccion.Nombre,
             idCliente: eleccion.idCliente,
@@ -119,14 +118,12 @@ function loadAssistant(e){
             costo: eleccion.Costo,
             deuda: eleccion.Costo,
             ganancia: eleccion.Ganancia,
-            proveedor: eleccion.Proveedor,
-            ayudante: eleccion.costoAyudante,
-            porcentajeAyudante:_percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante),
+            proveedor: eleccion.Proveedor,                       
             garantia: eleccion.Garantia,
             fecha: eleccion.Fecha,
         })
         setPorcenataje(trabajoSeleccionado.porcentajeAyudante);
-        console.log(trabajoSeleccionado)
+        
         
         handleCustomer(eleccion.idCliente)
     }
@@ -221,9 +218,10 @@ function loadAssistant(e){
                     fecha={fecha}
                     id={id}
                     trabajoSeleccionado={trabajoSeleccionado}
+                    porcentaje={porcentaje}
                     handleCancelNewWork={handleCancelNewWork}
                     goToPrint={goToPrint}
-                    onChange={handleOnChangeNewWork}
+                   onChange={handleOnChangeNewWork}
                 />
             </div>
             <div className="Work"
