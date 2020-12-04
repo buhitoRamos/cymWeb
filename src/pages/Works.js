@@ -21,6 +21,7 @@ function Works() {
     const [listaTrabajo, setListaTrabajo] = useState([]);
     const [count, setCount] = useState(1);
     const [porcentaje, setPorcenataje]=useState(50);
+    const [totalAyudante,SetTotalAyudante]=useState(0)
 
    
 
@@ -33,7 +34,7 @@ function Works() {
         setFecha(f);
         setGarantia(g)
         
-        setTrabajoSeleccionado({porcentajeAyudante:porcentaje,
+        setTrabajoSeleccionado({porcentajeAyudante:porcentaje, ayudante:totalAyudante,
             garantia: g, fecha: f})
 
     }
@@ -61,8 +62,11 @@ function Works() {
     
 
     //Eevento setea la comisión del ayudante
-function loadAssistant(e){
-
+function loadAssistant(porcentaje){
+    console.log("porcentaje: "+porcentaje+" importe: "+trabajoSeleccionado.importe+" costo: "+trabajoSeleccionado.costo)
+   let total=trabajoSeleccionado.importe-trabajoSeleccionado.costo;
+   total=total*porcentaje/100
+ return total
 
 }
 
@@ -103,10 +107,9 @@ function loadAssistant(e){
         
 
         const eleccion = listaTrabajo.find(t => t.ID === id);
-        let porcentaje=_percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante)
-        setTrabajoSeleccionado({            
-            porcentajeAyudante:porcentaje,            
-            ayudante: eleccion.Importe, 
+        
+        setTrabajoSeleccionado({    
+            ayudante: eleccion.costoAyudante, 
             id: eleccion.ID,
             nombre: eleccion.Nombre,
             idCliente: eleccion.idCliente,
@@ -115,11 +118,11 @@ function loadAssistant(e){
             importe: eleccion.Importe,
             pago: eleccion.Pago,
             costo: eleccion.Costo,
-            deuda: eleccion.Costo,
             ganancia: eleccion.Ganancia,
             proveedor: eleccion.Proveedor,                       
             garantia: eleccion.Garantia,
             fecha: eleccion.Fecha,
+            porcentajeAyudante:_percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante),
         })
         
         
@@ -129,9 +132,9 @@ function loadAssistant(e){
 
     //Esta función setea el porcentaje de ayudante
     function _percentajeAssistan(ganancia, ayudante){
-        var gan=parseFloat(ganancia);
-        var ayu=parseFloat(ayudante);        
-        var rta=gan+ayu;
+        const gan=parseFloat(ganancia);
+        const ayu=parseFloat(ayudante);        
+        let rta=gan+ayu;
         rta=ayu*100/rta;    
         return rta;
     }
@@ -165,10 +168,22 @@ function loadAssistant(e){
     //Este evento onChange setea los nuevos valores de fecha, garantia y detalles del trabajo
     function handleOnChangeNewWork(e) {
         const { id, value } = e.target;
+        
         if(id==="porcentaje"){
             setPorcenataje(value)            
         }
         setTrabajoSeleccionado({ ...trabajoSeleccionado, [id]: value });
+        if(id==="porcentajeAyudante"){
+                       
+           let value2=loadAssistant(value);
+           
+           setTrabajoSeleccionado({ ...trabajoSeleccionado, "ayudante": value2, [id]: value  });
+            
+            
+            
+       }
+        
+       
         
 
       console.log(trabajoSeleccionado)
