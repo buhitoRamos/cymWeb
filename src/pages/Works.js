@@ -20,7 +20,7 @@ function Works() {
     const [trabajoSeleccionado, setTrabajoSeleccionado] = useState([]);
     const [listaTrabajo, setListaTrabajo] = useState([]);
     const [count, setCount] = useState(1);
-    const [porcentaje, setPorcenataje]=useState(50)
+    const [porcentaje, setPorcenataje]=useState(50);
 
    
 
@@ -32,12 +32,9 @@ function Works() {
         g = g.getDate() + "-" + (g.getMonth() + 2) + "-" + g.getFullYear();
         setFecha(f);
         setGarantia(g)
-        let trabajo = {
-            id: "", nombre: "", direccion: "", detalle: "", importe: "", pago: "", costo: "", deuda: "",
-            ganancia: "", proveedor: "", ayudante: "", porcentajeAyudante:porcentaje,
-            garantia: g, fecha: f
-        }
-        setTrabajoSeleccionado(trabajo)
+        
+        setTrabajoSeleccionado({porcentajeAyudante:porcentaje,
+            garantia: g, fecha: f})
 
     }
 
@@ -103,11 +100,13 @@ function loadAssistant(e){
     (props) y asi en Works ya tenga el trabajo para enviarlo a NewWork
     */
     function handleClickWork(id) {
+        
 
         const eleccion = listaTrabajo.find(t => t.ID === id);
+        let porcentaje=_percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante)
         setTrabajoSeleccionado({            
-            porcentajeAyudante:_percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante),
-            ayudante: eleccion.costoAyudante, 
+            porcentajeAyudante:porcentaje,            
+            ayudante: eleccion.Importe, 
             id: eleccion.ID,
             nombre: eleccion.Nombre,
             idCliente: eleccion.idCliente,
@@ -122,7 +121,7 @@ function loadAssistant(e){
             garantia: eleccion.Garantia,
             fecha: eleccion.Fecha,
         })
-        setPorcenataje(trabajoSeleccionado.porcentajeAyudante);
+        
         
         
         handleCustomer(eleccion.idCliente)
@@ -130,9 +129,9 @@ function loadAssistant(e){
 
     //Esta función setea el porcentaje de ayudante
     function _percentajeAssistan(ganancia, ayudante){
-        let gan=parseFloat(ganancia);
-        let ayu=parseFloat(ayudante);        
-        let rta=gan+ayu;
+        var gan=parseFloat(ganancia);
+        var ayu=parseFloat(ayudante);        
+        var rta=gan+ayu;
         rta=ayu*100/rta;    
         return rta;
     }
@@ -210,7 +209,8 @@ function loadAssistant(e){
                     handleChange={handleChange}
                 />
             </div>
-            <div>
+           
+             <div>
                 <NewWork
                     hiddenForm={hiddenForm}
                     nombre={nombre}
@@ -218,12 +218,11 @@ function loadAssistant(e){
                     fecha={fecha}
                     id={id}
                     trabajoSeleccionado={trabajoSeleccionado}
-                    porcentaje={porcentaje}
                     handleCancelNewWork={handleCancelNewWork}
                     goToPrint={goToPrint}
                    onChange={handleOnChangeNewWork}
                 />
-            </div>
+            </div> 
             <div className="Work"
                 hidden={hiddenTable}>
                 <TableCustomers
