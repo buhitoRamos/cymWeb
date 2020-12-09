@@ -104,10 +104,7 @@ function loadAssistant(porcentaje){
     (props) y asi en Works ya tenga el trabajo para enviarlo a NewWork
     */
     function handleClickWork(id) {
-        
-
         const eleccion = listaTrabajo.find(t => t.ID === id);
-        
         setTrabajoSeleccionado({    
             ayudante: eleccion.costoAyudante, 
             id: eleccion.ID,
@@ -124,9 +121,6 @@ function loadAssistant(porcentaje){
             fecha: eleccion.Fecha,
             porcentajeAyudante:_percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante),
         })
-        
-        
-        
         handleCustomer(eleccion.idCliente)
     }
 
@@ -137,6 +131,26 @@ function loadAssistant(porcentaje){
         let rta=gan+ayu;
         rta=ayu*100/rta;    
         return rta;
+    }
+
+    //Esta función se encarga de realizar cobros
+    function handlePayment(){
+        $.ajax({
+            url: "http://localhost/backend/Trabajos.php",
+            data: { 
+                el: 3, 
+                id: trabajoSeleccionado.id,
+                cobrar:trabajoSeleccionado.cobrar,
+             },
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            success: (response) => {
+                setTrabajoSeleccionado(response)
+            }
+        })
+        loadWorks();
+
     }
 
 
@@ -236,6 +250,8 @@ function loadAssistant(porcentaje){
                     handleCancelNewWork={handleCancelNewWork}
                     goToPrint={goToPrint}
                    onChange={handleOnChangeNewWork}
+                   payment={handlePayment}
+                   loadWorks={loadWorks}
                 />
             </div> 
             <div className="Work"

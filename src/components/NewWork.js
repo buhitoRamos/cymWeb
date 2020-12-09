@@ -1,7 +1,16 @@
 
 import React, { useState, useEffect } from 'react';
+import $ from "jquery"
 
 function NewWork(props) {
+
+    function _press(e){
+
+        if(e.key==="Enter"){            
+            props.payment();
+            
+        }
+    }
    
     
 
@@ -92,6 +101,7 @@ function NewWork(props) {
                                    <input type="number"
                                     className="p-1 ml-2"
                                     id="cobrar"
+                                    onKeyPress={_press}
                                     aria-describedby="cobrar"/>
                             </label>
                         </div>
