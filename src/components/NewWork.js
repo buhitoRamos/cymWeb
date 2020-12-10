@@ -4,15 +4,6 @@ import $ from "jquery"
 
 function NewWork(props) {
 
-    function _press(e){
-
-        if(e.key==="Enter"){            
-            props.payment();
-            
-        }
-    }
-   
-    
 
     /*
     En este componente recibimos todo el detalle desde trabajoSeleccionado
@@ -101,7 +92,8 @@ function NewWork(props) {
                                    <input type="number"
                                     className="p-1 ml-2"
                                     id="cobrar"
-                                    onKeyPress={_press}
+                                    onKeyPress={props.payment}
+                                    value={props.trabajoSeleccionado.cobrar}
                                     aria-describedby="cobrar"/>
                             </label>
                         </div>

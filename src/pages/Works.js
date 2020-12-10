@@ -134,23 +134,31 @@ function loadAssistant(porcentaje){
     }
 
     //Esta función se encarga de realizar cobros
-    function handlePayment(){
-        $.ajax({
-            url: "http://localhost/backend/Trabajos.php",
-            data: { 
-                el: 3, 
-                id: trabajoSeleccionado.id,
-                cobrar:trabajoSeleccionado.cobrar,
-             },
-            dataType: 'json',
-            type: 'POST',
-            async: true,
-            success: (response) => {
-                setTrabajoSeleccionado(response)
-            }
-        })
-        loadWorks();
-
+    function handlePayment(e){
+        console.log(trabajoSeleccionado)
+        let ID=trabajoSeleccionado.id;
+        if(ID===undefined){
+            ID=trabajoSeleccionado[0].ID
+        }       
+        if(e.key==="Enter"){            
+            $.ajax({
+                url: "http://localhost/backend/Trabajos.php",
+                data: { 
+                    el: 3,                   
+                    id: ID,                    
+                    cobrar:trabajoSeleccionado.cobrar,
+                 },
+                dataType: 'json',
+                type: 'POST',
+                async: true,
+                success: (response) => {
+                    console.log(response[0].ID)
+                    setTrabajoSeleccionado(response)
+                }
+            })
+            setTimeout(()=>loadWorks(),2000)
+            setTrabajoSeleccionado({...trabajoSeleccionado, cobrar:""})
+        }
     }
 
 
