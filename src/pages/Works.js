@@ -138,7 +138,7 @@ function loadAssistant(porcentaje){
         console.log(trabajoSeleccionado)
         let ID=trabajoSeleccionado.id;
         if(ID===undefined){
-            ID=trabajoSeleccionado[0].ID
+            ID=trabajoSeleccionado.ID
         }       
         if(e.key==="Enter"){            
             $.ajax({
@@ -153,7 +153,7 @@ function loadAssistant(porcentaje){
                 async: true,
                 success: (response) => {
                     console.log(response[0].ID)
-                    setTrabajoSeleccionado(response)
+                    setTrabajoSeleccionado(response[0])
                 }
             })
             setTimeout(()=>loadWorks(),2000)
