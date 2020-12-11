@@ -32,24 +32,24 @@ function NewWork(props) {
                             value={props.nombre} />
                         <label for="ganancia"
                             className="form-control form-input bg-info text-white rounded-pill form-line">
-                            Ganancia: {props.trabajoSeleccionado.ganancia}</label>
+                            Ganancia: {props.trabajoSeleccionado.Ganancia}</label>
                         <label for="garantia"
                             className="form-control form-input bg-primary text-white rounded-pill form-line">
                             Garantía</label>
                         <input type="text"
-                            id="garantia"
+                            id="Garantia"
                             class="form-control ml-1 mr-2"
                             aria-describedby="garantia"
-                            value={props.trabajoSeleccionado.garantia}
+                            value={props.trabajoSeleccionado.Garantia}
                             />
                         <label for="fecha"
                             className="form-control form-input bg-primary text-white rounded-pill form-line ml-2">
                             Fecha</label>
                         <input type="text"
-                            id="fecha"
+                            id="Fecha"
                             class="form-control ml-1 mr-2"
                             aria-describedby="fecha"
-                            value={props.trabajoSeleccionado.fecha}
+                            value={props.trabajoSeleccionado.Fecha}
                              />
                         <button className="btn btn-info ml-2"
                             onClick={props.handleCancelNewWork}>Cancelar</button>
@@ -58,31 +58,31 @@ function NewWork(props) {
                 <div className="container">
                     <label className="form-control form-input bg-primary text-white rounded-pill form-line text-center">
                         Detalle</label>
-                    <textarea className="col col-5" id="detalle" rows="10"
+                    <textarea className="col col-5" id="Detalle" rows="10"
                         placeholder="Ingrese descripción del trabajo"
-                        value={props.trabajoSeleccionado.detalle}/>
+                        value={props.trabajoSeleccionado.Detalle}/>
                     <spam className="float-left mr-1">
                         <div className="container">
-                            <label for="importe"
+                            <label for="Importe"
                                 className="bg-primary text-white  p-1">
                                 Importe:
                                  <input type="number"
                                     className=" p-1 m-1"
-                                    id="importe"
+                                    id="Importe"
                                     aria-describedby="importe"
                                     
-                                    value={props.trabajoSeleccionado.importe} />
+                                    value={props.trabajoSeleccionado.Importe} />
                             </label>
                         </div>
                         <div className="container">
-                            <label for="pago"
+                            <label for="Pago"
                                 className="bg-primary text-white  pl-2 pr-2 p-2 ">
                                 Pago:
                                 <input type="number"
                                     className=" pl-2 p-1 ml-3"
-                                    id="pago"
+                                    id="Pago"
                                     aria-describedby="Pago"
-                                    value={props.trabajoSeleccionado.pago} />
+                                    value={props.trabajoSeleccionado.Pago} />
                             </label>
                         </div>
                         <div className="container">
@@ -93,7 +93,7 @@ function NewWork(props) {
                                     className="p-1 ml-2"
                                     id="cobrar"
                                     onKeyPress={props.payment}
-                                    value={props.trabajoSeleccionado.cobrar}
+                                    value={props.trabajoSeleccionado.Cobrar}
                                     aria-describedby="cobrar"/>
                             </label>
                         </div>
@@ -108,34 +108,34 @@ function NewWork(props) {
                     </spam>
                     <spam className="float-right mr-3">
                         <div className="container">
-                        <label for="porcentajeAyudante"
+                        <label for="PorcentajeAyudante"
                                 className="bg-primary text-white  pl-2 pr-2 p-1 ml-1"
                                 >%:
                                        <input size="2"                                       
                                        type="text"
-                                       id="porcentajeAyudante"
+                                       id="PorcentajeAyudante"
                                     className="ml text-center"                                                                  
-                                    value={props.trabajoSeleccionado.porcentajeAyudante} />
+                                    value={props.trabajoSeleccionado.PorcentajeAyudante} />
                             </label>
                             <label 
                                 className="bg-primary text-white  pl-2 pr-2 p-1 ml-3"
                                 >Ayudante:
                                     <input size="5"                                 
                                     className=" ml-1"
-                                    id="ayudante"
+                                    id="Ayudante"
                                     aria-describedby="ayudante"
-                                    value={props.trabajoSeleccionado.ayudante} />
+                                    value={props.trabajoSeleccionado.Ayudante} />
                             </label>
                         </div>
                         <div className="container">
-                            <label for="costo"
+                            <label for="Costo"
                                 className="bg-primary text-white  p-2 ml-1"
                                 >Costo:
                                      <input type="number"
                                     className=" pl-2 p-1 ml-3 pr-2"
-                                    id="costo"
+                                    id="Costo"
                                     aria-describedby="Costo"
-                                    value={props.trabajoSeleccionado.costo} />
+                                    value={props.trabajoSeleccionado.Costo} />
                             </label>
                         </div>
                         <div className="container">
@@ -144,9 +144,9 @@ function NewWork(props) {
                                     >Provee:
                                         <input type="text"
                                         className="pr-1 ml-2 pr-3"
-                                        id="proveedor"
+                                        id="Proveedor"
                                         aria-describedby="proveedor"
-                                        value={props.trabajoSeleccionado.proveedor} />
+                                        value={props.trabajoSeleccionado.Proveedor} />
                                 </label>
                             </div>
                             <button className="btn btn-info ml-3"
