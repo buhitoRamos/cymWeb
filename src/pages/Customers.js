@@ -36,7 +36,7 @@ class Customers extends React.Component {
     loadCustomers = () => {
         $.ajax({
             url: "http://localhost/backend/Clientes.php",
-            data: { cl: "", el: 1 },
+            data: { cl: this.state.nombre, el: 1 },
             dataType: 'json',
             type: 'POST',
             async: true,
@@ -51,11 +51,24 @@ class Customers extends React.Component {
     //Evento que escucha todo lo que se tipea y guarda en estado.
     handleChange = e => {
         e.preventDefault();
-        this.setState({
-            ...this.state.cliente,
-            cliente: e.target.value
-        })
+        
+        
+        if(e.target.id==="search"){
+            
+            this.setState({ 
+                nombre: e.target.value
+            })
+        }else{
+            this.setState({
+                ...this.state,
+                [e.target.id]:[e.target.value]
+            })
+
+        }
+        
         setTimeout(() => this.loadCustomers(), 2000)
+        
+        
     }
 
     //Cuando se cancela un ingreso/edicion de contacto.
@@ -72,10 +85,7 @@ class Customers extends React.Component {
 
     //Esta Función nos levanta el formulario para crear nuevos clientes.
     handleNewCustomerForm = () => {
-        this.setState({
-            nombre: "Ingrese Nombre",
-            telefono: "Ingrese Teléfono",
-            direccion: "Ingrese Dirección",
+        this.setState({            
             newCustomer: true,
             formUpdate: false,
         })

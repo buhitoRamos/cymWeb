@@ -3,43 +3,36 @@ import React from 'react'
 
 class EditCustomerForm extends React.Component {
 
-    state={
-        nombre:this.props.nombre,
-        direccion:this.props.direccion,
-        telefono:this.props.telefono
-    }
+
 
     render() {
         
-        const { nombre, direccion, telefono, handleAcepted,
-            handleCancel, handleOnChangeValue, handleDeleted, handleEntry } = this.props
+        const { handleAcepted,handleCancel, handleOnChangeValue,
+             handleDeleted, handleEntry } = this.props
 
         return (
             <div>
-                <form>
+                <form onChange={handleOnChangeValue}>
                     <input
                         id="nombre"
-                        defaultValue={this.state.nombre}
-                        placeholder={nombre}
+                        value={this.props.nombre}
+                        placeholder="Ingrese Nombre"
                         type="text"
-                        onChange={handleOnChangeValue}
                         className="form-control form-input rounded-pill form-line"
                     />
 
                     <input
                         id="direccion"
-                        defaultValue={this.state.direccion}
-                        placeholder={direccion}
+                        value={this.props.direccion}
+                        placeholder="Ingrese Dirección"
                         type="text"
-                        onChange={handleOnChangeValue}
                         className="form-control form-input rounded-pill form-line"
                     />                    
                     <input
                         id="telefono"
-                        defaultValue={this.state.telefono}
-                        placeholder={telefono}
-                        type="text"
-                        onChange={handleOnChangeValue}
+                        value={this.props.telefono}
+                        placeholder="ingrese Telefono"
+                        type="text"                        
                         className="form-control form-input rounded-pill form-line"
                     />
                     <div className="container p-1">
