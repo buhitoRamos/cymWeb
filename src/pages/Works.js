@@ -61,8 +61,8 @@ function Works() {
 
     
 
-    //Evento setea la comisión del ayudante
-function loadAssistant(porcentaje){
+    //Evento retorna la comisión del ayudante
+function _returnAssistantTotal(porcentaje){
     console.log("porcentaje: "+porcentaje+" importe: "+trabajoSeleccionado.Importe+" costo: "+trabajoSeleccionado.Costo)
    let total=trabajoSeleccionado.Importe-trabajoSeleccionado.Costo;
    total=total*porcentaje/100
@@ -76,11 +76,11 @@ function loadAssistant(porcentaje){
             "\n" + "El trabajo cuenta con una garantía válida hasta " + trabajoSeleccionado.garantia
         history.push({
             pathname: '/comprobante',
-            id: trabajoSeleccionado.id,
-            nombre: trabajoSeleccionado.nombre,
-            detalle: Detalle,
-            direccion: trabajoSeleccionado.direccion,
-            fecha: trabajoSeleccionado.fecha,
+            id: trabajoSeleccionado.ID,
+            nombre: trabajoSeleccionado.Nombre,
+            detalle: trabajoSeleccionado.Detalle,
+            direccion: trabajoSeleccionado.Direccion,
+            fecha: trabajoSeleccionado.Fecha,
             tipo: "Remito N°:",
             detalleTipo: "Detalle de Trabajo",
             tyc: "hidden",
@@ -194,17 +194,20 @@ function loadAssistant(porcentaje){
         }
         setTrabajoSeleccionado({ ...trabajoSeleccionado, [id]: value });
         if(id==="PorcentajeAyudante"){       
-            console.log("entro ")                
-           let value2=loadAssistant(value);
+                           
+           let value2=_returnAssistantTotal(value);
            
            setTrabajoSeleccionado({ ...trabajoSeleccionado, "Ayudante": value2, [id]: value  });
              
-       }       
-        
-       
-        
-
+       }
       console.log(trabajoSeleccionado)
+    }
+
+    //esta función setea los valores el importe a pagar del asistente
+    function setAssistant(){
+        let total=_returnAssistantTotal(trabajoSeleccionado.PorcentajeAyudante);
+        setTrabajoSeleccionado({...trabajoSeleccionado, "Ayudante":total})
+
     }
 
 
@@ -256,6 +259,7 @@ function loadAssistant(porcentaje){
                    onChange={handleOnChangeNewWork}
                    payment={handlePayment}
                    loadWorks={loadWorks}
+                   setAssistant={setAssistant}
                 />
             </div> 
             <div className="Work"

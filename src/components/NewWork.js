@@ -4,6 +4,8 @@ import $ from "jquery"
 
 function NewWork(props) {
 
+   
+
 
     /*
     En este componente recibimos todo el detalle desde trabajoSeleccionado
@@ -154,7 +156,7 @@ function NewWork(props) {
                             <button className="btn btn-secondary ml-2"
                                 onClick={props.goToPrint}>Remito</button>
                                 <button className="btn btn-info ml-2"
-                                onClick={props.loadAssistant}>C. Ayudante</button>
+                                onClick={props.setAssistant}>C. Ayudante</button>
                     </spam>
                 </div>
             </div>
