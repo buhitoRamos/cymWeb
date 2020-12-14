@@ -23,8 +23,6 @@ function Works() {
     const [porcentaje, setPorcenataje]=useState(50);
     const [totalAyudante,SetTotalAyudante]=useState(0)
 
-   
-
     //Esta funcion setea los campos de trabajo seleccionado solo con la fecha, y porcentajeAyudante
     function _cleanWork() {
         var f = new Date();
@@ -33,10 +31,8 @@ function Works() {
         g = g.getDate() + "-" + (g.getMonth() + 2) + "-" + g.getFullYear();
         setFecha(f);
         setGarantia(g)
-        
         setTrabajoSeleccionado({PorcentajeAyudante:porcentaje, Ayudante:totalAyudante,
             Garantia: g, Fecha: f})
-
     }
 
     useEffect(() => {
@@ -59,15 +55,12 @@ function Works() {
         setCount(count + 1);
     }
 
-    
-
     //Evento retorna la comisión del ayudante
 function _returnAssistantTotal(porcentaje){
     console.log("porcentaje: "+porcentaje+" importe: "+trabajoSeleccionado.Importe+" costo: "+trabajoSeleccionado.Costo)
    let total=trabajoSeleccionado.Importe-trabajoSeleccionado.Costo;
    total=total*porcentaje/100
  return total
-
 }
 
     //lleva a la pagina de impresión con todos los datos para imprimir el comprobante
@@ -121,7 +114,9 @@ function _returnAssistantTotal(porcentaje){
             Fecha: eleccion.Fecha,
             PorcentajeAyudante:_percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante),
         })
-        handleCustomer(eleccion.idCliente)
+        handleCustomer(eleccion.idCliente);
+        
+
     }
 
     //Esta función setea el porcentaje de ayudante
@@ -131,6 +126,32 @@ function _returnAssistantTotal(porcentaje){
         let rta=gan+ayu;
         rta=ayu*100/rta;    
         return rta;
+    }
+
+    //Esta función se encarga de guardar ayudante y trabajo
+    function handleSaveWork(){
+        $.ajax({
+            url: "http://localhost/backend/Trabajos.php",
+            data: {
+                el:4,
+                idCliente: id,
+                detalle: trabajoSeleccionado.Detalle,
+                precioTotal: trabajoSeleccionado.Importe,
+                precioPago: trabajoSeleccionado.Pago,
+                costo: trabajoSeleccionado.Costo,
+                proveedor: trabajoSeleccionado.Proveedor,
+                garantia: "2021/12/14",
+                fecha: "2020/12/14",
+                german: trabajoSeleccionado.Ayudante
+             },
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            success: (response) => {                
+                setTrabajoSeleccionado(response[0])
+            }
+        })
+
     }
 
     //Esta función se encarga de realizar cobros
@@ -185,7 +206,7 @@ function _returnAssistantTotal(porcentaje){
     }
 
     //Este evento onChange setea los nuevos valores de fecha, garantia y detalles del trabajo
-    function handleOnChangeNewWork(e) {
+    function handleOnChangeNewWork(e) {    
         const { id, value } = e.target;
         console.log("id: "+id+" value: "+value)
         
@@ -201,6 +222,7 @@ function _returnAssistantTotal(porcentaje){
              
        }
       console.log(trabajoSeleccionado)
+      
     }
 
     //esta función setea los valores el importe a pagar del asistente
@@ -209,8 +231,6 @@ function _returnAssistantTotal(porcentaje){
         setTrabajoSeleccionado({...trabajoSeleccionado, "Ayudante":total})
 
     }
-
-
 
     //Carga la lista de clientes completa o filtrada.
     function loadCustomers() {
@@ -260,6 +280,7 @@ function _returnAssistantTotal(porcentaje){
                    payment={handlePayment}
                    loadWorks={loadWorks}
                    setAssistant={setAssistant}
+                   saveNewWork={handleSaveWork}
                 />
             </div> 
             <div className="Work"
@@ -276,6 +297,5 @@ function _returnAssistantTotal(porcentaje){
             />
         </div>
     )
-
 }
 export default Works

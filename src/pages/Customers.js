@@ -51,10 +51,7 @@ class Customers extends React.Component {
     //Evento que escucha todo lo que se tipea y guarda en estado.
     handleChange = e => {
         e.preventDefault();
-        
-        
-        if(e.target.id==="search"){
-            
+        if(e.target.id==="search"){            
             this.setState({ 
                 nombre: e.target.value
             })
@@ -63,12 +60,8 @@ class Customers extends React.Component {
                 ...this.state,
                 [e.target.id]:[e.target.value]
             })
-
-        }
-        
+        }        
         setTimeout(() => this.loadCustomers(), 2000)
-        
-        
     }
 
     //Cuando se cancela un ingreso/edicion de contacto.
