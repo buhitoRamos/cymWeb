@@ -128,6 +128,19 @@ function _returnAssistantTotal(porcentaje){
         return rta;
     }
 
+   /*
+   *Esta función configura la fecha string en date para ser enviada al backend,
+   utilizando un formato YYYY/MM//DD
+   */
+  function _setDate(fecha){
+      let divicion=fecha.split("-",3)      
+      let dia=divicion[0];
+      let mes=divicion[1];
+      let año=divicion[2];
+      return año+"/"+mes+"/"+dia;
+  }
+
+
     //Esta función se encarga de guardar ayudante y trabajo
     function handleSaveWork(){
         $.ajax({
@@ -140,8 +153,8 @@ function _returnAssistantTotal(porcentaje){
                 precioPago: trabajoSeleccionado.Pago,
                 costo: trabajoSeleccionado.Costo,
                 proveedor: trabajoSeleccionado.Proveedor,
-                garantia: "2021/12/14",
-                fecha: "2020/12/14",
+                garantia: _setDate(trabajoSeleccionado.Garantia),
+                fecha: _setDate(trabajoSeleccionado.Fecha),
                 german: trabajoSeleccionado.Ayudante
              },
             dataType: 'json',
