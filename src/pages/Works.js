@@ -6,6 +6,7 @@ import TableCustomers from "../components/TableCustomers";
 import NewWork from "../components/NewWork"
 import TableWork from "../components/TableWork";
 import $ from "jquery"
+import { confirmAlert } from 'react-confirm-alert'
 
 function Works() {
     const history = useHistory();
@@ -20,42 +21,40 @@ function Works() {
     const [trabajoSeleccionado, setTrabajoSeleccionado] = useState([]);
     const [listaTrabajo, setListaTrabajo] = useState([]);
     const [count, setCount] = useState(1);
-    const [porcentaje, setPorcenataje]=useState(50);
-    const [totalAyudante,SetTotalAyudante]=useState(0)
-
-
-    useEffect(()=>{
-    _cleanWork()
-    },[])
-
-    
-    //Esta funcion setea los campos de trabajo seleccionado solo con la fecha, y porcentajeAyudante
-    function _cleanWork() {
-        var f = new Date();
-        var g = f;
-        var fMes=f.getMonth() + 1;
-        var gMes=g.getMonth() + 2;
-        var gAño=f.getFullYear();
-        if(fMes>11){            
-            gMes=1;
-            gAño=gAño+1;
-        }        
-        f = f.getDate() + "-" + (fMes) + "-" + f.getFullYear();
-        g = g.getDate() + "-" + (gMes) + "-" + gAño;
-        setFecha(f);
-        setGarantia(g)
-        setTrabajoSeleccionado({PorcentajeAyudante:porcentaje, Ayudante:totalAyudante,
-            Garantia: g, Fecha: f, Ganancia:0, Pago:0})
-    }
+    const [porcentaje, setPorcenataje] = useState(0);
+    const [totalAyudante, SetTotalAyudante] = useState(0)
 
     useEffect(() => {
         loadCustomers();
         loadWorks();
-        if(count<1){
+        if (count < 2) {
             _cleanWork()
-        }       
+        }
 
     }, [count])
+
+
+    //Esta funcion setea los campos de trabajo seleccionado solo con la fecha, y porcentajeAyudante
+    function _cleanWork() {
+        var f = new Date();
+        var g = f;
+        var fMes = f.getMonth() + 1;
+        var gMes = g.getMonth() + 2;
+        var gAño = f.getFullYear();
+        if (fMes > 11) {
+            gMes = 1;
+            gAño = gAño + 1;
+        }
+        f = f.getDate() + "-" + (fMes) + "-" + f.getFullYear();
+        g = g.getDate() + "-" + (gMes) + "-" + gAño;
+        setFecha(f);
+        setGarantia(g)
+        setTrabajoSeleccionado({
+            PorcentajeAyudante: porcentaje, Ayudante: totalAyudante,
+            Garantia: g, Fecha: f, Ganancia: 0, Pago: 0
+        })
+    }
+
 
     //funcion que asigna almancena id y nombre del cliente seleccionado.
     function handleCustomer(id) {
@@ -69,12 +68,12 @@ function Works() {
     }
 
     //Evento retorna la comisión del ayudante
-function _returnAssistantTotal(porcentaje){
-    console.log("porcentaje: "+porcentaje+" importe: "+trabajoSeleccionado.Importe+" costo: "+trabajoSeleccionado.Costo)
-   let total=trabajoSeleccionado.Importe-trabajoSeleccionado.Costo;
-   total=total*porcentaje/100
- return total
-}
+    function _returnAssistantTotal(porcentaje) {
+        console.log("porcentaje: " + porcentaje + " importe: " + trabajoSeleccionado.Importe + " costo: " + trabajoSeleccionado.Costo)
+        let total = trabajoSeleccionado.Importe - trabajoSeleccionado.Costo;
+        total = total * porcentaje / 100
+        return total
+    }
 
     //lleva a la pagina de impresión con todos los datos para imprimir el comprobante
     function goToPrint() {
@@ -111,8 +110,8 @@ function _returnAssistantTotal(porcentaje){
     */
     function handleClickWork(id) {
         const eleccion = listaTrabajo.find(t => t.ID === id);
-        setTrabajoSeleccionado({    
-            Ayudante: eleccion.costoAyudante, 
+        setTrabajoSeleccionado({
+            Ayudante: eleccion.costoAyudante,
             ID: eleccion.ID,
             Nombre: eleccion.Nombre,
             IdCliente: eleccion.idCliente,
@@ -122,76 +121,106 @@ function _returnAssistantTotal(porcentaje){
             Pago: eleccion.Pago,
             Costo: eleccion.Costo,
             Ganancia: eleccion.Ganancia,
-            Proveedor: eleccion.Proveedor,                       
+            Proveedor: eleccion.Proveedor,
             Garantia: eleccion.Garantia,
             Fecha: eleccion.Fecha,
-            PorcentajeAyudante:_percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante),
+            PorcentajeAyudante: _percentajeAssistan(eleccion.Ganancia, eleccion.costoAyudante),
         })
         handleCustomer(eleccion.idCliente);
-        
+
 
     }
 
     //Esta función setea el porcentaje de ayudante
-    function _percentajeAssistan(ganancia, ayudante){
-        const gan=parseFloat(ganancia);
-        const ayu=parseFloat(ayudante);        
-        let rta=gan+ayu;
-        rta=ayu*100/rta;    
+    function _percentajeAssistan(ganancia, ayudante) {
+        const gan = parseFloat(ganancia);
+        const ayu = parseFloat(ayudante);
+        let rta = gan + ayu;
+        rta = ayu * 100 / rta;
         return rta;
     }
 
-   /*
-   *Esta función configura la fecha string en date para ser enviada al backend,
-   utilizando un formato YYYY/MM//DD
-   */
-  function _setDate(fecha){
-      let divicion=fecha.split("-",3)      
-      let dia=divicion[0];
-      let mes=divicion[1];
-      let año=divicion[2];
-      return año+"/"+mes+"/"+dia;
-  }
+    /*
+    *Esta función configura la fecha string en date para ser enviada al backend,
+    utilizando un formato YYYY/MM//DD
+    */
+    function _setDate(fecha) {
+        let divicion = fecha.split("-", 3)
+        let dia = divicion[0];
+        let mes = divicion[1];
+        let año = divicion[2];
+        return año + "/" + mes + "/" + dia;
+    }
 
 
     //Esta función se encarga de guardar ayudante y trabajo
-    function handleSaveWork(){
-        $.ajax({
-            url: "http://localhost/backend/Trabajos.php",
-            data: {
-                el:4,
-                idCliente: id,
-                detalle: trabajoSeleccionado.Detalle,
-                precioTotal: trabajoSeleccionado.Importe,
-                precioPago: trabajoSeleccionado.Pago,
-                costo: trabajoSeleccionado.Costo,
-                proveedor: trabajoSeleccionado.Proveedor,
-                garantia: _setDate(trabajoSeleccionado.Garantia),
-                fecha: _setDate(trabajoSeleccionado.Fecha),
-                german: trabajoSeleccionado.Ayudante
-             },
-            dataType: 'json',
-            type: 'POST',
-            async: true,
-            success: (response) => {                
-                setTrabajoSeleccionado(response[0])
+    function handleSaveWork() {
+        let importe = trabajoSeleccionado.Importe;
+        let costo = trabajoSeleccionado.Costo;
+        if (!((importe === undefined) || (costo === undefined))) {         
+            if (!((importe === "") || (costo === ""))) {
+                console.log("importe:" + importe + " costo: " + costo)
+                if (parseFloat(importe) > parseFloat(costo)) {
+                    $.ajax({
+                        url: "http://localhost/backend/Trabajos.php",
+                        data: {
+                            el: 4,
+                            idCliente: id,
+                            detalle: trabajoSeleccionado.Detalle,
+                            precioTotal: trabajoSeleccionado.Importe,
+                            precioPago: trabajoSeleccionado.Pago,
+                            costo: trabajoSeleccionado.Costo,
+                            proveedor: trabajoSeleccionado.Proveedor,
+                            garantia: _setDate(trabajoSeleccionado.Garantia),
+                            fecha: _setDate(trabajoSeleccionado.Fecha),
+                            german: trabajoSeleccionado.Ayudante
+                        },
+                        dataType: 'json',
+                        type: 'POST',
+                        async: true,
+                        success: (response) => {
+                            setListaTrabajo(response)
+                            setCount(count + 1);
+                        }
+                    })
+                } else {
+                    _noChange();
+                }
+            } else {
+                _noChange();
             }
-        })
+        } else {
+            _noChange();
+        }
+        setCount(count + 1);
+    }
+
+    //Esta funcion es para mostrar un cartel si no se guardan cambios
+    function _noChange() {
+        confirmAlert({
+            title: 'No se guardaran los cambios',
+            message: 'Los datos ingresados son incorrectos',
+            buttons: [
+                {
+                    label: 'Aceptar',
+                },
+            ]
+        });
 
     }
 
     //Esta función se encarga de realizar cobros
-    function handlePayment(e){
+    function handlePayment(e) {
         console.log(trabajoSeleccionado)
-               
-        if(e.key==="Enter"){            
+
+        if (e.key === "Enter") {
             $.ajax({
                 url: "http://localhost/backend/Trabajos.php",
-                data: { 
-                    el: 3,                   
-                    id: trabajoSeleccionado.ID,                    
-                    cobrar:trabajoSeleccionado.cobrar,
-                 },
+                data: {
+                    el: 3,
+                    id: trabajoSeleccionado.ID,
+                    cobrar: trabajoSeleccionado.cobrar,
+                },
                 dataType: 'json',
                 type: 'POST',
                 async: true,
@@ -200,8 +229,8 @@ function _returnAssistantTotal(porcentaje){
                     setTrabajoSeleccionado(response[0])
                 }
             })
-            setTimeout(()=>loadWorks(),2000)
-            setTrabajoSeleccionado({...trabajoSeleccionado, Cobrar:""})
+            setTimeout(() => loadWorks(), 2000)
+            setTrabajoSeleccionado({ ...trabajoSeleccionado, Cobrar: "" })
         }
     }
 
@@ -232,29 +261,29 @@ function _returnAssistantTotal(porcentaje){
     }
 
     //Este evento onChange setea los nuevos valores de fecha, garantia y detalles del trabajo
-    function handleOnChangeNewWork(e) {    
+    function handleOnChangeNewWork(e) {
         const { id, value } = e.target;
-        console.log("id: "+id+" value: "+value)
-        
-        if(id==="Porcentaje"){
-            setPorcenataje(value)            
+        console.log("id: " + id + " value: " + value)
+
+        if (id === "Porcentaje") {
+            setPorcenataje(value)
         }
         setTrabajoSeleccionado({ ...trabajoSeleccionado, [id]: value });
-        if(id==="PorcentajeAyudante"){       
-                           
-           let value2=_returnAssistantTotal(value);
-           
-           setTrabajoSeleccionado({ ...trabajoSeleccionado, "Ayudante": value2, [id]: value  });
-             
-       }
-      console.log(trabajoSeleccionado)
-      
+        if (id === "PorcentajeAyudante") {
+
+            let value2 = _returnAssistantTotal(value);
+
+            setTrabajoSeleccionado({ ...trabajoSeleccionado, "Ayudante": value2, [id]: value });
+
+        }
+        console.log(trabajoSeleccionado)
+
     }
 
     //esta función setea los valores el importe a pagar del asistente
-    function setAssistant(){
-        let total=_returnAssistantTotal(trabajoSeleccionado.PorcentajeAyudante);
-        setTrabajoSeleccionado({...trabajoSeleccionado, "Ayudante":total})
+    function setAssistant() {
+        let total = _returnAssistantTotal(trabajoSeleccionado.PorcentajeAyudante);
+        setTrabajoSeleccionado({ ...trabajoSeleccionado, "Ayudante": total })
 
     }
 
@@ -291,8 +320,8 @@ function _returnAssistantTotal(porcentaje){
                     handleChange={handleChange}
                 />
             </div>
-           
-             <div>
+
+            <div>
                 <NewWork
                     hiddenForm={hiddenForm}
                     nombre={nombre}
@@ -302,13 +331,13 @@ function _returnAssistantTotal(porcentaje){
                     trabajoSeleccionado={trabajoSeleccionado}
                     handleCancelNewWork={handleCancelNewWork}
                     goToPrint={goToPrint}
-                   onChange={handleOnChangeNewWork}
-                   payment={handlePayment}
-                   loadWorks={loadWorks}
-                   setAssistant={setAssistant}
-                   saveNewWork={handleSaveWork}
+                    onChange={handleOnChangeNewWork}
+                    payment={handlePayment}
+                    loadWorks={loadWorks}
+                    setAssistant={setAssistant}
+                    saveNewWork={handleSaveWork}
                 />
-            </div> 
+            </div>
             <div className="Work"
                 hidden={hiddenTable}>
                 <TableCustomers
