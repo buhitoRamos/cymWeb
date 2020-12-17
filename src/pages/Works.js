@@ -23,16 +23,29 @@ function Works() {
     const [porcentaje, setPorcenataje]=useState(50);
     const [totalAyudante,SetTotalAyudante]=useState(0)
 
+
+    useEffect(()=>{
+    _cleanWork()
+    },[])
+
+    
     //Esta funcion setea los campos de trabajo seleccionado solo con la fecha, y porcentajeAyudante
     function _cleanWork() {
         var f = new Date();
         var g = f;
-        f = f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear();
-        g = g.getDate() + "-" + (g.getMonth() + 2) + "-" + g.getFullYear();
+        var fMes=f.getMonth() + 1;
+        var gMes=g.getMonth() + 2;
+        var gAño=f.getFullYear();
+        if(fMes>11){            
+            gMes=1;
+            gAño=gAño+1;
+        }        
+        f = f.getDate() + "-" + (fMes) + "-" + f.getFullYear();
+        g = g.getDate() + "-" + (gMes) + "-" + gAño;
         setFecha(f);
         setGarantia(g)
         setTrabajoSeleccionado({PorcentajeAyudante:porcentaje, Ayudante:totalAyudante,
-            Garantia: g, Fecha: f})
+            Garantia: g, Fecha: f, Ganancia:0, Pago:0})
     }
 
     useEffect(() => {
