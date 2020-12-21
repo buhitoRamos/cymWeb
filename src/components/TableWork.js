@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import "../components/styles/Tbody.css";
 
 function TableWork(props) {
@@ -6,12 +6,13 @@ function TableWork(props) {
 
     return (
         <div className="Work">
+            <h6 className="bg-danger text-center text-white p-1">Trabajos</h6>
             <table className="table table-hover table-dark"
                 cellSpacing="5" cellPadding="10" border="3"
                 id="customers"
             >
                 <thead className="bg-danger">
-                    <t6>Trabajos</t6>
+                    
                     <tr>
                         <th className="text-center">ID</th>
                         <th className="text-center">Nombre</th>

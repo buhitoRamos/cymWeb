@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 function ToPrint(props) {
 
     const [nombre] = useState(props.location.nombre);
-    const [detalle, setDetalle] = useState(props.location.detalle);
+    const [detalle] = useState(props.location.detalle);
     const [fecha] = useState(props.location.fecha);      
     const [direccion] = useState(props.location.direccion);
     const [id] = useState(props.location.id);
@@ -54,15 +54,15 @@ function ToPrint(props) {
                                 {direccion}
                             </span>
                         </h4>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">
+                        <div className="form-group">
+                            <label >
                                 <h2><span className="badge badge-primary p-2 mt-3">
                                     {detalleTipo}
                             </span></h2>
                             </label>
                         </div>
 
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="8">
+                        <textarea className="form-control" id="detalle" rows="8">
                             {detalle}                           
                         </textarea>
                         <p hidden={tyc}>

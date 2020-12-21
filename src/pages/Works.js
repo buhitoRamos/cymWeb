@@ -22,7 +22,7 @@ function Works() {
     const [listaTrabajo, setListaTrabajo] = useState([]);
     const [count, setCount] = useState(1);
     const [porcentaje, setPorcenataje] = useState(0);
-    const [totalAyudante, SetTotalAyudante] = useState(0)
+    const [totalAyudante] = useState(0)
 
     useEffect(() => {
         loadCustomers();
@@ -77,13 +77,13 @@ function Works() {
 
     //lleva a la pagina de impresión con todos los datos para imprimir el comprobante
     function goToPrint() {
-        const Detalle = trabajoSeleccionado.detalle +
-            "\n" + "El trabajo cuenta con una garantía válida hasta " + trabajoSeleccionado.garantia
+        const Detalle = trabajoSeleccionado.Detalle +
+            "\n" + "El trabajo cuenta con una garantía válida hasta " + trabajoSeleccionado.Garantia
         history.push({
             pathname: '/comprobante',
             id: trabajoSeleccionado.ID,
             nombre: trabajoSeleccionado.Nombre,
-            detalle: trabajoSeleccionado.Detalle,
+            detalle: Detalle,
             direccion: trabajoSeleccionado.Direccion,
             fecha: trabajoSeleccionado.Fecha,
             tipo: "Remito N°:",
@@ -145,47 +145,55 @@ function Works() {
     utilizando un formato YYYY/MM//DD
     */
     function _setDate(fecha) {
-        let divicion = fecha.split("-", 3)
+       const separador= fecha.substr(2,1);
+        
+        let divicion = fecha.split(separador, 3)
         let dia = divicion[0];
         let mes = divicion[1];
         let año = divicion[2];
-        return año + "/" + mes + "/" + dia;
+        return año + "-" + mes + "-" + dia;
     }
 
 
-    //Esta función se encarga de guardar ayudante y trabajo
+
+    //Esta función se encarga de guardar/editar ayudante y trabajo
     function handleSaveWork() {
+               
+        let eleccion=5
+        if(trabajoSeleccionado.ID==undefined){
+            eleccion=4;
+        }
+        console.log("idtrabajo=" +trabajoSeleccionado.ID +"eleccion: "+eleccion)
         let importe = trabajoSeleccionado.Importe;
         let costo = trabajoSeleccionado.Costo;
         if (!((importe === undefined) || (costo === undefined))) {         
             if (!((importe === "") || (costo === ""))) {
                 console.log("importe:" + importe + " costo: " + costo)
-                if (parseFloat(importe) > parseFloat(costo)) {
+                
                     $.ajax({
                         url: "http://localhost/backend/Trabajos.php",
                         data: {
-                            el: 4,
+                            el: eleccion,
                             idCliente: id,
+                            idTrabajo:trabajoSeleccionado.ID,
                             detalle: trabajoSeleccionado.Detalle,
                             precioTotal: trabajoSeleccionado.Importe,
                             precioPago: trabajoSeleccionado.Pago,
                             costo: trabajoSeleccionado.Costo,
                             proveedor: trabajoSeleccionado.Proveedor,
                             garantia: _setDate(trabajoSeleccionado.Garantia),
-                            fecha: _setDate(trabajoSeleccionado.Fecha),
+                            fecha: _setDate(trabajoSeleccionado.Fecha),                            
                             german: trabajoSeleccionado.Ayudante
                         },
                         dataType: 'json',
                         type: 'POST',
                         async: true,
                         success: (response) => {
+                            console.log(response)
                             setListaTrabajo(response)
                             setCount(count + 1);
                         }
-                    })
-                } else {
-                    _noChange();
-                }
+                    })                
             } else {
                 _noChange();
             }

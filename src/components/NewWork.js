@@ -1,6 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
-import $ from "jquery"
+import React from 'react';
 
 function NewWork(props) {
 
@@ -21,7 +20,7 @@ function NewWork(props) {
                 <br></br>
                 <div className="form-inline">
                     <div className="form-group">
-                        <label for="nombreCliente"
+                        <label for="id"
                             className="form-control form-input bg-primary text-white rounded-pill form-line">
                             {props.id}</label>
                         <label for="nombreCliente"
