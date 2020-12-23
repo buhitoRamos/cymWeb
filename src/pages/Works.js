@@ -5,8 +5,8 @@ import "../components/styles/Tbody.css";
 import TableCustomers from "../components/TableCustomers";
 import NewWork from "../components/NewWork"
 import TableWork from "../components/TableWork";
-import $ from "jquery"
-import { confirmAlert } from 'react-confirm-alert'
+import $ from "jquery";
+import { confirmAlert } from 'react-confirm-alert';
 
 function Works() {
     const history = useHistory();
@@ -145,8 +145,8 @@ function Works() {
     utilizando un formato YYYY/MM//DD
     */
     function _setDate(fecha) {
-       const separador= fecha.substr(2,1);
-        
+        const separador = fecha.substr(2, 1);
+
         let divicion = fecha.split(separador, 3)
         let dia = divicion[0];
         let mes = divicion[1];
@@ -155,59 +155,60 @@ function Works() {
     }
 
     //Esta función se encarga de borrar el trabajo seleccionado
-    function _handleDelete(){
+    function _handleDelete() {
         $.ajax({
             url: "http://localhost/backend/Trabajos.php",
             data: {
                 el: 6,
-                idTrabajo:trabajoSeleccionado.ID,               
+                idTrabajo: trabajoSeleccionado.ID,
             },
             dataType: 'json',
             type: 'POST',
             async: true,
-            success: (response) => {
-                setCount(count + 1);
+            success: () => {
+
             }
-        })  
+        })
+        setCount(count + 1);
     }
 
 
 
     //Esta función se encarga de guardar/editar ayudante y trabajo
     function handleSaveWork() {
-               
-        let eleccion=5
-        if(trabajoSeleccionado.ID===undefined){
-            eleccion=4;
-        }        
+
+        let eleccion = 5
+        if (trabajoSeleccionado.ID === undefined) {
+            eleccion = 4;
+        }
         let importe = trabajoSeleccionado.Importe;
         let costo = trabajoSeleccionado.Costo;
-        if (!((importe === undefined) || (costo === undefined))) {         
-            if (!((importe === "") || (costo === ""))) {                
-                    $.ajax({
-                        url: "http://localhost/backend/Trabajos.php",
-                        data: {
-                            el: eleccion,
-                            idCliente: id,
-                            idTrabajo:trabajoSeleccionado.ID,
-                            detalle: trabajoSeleccionado.Detalle,
-                            precioTotal: trabajoSeleccionado.Importe,
-                            precioPago: trabajoSeleccionado.Pago,
-                            costo: trabajoSeleccionado.Costo,
-                            proveedor: trabajoSeleccionado.Proveedor,
-                            garantia: _setDate(trabajoSeleccionado.Garantia),
-                            fecha: _setDate(trabajoSeleccionado.Fecha),                            
-                            german: trabajoSeleccionado.Ayudante
-                        },
-                        dataType: 'json',
-                        type: 'POST',
-                        async: true,
-                        success: (response) => {
-                            console.log(response)
-                            setListaTrabajo(response)
-                            setCount(count + 1);
-                        }
-                    })                
+        if (!((importe === undefined) || (costo === undefined))) {
+            if (!((importe === "") || (costo === ""))) {
+                $.ajax({
+                    url: "http://localhost/backend/Trabajos.php",
+                    data: {
+                        el: eleccion,
+                        idCliente: id,
+                        idTrabajo: trabajoSeleccionado.ID,
+                        detalle: trabajoSeleccionado.Detalle,
+                        precioTotal: trabajoSeleccionado.Importe,
+                        precioPago: trabajoSeleccionado.Pago,
+                        costo: trabajoSeleccionado.Costo,
+                        proveedor: trabajoSeleccionado.Proveedor,
+                        garantia: _setDate(trabajoSeleccionado.Garantia),
+                        fecha: _setDate(trabajoSeleccionado.Fecha),
+                        german: trabajoSeleccionado.Ayudante
+                    },
+                    dataType: 'json',
+                    type: 'POST',
+                    async: true,
+                    success: (response) => {
+                        console.log(response)
+                        setListaTrabajo(response)
+                        setCount(count + 1);
+                    }
+                })
             } else {
                 _noChange();
             }
@@ -218,19 +219,19 @@ function Works() {
     }
 
     //Esta funcion se encarga de confirmar antes de borrar un trabajo
-    function SecureErase(){
+    function SecureErase() {
         confirmAlert({
             title: '¿Estas seguro/a de borrar el trabajo seleccionado?',
             message: 'Los datos borrados se perderán',
             buttons: [
                 {
                     label: 'Aceptar',
-                    onClick:()=>{
+                    onClick: () => {
                         _handleDelete();
                     }
                 },
                 {
-                    label:'Cancelar',
+                    label: 'Cancelar',
                 }
             ]
         });
@@ -279,6 +280,7 @@ function Works() {
 
     //Esta función carga los trabajos.
     function loadWorks() {
+        console.log("entro en loadWorks")
         var ELECCION;
 
         if (id > 0) {
@@ -362,7 +364,7 @@ function Works() {
                     handleChange={handleChange}
                 />
             </div>
-
+            
             <div>
                 <NewWork
                     hiddenForm={hiddenForm}
