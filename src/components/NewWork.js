@@ -102,7 +102,7 @@ function NewWork(props) {
                             <button className="btn btn-info ml-3"
                                 onClick={props.saveNewWork}>Guardar </button>
                             <button className="btn btn-danger ml-2"
-                                onClick="">Eliminar</button>
+                                onClick={props.delete}>Eliminar</button>
                             <button className="btn btn-secondary ml-2"
                                 onClick="">Costos</button>
                         </div>

@@ -154,22 +154,36 @@ function Works() {
         return año + "-" + mes + "-" + dia;
     }
 
+    //Esta función se encarga de borrar el trabajo seleccionado
+    function _handleDelete(){
+        $.ajax({
+            url: "http://localhost/backend/Trabajos.php",
+            data: {
+                el: 6,
+                idTrabajo:trabajoSeleccionado.ID,               
+            },
+            dataType: 'json',
+            type: 'POST',
+            async: true,
+            success: (response) => {
+                setCount(count + 1);
+            }
+        })  
+    }
+
 
 
     //Esta función se encarga de guardar/editar ayudante y trabajo
     function handleSaveWork() {
                
         let eleccion=5
-        if(trabajoSeleccionado.ID==undefined){
+        if(trabajoSeleccionado.ID===undefined){
             eleccion=4;
-        }
-        console.log("idtrabajo=" +trabajoSeleccionado.ID +"eleccion: "+eleccion)
+        }        
         let importe = trabajoSeleccionado.Importe;
         let costo = trabajoSeleccionado.Costo;
         if (!((importe === undefined) || (costo === undefined))) {         
-            if (!((importe === "") || (costo === ""))) {
-                console.log("importe:" + importe + " costo: " + costo)
-                
+            if (!((importe === "") || (costo === ""))) {                
                     $.ajax({
                         url: "http://localhost/backend/Trabajos.php",
                         data: {
@@ -201,6 +215,26 @@ function Works() {
             _noChange();
         }
         setCount(count + 1);
+    }
+
+    //Esta funcion se encarga de confirmar antes de borrar un trabajo
+    function SecureErase(){
+        confirmAlert({
+            title: '¿Estas seguro/a de borrar el trabajo seleccionado?',
+            message: 'Los datos borrados se perderán',
+            buttons: [
+                {
+                    label: 'Aceptar',
+                    onClick:()=>{
+                        _handleDelete();
+                    }
+                },
+                {
+                    label:'Cancelar',
+                }
+            ]
+        });
+
     }
 
     //Esta funcion es para mostrar un cartel si no se guardan cambios
@@ -344,6 +378,7 @@ function Works() {
                     loadWorks={loadWorks}
                     setAssistant={setAssistant}
                     saveNewWork={handleSaveWork}
+                    delete={SecureErase}
                 />
             </div>
             <div className="Work"
