@@ -5,6 +5,7 @@ import "../components/styles/Tbody.css";
 import TableCustomers from "../components/TableCustomers";
 import NewWork from "../components/NewWork"
 import TableWork from "../components/TableWork";
+import Costs from "../components/Costs"
 import $ from "jquery";
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -22,7 +23,8 @@ function Works() {
     const [listaTrabajo, setListaTrabajo] = useState([]);
     const [count, setCount] = useState(1);
     const [porcentaje, setPorcenataje] = useState(0);
-    const [totalAyudante] = useState(0)
+    const [totalAyudante] = useState(0);
+    const [costos, setCostos] = useState([])
 
     useEffect(() => {
         loadCustomers();
@@ -302,6 +304,7 @@ function Works() {
 
             }
         })
+       
     }
 
     //Este evento onChange setea los nuevos valores de fecha, garantia y detalles del trabajo
@@ -364,6 +367,8 @@ function Works() {
                     handleChange={handleChange}
                 />
             </div>
+            <Costs 
+            />
             
             <div>
                 <NewWork

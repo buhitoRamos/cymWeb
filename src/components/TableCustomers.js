@@ -15,7 +15,7 @@ function TableCustomer(props) {
                         <th
                             className="text-center">ID</th>
                         <th
-                            className="text-center">Nombre</th>
+                            className="text-center nombre">Nombre</th>
                         <th
                             className="text-center">Direccion</th>
                         <th
