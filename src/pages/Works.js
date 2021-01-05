@@ -46,12 +46,23 @@ function Works() {
         var fMes = f.getMonth() + 1;
         var gMes = g.getMonth() + 2;
         var gAño = f.getFullYear();
+        var fDia=f.getDate();
+        if(fDia<10){
+            fDia="0"+fDia
+        }        
         if (fMes > 11) {
             gMes = 1;
             gAño = gAño + 1;
         }
-        f = f.getDate() + "-" + (fMes) + "-" + f.getFullYear();
-        g = g.getDate() + "-" + (gMes) + "-" + gAño;
+        if(fMes<10){
+            fMes="0"+fMes
+        }
+        if(gMes<10){
+            gMes="0"+gMes
+
+        }
+        f = fDia + "-" + (fMes) + "-" + f.getFullYear();
+        g = fDia + "-" + (gMes) + "-" + gAño;
         setFecha(f);
         setGarantia(g)
         setTrabajoSeleccionado({
