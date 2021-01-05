@@ -104,7 +104,7 @@ function NewWork(props) {
                             <button className="btn btn-danger ml-2"
                                 onClick={props.delete}>Eliminar</button>
                             <button className="btn btn-secondary ml-2"
-                                onClick="">Costos</button>
+                                onClick={props.showCosts}>Costos</button>
                         </div>
                     </spam>
                     <spam className="float-right mr-3">

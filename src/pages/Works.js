@@ -25,6 +25,8 @@ function Works() {
     const [porcentaje, setPorcenataje] = useState(0);
     const [totalAyudante] = useState(0);
     const [costos, setCostos] = useState([])
+    const [hiddenCosts, setHiddenCost]=useState("hidden")
+    const [hiddenNewWork, setHiddenNewWork]=useState(false)
 
     useEffect(() => {
         loadCustomers();
@@ -93,6 +95,21 @@ function Works() {
             tyc: "hidden",
             verGarantia: true
         })
+    }
+
+    //Esconde/muestra costs
+    function handleExitCosts(e){
+        e.preventDefault();
+        if(hiddenNewWork===false){
+            setHiddenNewWork("hidden")
+        }else{setHiddenNewWork(false)}
+
+        if(setHiddenCost===false){
+            setHiddenCost("hidden")
+        }else{setHiddenCost(false)}
+
+        setHiddenCost(!hiddenCosts);
+        
     }
 
     //Esconde cancela el formulario actual.
@@ -367,12 +384,17 @@ function Works() {
                     handleChange={handleChange}
                 />
             </div>
+            <div hidden={hiddenCosts}>
             <Costs 
+            handleExit={handleExitCosts}            
             />
+            </div>
             
-            <div>
+            
+            <div hidden={hiddenNewWork}>
                 <NewWork
                     hiddenForm={hiddenForm}
+                    showCosts={handleExitCosts}
                     nombre={nombre}
                     garantia={garantia}
                     fecha={fecha}
