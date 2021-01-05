@@ -24,8 +24,9 @@ function Works() {
     const [count, setCount] = useState(1);
     const [porcentaje, setPorcenataje] = useState(0);
     const [totalAyudante] = useState(0);
-    const [costos, setCostos] = useState([])
-    const [hiddenCosts, setHiddenCost]=useState("hidden")
+    const [nuevoIdTrabajo, setNuevoIdTrabajo]=useState(0);
+    const [costos, setCostos] = useState([]);
+    const [hiddenCosts, setHiddenCost]=useState("hidden");
     const [hiddenNewWork, setHiddenNewWork]=useState(false)
 
     useEffect(() => {
@@ -204,6 +205,7 @@ function Works() {
         let costo = trabajoSeleccionado.Costo;
         if (!((importe === undefined) || (costo === undefined))) {
             if (!((importe === "") || (costo === ""))) {
+                console.log("entra al metodo de generar trabajo/ eleccion"+eleccion)
                 $.ajax({
                     url: "http://localhost/backend/Trabajos.php",
                     data: {
@@ -225,6 +227,7 @@ function Works() {
                     success: (response) => {
                         console.log(response)
                         setListaTrabajo(response)
+                        //setNuevoIdTrabajo(response[0].ID)
                         setCount(count + 1);
                     }
                 })
@@ -373,7 +376,7 @@ function Works() {
     }
 
     return (
-        <div>
+        <div onClick={console.log("id nuevo="+nuevoIdTrabajo)}>
             <div>
                 <NavBar
                     txt="Trabajos"
